@@ -3,6 +3,7 @@ import authentication from '../Reducers/Auth';
 
 const mainReducer = combineReducers({
   auth: authentication,
+  
 });
 
 const store = configureStore({

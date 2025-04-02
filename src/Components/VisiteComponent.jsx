@@ -1,52 +1,60 @@
-import { Container, Table } from "react-bootstrap";
+import { useEffect, useState } from "react";
+import { Container, Table, Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
+
+import { getAllVisite } from "../Redux/Actions/VisitaAction";
+
 const VisiteComponent = () => {
+  const [visite, setVisite] = useState([]);
+
+  useEffect(() => {
+    fetchVisite();
+  }, []);
+
+  const fetchVisite = async () => {
+    const data = await getAllVisite();
+    if (data) setVisite(data);
+  };
+
   return (
     <Container style={{ fontFamily: "'Poppins', sans-serif" }}>
       <h4 className="text-center">Sezione Visite</h4>
       <div className="d-flex justify-content-end">
-        <a className="btn btn-sm border border-2 rounded-1">
-          <i class="bi bi-plus text-black"></i>
-        </a>
+        <Link to="/visite/create">
+          <i className="bi bi-plus text-black"></i>
+        </Link>
       </div>
       <Table striped>
         <thead>
           <tr>
-            <th>Id</th>
             <th>NomePuppy</th>
-            <th>Obbiettivoesame</th>
+            <th>DataVisita</th>
+            <th>ObiettivoEsame</th>
             <th>DescrizioneCura</th>
             <th>Azioni</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>1</td>
-            <td>Teddy</td>
-            <td>Rimovere le palline</td>
-            <td>Immergere le palline in acqua fredda</td>
-            <td>
-              <i class="bi bi-pencil-square"></i>
-              <i class="bi bi-trash"></i>
-              <i class="bi bi-info-square"></i>
-            </td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>Attila</td>
-            <td>Rimozione zecca</td>
-            <td>
-              Prendere un antibiotico per bocca 2 volte al giorno per 7 giorni
-            </td>
-
-            <td>
-              <i class="bi bi-pencil-square"></i>
-              <i class="bi bi-trash"></i>
-              <i class="bi bi-info-square"></i>
-            </td>
-          </tr>
+          {visite.map((visita) => (
+            <tr key={visita.id}>
+              <td>{visita.animale?.nome || "N/A"}</td>
+              <td>{visita.dataVisita.split("T")[0]}</td>
+              <td>{visita.obiettivoEsame}</td>
+              <td>{visita.descrizioneCura}</td>
+              <td>
+                <Link to={`/visite/edit/${visita.id}`}>
+                  <i className="bi bi-pencil-square mx-2"></i>
+                </Link>
+                <Link to={`/visite/delete/${visita.id}`}>
+                  <i className="bi bi-trash mx-2"></i>
+                </Link>
+              </td>
+            </tr>
+          ))}
         </tbody>
       </Table>
     </Container>
   );
 };
+
 export default VisiteComponent;
