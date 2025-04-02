@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Modal, Button, Form, Alert } from "react-bootstrap";
 import { createRicovero } from "../../Redux/Actions/ricoveriActions";
 
@@ -9,65 +9,98 @@ const CreateRicoveroModal = ({ show, handleClose, onRicoveroCreated }) => {
     descrizione: "",
     dataFineRicovero: "",
   });
-  const [error, setError] = useState(null);
+
+  const [puppies, setPuppies] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    if (show) {
+      fetchPuppies();
+    }
+  }, [show]);
+
+  const fetchPuppies = async () => {
+    try {
+      const token = localStorage.getItem("token");
+
+      const response = await fetch("https://localhost:7055/api/Animali", {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+
+      const data = await response.json();
+
+      if (data && data.puppies) {
+        setPuppies(data.puppies);
+      } else {
+        throw new Error("Formato risposta non valido");
+      }
+    } catch (error) {
+      console.error("Errore nel caricamento dei puppy:", error);
+      setError("Errore nel caricamento dei puppy: " + error.message);
+    }
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    setError(null);
 
     try {
-      const formattedData = {
-        puppyId: parseInt(formData.puppyId, 10),
-        dataInizioRicovero: formData.dataInizioRicovero,
-        descrizione: formData.descrizione,
-        ...(formData.dataFineRicovero
-          ? { dataFineRicovero: formData.dataFineRicovero }
-          : {}),
-      };
-
-      console.log("Sending data:", formattedData);
-      await createRicovero(formattedData);
-
-      handleClose();
+      await createRicovero(formData);
       onRicoveroCreated();
-
       setFormData({
         puppyId: "",
         dataInizioRicovero: "",
         descrizione: "",
         dataFineRicovero: "",
       });
+      setError(null);
     } catch (err) {
-      setError("Errore durante la creazione del ricovero: " + err.message);
+      setError(`Errore nella creazione del ricovero: ${err.message}`);
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <Modal show={show} onHide={handleClose} centered>
+    <Modal show={show} onHide={handleClose}>
       <Modal.Header closeButton>
         <Modal.Title>Nuovo Ricovero</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         {error && <Alert variant="danger">{error}</Alert>}
+
         <Form onSubmit={handleSubmit}>
           <Form.Group className="mb-3">
-            <Form.Label>ID Puppy</Form.Label>
-            <Form.Control
-              type="number"
+            <Form.Label>Puppy</Form.Label>
+            <Form.Select
               name="puppyId"
               value={formData.puppyId}
               onChange={handleChange}
               required
-            />
+            >
+              <option value="">Seleziona un puppy</option>
+              {puppies.map((puppy) => (
+                <option key={puppy.puppyId} value={puppy.puppyId}>
+                  {puppy.nome} ({puppy.tipologia})
+                </option>
+              ))}
+            </Form.Select>
           </Form.Group>
 
           <Form.Group className="mb-3">
@@ -108,7 +141,7 @@ const CreateRicoveroModal = ({ show, handleClose, onRicoveroCreated }) => {
               Annulla
             </Button>
             <Button variant="primary" type="submit" disabled={loading}>
-              {loading ? "Creazione in corso..." : "Crea Ricovero"}
+              {loading ? "Salvataggio..." : "Salva"}
             </Button>
           </div>
         </Form>
