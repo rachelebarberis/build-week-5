@@ -10,7 +10,6 @@ const UpdatePuppyComponent = () => {
     (state) => state.puppies
   );
 
-  // Stato del modulo
   const [nome, setNome] = useState('');
   const [tipologia, setTipologia] = useState('');
   const [coloreMantello, setColoreMantello] = useState('');
