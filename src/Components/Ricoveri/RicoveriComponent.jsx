@@ -28,7 +28,6 @@ const RicoveriComponent = () => {
   const [showSearch, setShowSearch] = useState(false);
   const [selectedRicovero, setSelectedRicovero] = useState(null);
 
-  // Modal states
   const [modalState, setModalState] = useState({
     create: false,
     update: false,
@@ -36,7 +35,6 @@ const RicoveriComponent = () => {
     view: false,
   });
 
-  // Search parameters
   const [searchParams, setSearchParams] = useState({
     puppyNome: "",
     dataInizioFrom: "",
@@ -46,7 +44,6 @@ const RicoveriComponent = () => {
     soloAttivi: false,
   });
 
-  // Fetch data on component mount
   useEffect(() => {
     fetchRicoveri();
   }, []);
@@ -114,7 +111,6 @@ const RicoveriComponent = () => {
     fetchRicoveri();
   };
 
-  // Modal handlers
   const toggleModal = (modalName, ricovero = null) => {
     setSelectedRicovero(ricovero);
     setModalState((prev) => ({
@@ -123,7 +119,6 @@ const RicoveriComponent = () => {
     }));
   };
 
-  // Handle CRUD operations
   const handleRicoveroCreated = () => {
     fetchRicoveri();
     toggleModal("create");
@@ -141,7 +136,6 @@ const RicoveriComponent = () => {
     toggleModal("delete");
   };
 
-  // Format date
   const formatDate = (dateString) => {
     if (!dateString) return null;
     return new Date(dateString).toLocaleDateString("it-IT");
