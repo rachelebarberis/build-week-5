@@ -27,7 +27,6 @@ const ViewRicoveroModal = ({ show, handleClose, ricoveroId }) => {
     }
   };
 
-  // Format date function
   const formatDate = (dateString) => {
     if (!dateString) return "Non specificata";
     const date = new Date(dateString);

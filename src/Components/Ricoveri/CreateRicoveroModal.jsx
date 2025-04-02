@@ -23,12 +23,10 @@ const CreateRicoveroModal = ({ show, handleClose, onRicoveroCreated }) => {
     setError(null);
 
     try {
-      // Create a new object with properly formatted data
       const formattedData = {
-        puppyId: parseInt(formData.puppyId, 10), // Convert to integer
-        dataInizioRicovero: formData.dataInizioRicovero, // Keep date format as is
+        puppyId: parseInt(formData.puppyId, 10),
+        dataInizioRicovero: formData.dataInizioRicovero,
         descrizione: formData.descrizione,
-        // Only include dataFineRicovero if it has a value
         ...(formData.dataFineRicovero
           ? { dataFineRicovero: formData.dataFineRicovero }
           : {}),
@@ -40,7 +38,6 @@ const CreateRicoveroModal = ({ show, handleClose, onRicoveroCreated }) => {
       handleClose();
       onRicoveroCreated();
 
-      // Reset form
       setFormData({
         puppyId: "",
         dataInizioRicovero: "",

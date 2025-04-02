@@ -65,10 +65,8 @@ const UpdateRicoveroModal = ({
     setError(null);
 
     try {
-      // Create a copy of the form data for submission
       const dataToSubmit = { ...formData };
 
-      // If dataFineRicovero is empty string, set it to null for the API
       if (dataToSubmit.dataFineRicovero === "") {
         dataToSubmit.dataFineRicovero = null;
       }
