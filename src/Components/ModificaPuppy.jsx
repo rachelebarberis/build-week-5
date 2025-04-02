@@ -49,7 +49,7 @@ const UpdatePuppyComponent = () => {
     const success = await dispatch(updatePuppy(id, updatedPuppy));
 
     if (success) {
-      navigate('/elencopuppy'); // Reindirizza solo se l'update ha successo
+      navigate('/elencopuppy');
     }
   };
 
