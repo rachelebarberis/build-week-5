@@ -11,7 +11,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import LoginComponent from './Components/LoginComponent';
 import HomeComponent from './Components/HomeComponent';
 import NotAuthorized from './Components/NotAuthorized';
-import AuthRoute from './Components/roleRoute';
+import RoleRoute from './Components/roleRoute';
 
 const App = () => {
   return (
@@ -34,34 +34,24 @@ const MainApp = () => {
         <Route
           path='/elencopuppy'
           element={
-            <AuthRoute>
-              <ElencoPuppy />
-            </AuthRoute>
+            <RoleRoute component={<ElencoPuppy />} requiredRole='Admin' />
           }
         />
         <Route
           path='/visite'
           element={
-            <AuthRoute>
-              <VisiteComponent />
-            </AuthRoute>
+            <RoleRoute component={<VisiteComponent />} requiredRole='Admin' />
           }
         />
         <Route
           path='/ricoveri'
           element={
-            <AuthRoute>
-              <RicoveriComponent />
-            </AuthRoute>
+            <RoleRoute component={<RicoveriComponent />} requiredRole='Admin' />
           }
         />
         <Route
           path='/farmacia'
-          element={
-            <AuthRoute>
-              <Farmacia />
-            </AuthRoute>
-          }
+          element={<RoleRoute component={<Farmacia />} requiredRole='Admin' />}
         />
 
         <Route path='/puppy' element={<Puppy />} />

@@ -1,16 +1,13 @@
 import { getRoleFromToken } from '../../utils/jwtUtils';
 import { LOGIN_SUCCESS, LOGOUT } from '../Actions/authActions.js';
 
-// Stato iniziale
-const token = localStorage.getItem('token');
 const initialState = {
   user: null,
-  token: token,
-  isAuthenticated: !!token,
-  role: getRoleFromToken(token),
+  token: null,
+  isAuthenticated: false,
+  role: null,
 };
 
-// Reducer
 const authReducer = (state = initialState, action) => {
   switch (action.type) {
     case LOGIN_SUCCESS:
@@ -18,11 +15,14 @@ const authReducer = (state = initialState, action) => {
         ...state,
         user: action.payload.user,
         token: action.payload.token,
-        isAuthenticated: true,
-        role: action.payload.role,
+        isAuthenticated: action.payload.isAuthenticated,
+        role: getRoleFromToken(action.payload.token),
       };
 
     case LOGOUT:
+      localStorage.removeItem('token');
+      localStorage.removeItem('user');
+      localStorage.removeItem('role');
       return {
         ...state,
         user: null,

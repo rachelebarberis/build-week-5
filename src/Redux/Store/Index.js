@@ -2,7 +2,7 @@ import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import authentication from '../Reducers/Auth';
 
 const mainReducer = combineReducers({
-  loginToken: authentication,
+  auth: authentication,
 });
 
 const store = configureStore({

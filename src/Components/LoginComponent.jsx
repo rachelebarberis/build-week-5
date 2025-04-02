@@ -3,6 +3,8 @@ import { Container, Form, Button } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { loginSuccess } from '../Redux/Actions/authActions';
 import { useState } from 'react';
+import { getRoleFromToken } from '../utils/jwtUtils';
+import PrivateRoute from './roleRoute';
 
 const LoginComponent = () => {
   const [email, setEmail] = useState('');
@@ -24,10 +26,14 @@ const LoginComponent = () => {
       }
 
       const data = await response.json();
+      const isAuthenticated = true;
+      const role = getRoleFromToken(data.token);
 
       localStorage.setItem('token', data.token);
+      localStorage.setItem('role', role);
 
-      dispatch(loginSuccess(email, data.token));
+      dispatch(loginSuccess(email, data.token, isAuthenticated, role));
+      PrivateRoute();
     } catch (error) {
       console.error('Errore nel login:', error.message);
     }
