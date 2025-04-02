@@ -5,11 +5,13 @@ import { loginSuccess } from '../Redux/Actions/authActions';
 import { useState } from 'react';
 import { getRoleFromToken } from '../utils/jwtUtils';
 import PrivateRoute from './roleRoute';
+import { useNavigate } from 'react-router-dom';
 
 const LoginComponent = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -33,7 +35,7 @@ const LoginComponent = () => {
       localStorage.setItem('role', role);
 
       dispatch(loginSuccess(email, data.token, isAuthenticated, role));
-      PrivateRoute();
+      navigate('/');
     } catch (error) {
       console.error('Errore nel login:', error.message);
     }
