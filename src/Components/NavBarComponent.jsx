@@ -4,7 +4,7 @@ const NavBarComponent = () => {
   return (
     <Navbar expand="md" className="bg-body-dark pt-0">
       <Container fluid={true} style={{ fontFamily: "'Poppins', sans-serif" }}>
-        <Navbar.Brand href="#home" className="m-0 p-0">
+        <Navbar.Brand href="/" className="m-0 p-0">
           <img src="/public/images/navbar.jpg" id="imglogo" />
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -25,6 +25,9 @@ const NavBarComponent = () => {
 
             <Link to="/farmacia" className="nav-link  text-dark">
               Farmacia
+            </Link>
+            <Link to="/account" className="nav-link  text-dark">
+              Account
             </Link>
           </Nav>
           <Nav>
