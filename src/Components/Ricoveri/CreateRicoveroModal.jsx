@@ -127,7 +127,7 @@ const CreateRicoveroModal = ({ show, handleClose, onRicoveroCreated }) => {
                 value={formData.puppyId}
                 onChange={handleChange}
                 required
-                className="shadow-sm"
+                className="form-select-sm shadow-sm"
               >
                 <option value="">Seleziona un puppy</option>
                 {puppies.map((puppy) => (
