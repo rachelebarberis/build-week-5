@@ -46,6 +46,16 @@ const RicoveriComponent = () => {
 
   useEffect(() => {
     fetchRicoveri();
+
+    return () => {
+      setModalState({
+        create: false,
+        update: false,
+        delete: false,
+        view: false,
+      });
+      setSelectedRicovero(null);
+    };
   }, []);
 
   const fetchRicoveri = async () => {
@@ -112,11 +122,23 @@ const RicoveriComponent = () => {
   };
 
   const toggleModal = (modalName, ricovero = null) => {
-    setSelectedRicovero(ricovero);
-    setModalState((prev) => ({
-      ...prev,
-      [modalName]: !prev[modalName],
-    }));
+    const resetModals = {
+      create: false,
+      update: false,
+      delete: false,
+      view: false,
+    };
+
+    if (modalState[modalName] === true) {
+      setSelectedRicovero(null);
+      setModalState(resetModals);
+    } else {
+      setSelectedRicovero(ricovero);
+      setModalState({
+        ...resetModals,
+        [modalName]: true,
+      });
+    }
   };
 
   const handleRicoveroCreated = () => {
@@ -248,14 +270,18 @@ const RicoveriComponent = () => {
                   <td>{ricovero.descrizione || "-"}</td>
                   <td>
                     {formatDate(ricovero.dataFineRicovero) || (
-                      <Badge bg="warning" text="dark">
-                        In corso
+                      <Badge
+                        bg={null}
+                        style={{ backgroundColor: "purple", color: "white" }}
+                      >
+                        Ancora in Ricovero
                       </Badge>
                     )}
                   </td>
-                  <td>
+
+                  <td className="text-center">
                     <Button
-                      variant="outline-primary"
+                      variant="outline-secondary"
                       size="sm"
                       className="me-2"
                       onClick={() => toggleModal("update", ricovero)}
@@ -263,7 +289,7 @@ const RicoveriComponent = () => {
                       <i className="bi bi-pencil"></i>
                     </Button>
                     <Button
-                      variant="outline-danger"
+                      variant="outline-secondary"
                       size="sm"
                       className="me-2"
                       onClick={() => toggleModal("delete", ricovero)}
@@ -271,7 +297,7 @@ const RicoveriComponent = () => {
                       <i className="bi bi-trash"></i>
                     </Button>
                     <Button
-                      variant="outline-info"
+                      variant="outline-secondary"
                       size="sm"
                       onClick={() => toggleModal("view", ricovero)}
                     >
