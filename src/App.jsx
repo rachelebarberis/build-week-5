@@ -7,9 +7,11 @@ import VisiteComponent from './Components/VisiteComponent';
 import ElencoPuppy from './Components/ElencoPuppy';
 import RicoveriComponent from './Components/RicoveriComponent';
 import Farmacia from './Components/Farmacia';
-import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import LoginComponent from './Components/LoginComponent';
 import HomeComponent from './Components/HomeComponent';
+import NotAuthorized from './Components/NotAuthorized';
+import AuthRoute from './Components/roleRoute';
 
 const App = () => {
   return (
@@ -20,21 +22,52 @@ const App = () => {
 };
 
 const MainApp = () => {
-  const location = useLocation();
-
   return (
     <>
       <NavBarComponent />
 
-      {location.pathname === '/' && <HomeComponent />}
-
       <Routes>
-        <Route path='/elencopuppy' element={<ElencoPuppy />} />
-        <Route path='/visite' element={<VisiteComponent />} />
-        <Route path='/ricoveri' element={<RicoveriComponent />} />
-        <Route path='/farmacia' element={<Farmacia />} />
+        <Route path='/' element={<HomeComponent />} />
+
         <Route path='/account' element={<LoginComponent />} />
+
+        <Route
+          path='/elencopuppy'
+          element={
+            <AuthRoute>
+              <ElencoPuppy />
+            </AuthRoute>
+          }
+        />
+        <Route
+          path='/visite'
+          element={
+            <AuthRoute>
+              <VisiteComponent />
+            </AuthRoute>
+          }
+        />
+        <Route
+          path='/ricoveri'
+          element={
+            <AuthRoute>
+              <RicoveriComponent />
+            </AuthRoute>
+          }
+        />
+        <Route
+          path='/farmacia'
+          element={
+            <AuthRoute>
+              <Farmacia />
+            </AuthRoute>
+          }
+        />
+
         <Route path='/puppy' element={<Puppy />} />
+
+        <Route path='/not-authorized' element={<NotAuthorized />} />
+        <Route path='*' element={<Navigate to='/' />} />
       </Routes>
 
       <FooterComponent />
