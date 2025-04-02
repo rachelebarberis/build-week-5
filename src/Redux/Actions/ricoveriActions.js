@@ -49,29 +49,21 @@ export const searchRicoveri = async (searchParams) => {
 };
 
 export const createRicovero = async (ricoveroData) => {
-  try {
-    console.log("Creating ricovero with data:", ricoveroData);
+  const formattedData = {
+    puppyId: parseInt(ricoveroData.puppyId, 10),
+    dataInizioRicovero: ricoveroData.dataInizioRicovero,
+    descrizione: ricoveroData.descrizione,
+    ...(ricoveroData.dataFineRicovero
+      ? { dataFineRicovero: ricoveroData.dataFineRicovero }
+      : {}),
+  };
 
-    const response = await fetch(`${API_URL}`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-      body: JSON.stringify(ricoveroData),
-    });
+  console.log("Dati da inviare:", formattedData);
 
-    if (!response.ok) {
-      const errorText = await response.text();
-      console.error("Server error response:", errorText);
-      throw new Error(`Create failed: ${response.status} - ${errorText}`);
-    }
-
-    return response.json();
-  } catch (error) {
-    console.error("Error creating ricovero:", error);
-    throw error;
-  }
+  return fetchWithAuth(`${API_URL}`, {
+    method: "POST",
+    body: JSON.stringify(formattedData),
+  });
 };
 
 export const updateRicovero = async (id, ricoveroData) => {

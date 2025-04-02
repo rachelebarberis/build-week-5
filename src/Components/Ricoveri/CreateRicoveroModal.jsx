@@ -61,7 +61,15 @@ const CreateRicoveroModal = ({ show, handleClose, onRicoveroCreated }) => {
     setLoading(true);
 
     try {
-      await createRicovero(formData);
+      const ricoveroData = {
+        puppyId: parseInt(formData.puppyId, 10),
+        dataInizioRicovero: formData.dataInizioRicovero,
+        descrizione: formData.descrizione,
+        dataFineRicovero: formData.dataFineRicovero || undefined,
+      };
+
+      console.log("Dati del form:", ricoveroData);
+      await createRicovero(ricoveroData);
       onRicoveroCreated();
       setFormData({
         puppyId: "",
@@ -71,6 +79,7 @@ const CreateRicoveroModal = ({ show, handleClose, onRicoveroCreated }) => {
       });
       setError(null);
     } catch (err) {
+      console.error("Errore completo:", err);
       setError(`Errore nella creazione del ricovero: ${err.message}`);
     } finally {
       setLoading(false);
