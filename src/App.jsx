@@ -13,6 +13,9 @@ import RegisterComponent from './Components/RegisterComponent';
 import HomeComponent from './Components/HomeComponent';
 import NotAuthorized from './Components/NotAuthorized';
 import RoleRoute from './Components/roleRoute';
+import AggiungiPuppy from './Components/AggiungiPuppy';
+import ModificaPuppy from './Components/ModificaPuppy';
+import PuppyDetails from './Components/PuppyDetails';
 
 const App = () => {
   return (
@@ -32,6 +35,9 @@ const MainApp = () => {
 
         <Route path='/account' element={<LoginComponent />} />
         <Route path='/register' element={<RegisterComponent />} />
+        <Route path='/addPuppy' element={<AggiungiPuppy />} />
+        <Route path='/puppies/edit/:id' element={<ModificaPuppy />} />
+        <Route path='/puppies/details/:id' element={<PuppyDetails />} />
 
         <Route
           path='/elencopuppy'
