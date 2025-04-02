@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Modal, Button, Form, Alert } from "react-bootstrap";
+import { Modal, Button, Form, Alert, Spinner, Row, Col } from "react-bootstrap";
 import { createRicovero } from "../../Redux/Actions/ricoveriActions";
 
 const CreateRicoveroModal = ({ show, handleClose, onRicoveroCreated }) => {
@@ -12,6 +12,7 @@ const CreateRicoveroModal = ({ show, handleClose, onRicoveroCreated }) => {
 
   const [puppies, setPuppies] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [fetchingPuppies, setFetchingPuppies] = useState(false);
   const [error, setError] = useState(null);
 
   useEffect(() => {
@@ -22,6 +23,7 @@ const CreateRicoveroModal = ({ show, handleClose, onRicoveroCreated }) => {
 
   const fetchPuppies = async () => {
     try {
+      setFetchingPuppies(true);
       const token = localStorage.getItem("token");
 
       const response = await fetch("https://localhost:7055/api/Animali", {
@@ -45,6 +47,8 @@ const CreateRicoveroModal = ({ show, handleClose, onRicoveroCreated }) => {
     } catch (error) {
       console.error("Errore nel caricamento dei puppy:", error);
       setError("Errore nel caricamento dei puppy: " + error.message);
+    } finally {
+      setFetchingPuppies(false);
     }
   };
 
@@ -68,7 +72,6 @@ const CreateRicoveroModal = ({ show, handleClose, onRicoveroCreated }) => {
         dataFineRicovero: formData.dataFineRicovero || undefined,
       };
 
-      console.log("Dati del form:", ricoveroData);
       await createRicovero(ricoveroData);
       onRicoveroCreated();
       setFormData({
@@ -78,6 +81,7 @@ const CreateRicoveroModal = ({ show, handleClose, onRicoveroCreated }) => {
         dataFineRicovero: "",
       });
       setError(null);
+      handleClose();
     } catch (err) {
       console.error("Errore completo:", err);
       setError(`Errore nella creazione del ricovero: ${err.message}`);
@@ -87,70 +91,132 @@ const CreateRicoveroModal = ({ show, handleClose, onRicoveroCreated }) => {
   };
 
   return (
-    <Modal show={show} onHide={handleClose}>
-      <Modal.Header closeButton>
-        <Modal.Title>Nuovo Ricovero</Modal.Title>
+    <Modal show={show} onHide={handleClose} centered backdrop="static">
+      <Modal.Header
+        closeButton
+        className="bg-light"
+        style={{ borderBottom: "2px solid #dee2e6" }}
+      >
+        <div className="w-100 text-center">
+          <Modal.Title>Nuovo Ricovero</Modal.Title>
+        </div>
       </Modal.Header>
-      <Modal.Body>
-        {error && <Alert variant="danger">{error}</Alert>}
+
+      <Modal.Body className="px-4 py-4">
+        {error && (
+          <Alert variant="danger" className="mb-4">
+            <i className="bi bi-exclamation-triangle-fill me-2"></i>
+            {error}
+          </Alert>
+        )}
 
         <Form onSubmit={handleSubmit}>
-          <Form.Group className="mb-3">
-            <Form.Label>Puppy</Form.Label>
-            <Form.Select
-              name="puppyId"
-              value={formData.puppyId}
-              onChange={handleChange}
-              required
-            >
-              <option value="">Seleziona un puppy</option>
-              {puppies.map((puppy) => (
-                <option key={puppy.puppyId} value={puppy.puppyId}>
-                  {puppy.nome} ({puppy.tipologia})
-                </option>
-              ))}
-            </Form.Select>
+          <Form.Group className="mb-4">
+            <Form.Label className="fw-semibold">
+              <i className="bi bi-tag me-2"></i>
+              Puppy
+            </Form.Label>
+            {fetchingPuppies ? (
+              <div className="text-center py-3">
+                <Spinner animation="border" size="sm" className="me-2" />
+                Caricamento puppies...
+              </div>
+            ) : (
+              <Form.Select
+                name="puppyId"
+                value={formData.puppyId}
+                onChange={handleChange}
+                required
+                className="shadow-sm"
+              >
+                <option value="">Seleziona un puppy</option>
+                {puppies.map((puppy) => (
+                  <option key={puppy.puppyId} value={puppy.puppyId}>
+                    {puppy.nome} ({puppy.tipologia})
+                  </option>
+                ))}
+              </Form.Select>
+            )}
           </Form.Group>
 
-          <Form.Group className="mb-3">
-            <Form.Label>Data Inizio Ricovero</Form.Label>
-            <Form.Control
-              type="date"
-              name="dataInizioRicovero"
-              value={formData.dataInizioRicovero}
-              onChange={handleChange}
-              required
-            />
-          </Form.Group>
+          <Row>
+            <Col md={6}>
+              <Form.Group className="mb-4">
+                <Form.Label className="fw-semibold">
+                  <i className="bi bi-calendar-plus me-2"></i>
+                  Data Inizio Ricovero
+                </Form.Label>
+                <Form.Control
+                  type="date"
+                  name="dataInizioRicovero"
+                  value={formData.dataInizioRicovero}
+                  onChange={handleChange}
+                  required
+                  className="shadow-sm"
+                />
+              </Form.Group>
+            </Col>
+            <Col md={6}>
+              <Form.Group className="mb-4">
+                <Form.Label className="fw-semibold">
+                  <i className="bi bi-calendar-check me-2"></i>
+                  Data Fine (opzionale)
+                </Form.Label>
+                <Form.Control
+                  type="date"
+                  name="dataFineRicovero"
+                  value={formData.dataFineRicovero}
+                  onChange={handleChange}
+                  className="shadow-sm"
+                />
+              </Form.Group>
+            </Col>
+          </Row>
 
-          <Form.Group className="mb-3">
-            <Form.Label>Descrizione</Form.Label>
+          <Form.Group className="mb-4">
+            <Form.Label className="fw-semibold">
+              <i className="bi bi-card-text me-2"></i>
+              Descrizione
+            </Form.Label>
             <Form.Control
               as="textarea"
-              rows={3}
+              rows={4}
               name="descrizione"
               value={formData.descrizione}
               onChange={handleChange}
               required
+              placeholder="Inserisci una descrizione dettagliata del ricovero..."
+              className="shadow-sm"
             />
           </Form.Group>
 
-          <Form.Group className="mb-3">
-            <Form.Label>Data Fine Ricovero (opzionale)</Form.Label>
-            <Form.Control
-              type="date"
-              name="dataFineRicovero"
-              value={formData.dataFineRicovero}
-              onChange={handleChange}
-            />
-          </Form.Group>
-
-          <div className="d-flex justify-content-end">
-            <Button variant="secondary" onClick={handleClose} className="me-2">
+          <div className="d-flex justify-content-end mt-4">
+            <Button
+              variant="outline-secondary"
+              onClick={handleClose}
+              className="me-2"
+              disabled={loading}
+            >
+              <i className="bi bi-x-circle me-1"></i>
               Annulla
             </Button>
-            <Button variant="primary" type="submit" disabled={loading}>
-              {loading ? "Salvataggio..." : "Salva"}
+            <Button
+              variant="primary"
+              type="submit"
+              disabled={loading}
+              className="px-4"
+            >
+              {loading ? (
+                <>
+                  <Spinner animation="border" size="sm" className="me-2" />
+                  Salvataggio...
+                </>
+              ) : (
+                <>
+                  <i className="bi bi-check-circle me-1"></i>
+                  Salva
+                </>
+              )}
             </Button>
           </div>
         </Form>

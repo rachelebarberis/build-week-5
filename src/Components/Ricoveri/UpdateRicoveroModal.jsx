@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Modal, Button, Form, Alert, Spinner } from "react-bootstrap";
+import { Modal, Button, Form, Alert, Spinner, Row, Col } from "react-bootstrap";
 import {
   getRicoveroById,
   updateRicovero,
@@ -17,6 +17,8 @@ const UpdateRicoveroModal = ({
     descrizione: "",
     dataFineRicovero: "",
   });
+
+  const [puppyInfo, setPuppyInfo] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const [fetchLoading, setFetchLoading] = useState(true);
@@ -42,6 +44,11 @@ const UpdateRicoveroModal = ({
         dataInizioRicovero: formatDate(ricovero.dataInizioRicovero),
         descrizione: ricovero.descrizione,
         dataFineRicovero: formatDate(ricovero.dataFineRicovero),
+      });
+
+      setPuppyInfo({
+        nome: ricovero.puppyNome || "Puppy",
+        tipologia: ricovero.puppyTipologia || "Non specificato",
       });
     } catch (err) {
       setError("Errore nel caricamento dei dati: " + err.message);
@@ -82,12 +89,24 @@ const UpdateRicoveroModal = ({
   };
 
   return (
-    <Modal show={show} onHide={handleClose} centered>
-      <Modal.Header closeButton>
-        <Modal.Title>Modifica Ricovero</Modal.Title>
+    <Modal show={show} onHide={handleClose} centered backdrop="static">
+      <Modal.Header
+        closeButton
+        className="bg-light"
+        style={{ borderBottom: "2px solid #dee2e6" }}
+      >
+        <div className="w-100 text-end">
+          <Modal.Title>Modifica Ricovero</Modal.Title>
+        </div>
       </Modal.Header>
-      <Modal.Body>
-        {error && <Alert variant="danger">{error}</Alert>}
+
+      <Modal.Body className="px-4 py-4">
+        {error && (
+          <Alert variant="danger" className="mb-4">
+            <i className="bi bi-exclamation-triangle-fill me-2"></i>
+            {error}
+          </Alert>
+        )}
 
         {fetchLoading ? (
           <div className="text-center my-4">
@@ -97,39 +116,75 @@ const UpdateRicoveroModal = ({
           </div>
         ) : (
           <Form onSubmit={handleSubmit}>
-            <Form.Group className="mb-3">
-              <Form.Label>Descrizione</Form.Label>
+            {puppyInfo && (
+              <div className="mb-4 p-3 bg-light rounded border">
+                <h6 className="mb-1">Puppy:</h6>
+                <div className="fs-5 fw-bold">{puppyInfo.nome}</div>
+              </div>
+            )}
+
+            <Row>
+              <Col md={6}>
+                <Form.Group className="mb-4">
+                  <Form.Label className="fw-semibold">
+                    <i className="bi bi-calendar-plus me-2"></i>
+                    Data Inizio Ricovero
+                  </Form.Label>
+                  <Form.Control
+                    type="date"
+                    name="dataInizioRicovero"
+                    value={formData.dataInizioRicovero}
+                    onChange={handleChange}
+                    required
+                    className="shadow-sm"
+                    disabled
+                  />
+                </Form.Group>
+              </Col>
+              <Col md={6}>
+                <Form.Group className="mb-4">
+                  <Form.Label className="fw-semibold">
+                    <i className="bi bi-calendar-check me-2"></i>
+                    Data Fine (opzionale)
+                  </Form.Label>
+                  <div className="d-flex">
+                    <Form.Control
+                      type="date"
+                      name="dataFineRicovero"
+                      value={formData.dataFineRicovero}
+                      onChange={handleChange}
+                      className="shadow-sm"
+                    />
+                    <Button
+                      variant="outline-secondary"
+                      className="ms-2"
+                      onClick={handleClearEndDate}
+                      title="Rimuovi data fine (ancora in ricovero)"
+                    >
+                      <i className="bi bi-x-lg"></i>
+                    </Button>
+                  </div>
+                  <Form.Text className="text-muted">
+                    Lascia vuoto se il puppy è ancora in ricovero
+                  </Form.Text>
+                </Form.Group>
+              </Col>
+            </Row>
+
+            <Form.Group className="mb-4">
+              <Form.Label className="fw-semibold">
+                <i className="bi bi-card-text me-2"></i>
+                Descrizione
+              </Form.Label>
               <Form.Control
                 as="textarea"
-                rows={3}
+                rows={4}
                 name="descrizione"
                 value={formData.descrizione}
                 onChange={handleChange}
                 required
+                className="shadow-sm"
               />
-            </Form.Group>
-
-            <Form.Group className="mb-3">
-              <Form.Label>Data Fine Ricovero</Form.Label>
-              <div className="d-flex">
-                <Form.Control
-                  type="date"
-                  name="dataFineRicovero"
-                  value={formData.dataFineRicovero}
-                  onChange={handleChange}
-                />
-                <Button
-                  variant="outline-secondary"
-                  className="ms-2"
-                  onClick={handleClearEndDate}
-                  title="Rimuovi data fine (ancora in ricovero)"
-                >
-                  <i className="bi bi-x-lg"></i>
-                </Button>
-              </div>
-              <Form.Text className="text-muted">
-                Lascia vuoto se il puppy è ancora in ricovero
-              </Form.Text>
             </Form.Group>
 
             <div className="d-flex justify-content-end">
@@ -137,11 +192,28 @@ const UpdateRicoveroModal = ({
                 variant="secondary"
                 onClick={handleClose}
                 className="me-2"
+                disabled={loading}
               >
+                <i className="bi bi-x-circle me-1"></i>
                 Annulla
               </Button>
-              <Button variant="primary" type="submit" disabled={loading}>
-                {loading ? "Aggiornamento in corso..." : "Aggiorna Ricovero"}
+              <Button
+                variant="primary"
+                type="submit"
+                disabled={loading}
+                className="px-4"
+              >
+                {loading ? (
+                  <>
+                    <Spinner animation="border" size="sm" className="me-2" />
+                    Aggiornamento...
+                  </>
+                ) : (
+                  <>
+                    <i className="bi bi-check-circle me-1"></i>
+                    Aggiorna
+                  </>
+                )}
               </Button>
             </div>
           </Form>
