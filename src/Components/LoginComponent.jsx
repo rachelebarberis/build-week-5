@@ -1,11 +1,9 @@
 import { Container, Form, Button } from 'react-bootstrap';
 
-import { useDispatch } from 'react-redux';
-import { loginSuccess } from '../Redux/Actions/authActions';
 import { useState } from 'react';
-import { getRoleFromToken } from '../utils/jwtUtils';
-import PrivateRoute from './roleRoute';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { login } from '../Redux/Actions/authActions';
 
 const LoginComponent = () => {
   const [email, setEmail] = useState('');
@@ -16,28 +14,12 @@ const LoginComponent = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    try {
-      const response = await fetch('https://localhost:7055/api/Account/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password }),
-      });
+    const isLoggedIn = await dispatch(login(email, password));
 
-      if (!response.ok) {
-        throw new Error('Credenziali non valide');
-      }
-
-      const data = await response.json();
-      const isAuthenticated = true;
-      const role = getRoleFromToken(data.token);
-
-      localStorage.setItem('token', data.token);
-      localStorage.setItem('role', role);
-
-      dispatch(loginSuccess(email, data.token, isAuthenticated, role));
+    if (isLoggedIn) {
       navigate('/');
-    } catch (error) {
-      console.error('Errore nel login:', error.message);
+    } else {
+      alert('Login fallito');
     }
   };
 
@@ -88,7 +70,9 @@ const LoginComponent = () => {
         <p className='text-muted'>
           Registrati ora per accedere a tutte le funzionalità
         </p>
-        <Button className='btn btn-secondary btn-sm'>Registrati</Button>
+        <Link to='/register'>
+          <Button className='btn btn-secondary btn-sm'>Registrati</Button>
+        </Link>
       </div>
     </Container>
   );

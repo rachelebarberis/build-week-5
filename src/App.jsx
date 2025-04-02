@@ -9,6 +9,7 @@ import RicoveriComponent from './Components/RicoveriComponent';
 import Farmacia from './Components/Farmacia';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import LoginComponent from './Components/LoginComponent';
+import RegisterComponent from './Components/RegisterComponent';
 import HomeComponent from './Components/HomeComponent';
 import NotAuthorized from './Components/NotAuthorized';
 import RoleRoute from './Components/roleRoute';
@@ -30,6 +31,7 @@ const MainApp = () => {
         <Route path='/' element={<HomeComponent />} />
 
         <Route path='/account' element={<LoginComponent />} />
+        <Route path='/register' element={<RegisterComponent />} />
 
         <Route
           path='/elencopuppy'
