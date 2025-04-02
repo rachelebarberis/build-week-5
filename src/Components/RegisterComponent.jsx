@@ -2,7 +2,7 @@ import { Container, Form, Button } from 'react-bootstrap';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { login } from '../Redux/Actions/authActions';
-import { useNavigate } from 'react-router-dom'; // Per il reindirizzamento
+import { Link, useNavigate } from 'react-router-dom'; // Per il reindirizzamento
 
 const RegisterComponent = () => {
   const [firstName, setFirstName] = useState('');
@@ -152,7 +152,9 @@ const RegisterComponent = () => {
         <p className='text-muted'>
           Accedi al gestionale usando le tue credenziali
         </p>
-        <Button className='btn btn-secondary btn-sm'>Accedi</Button>
+        <Link to='/account'>
+          <Button className='btn btn-secondary btn-sm'>Accedi</Button>
+        </Link>
       </div>
     </Container>
   );
