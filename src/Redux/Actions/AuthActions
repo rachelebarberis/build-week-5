@@ -1,0 +1,38 @@
+export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
+export const LOGOUT = 'LOGOUT';
+
+// Azione di login
+export const login = (credentials) => async (dispatch) => {
+  try {
+    const response = await fetch('http://localhost:5000/api/auth/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(credentials),
+    });
+
+    if (!response.ok) {
+      throw new Error('Credenziali non valide');
+    }
+
+    const data = await response.json();
+
+    // Salva il token in localStorage
+    localStorage.setItem('token', data.token);
+
+    dispatch({
+      type: LOGIN_SUCCESS,
+      payload: { user: credentials.username, token: data.token },
+    });
+  } catch (error) {
+    console.error('Errore nel login:', error.message);
+  }
+};
+
+// Azione di logout
+export const logoutUser = () => (dispatch) => {
+  localStorage.removeItem('token');
+
+  dispatch({
+    type: LOGOUT,
+  });
+};
