@@ -2,23 +2,24 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import NavBarComponent from "./Components/NavBarComponent";
 import FooterComponent from "./Components/FooterComponent";
-import Puppy from "./Components/Puppy";
+import Puppy from "./Components/Puppy/Puppy";
 import VisiteComponent from "./Components/VisiteComponent";
-import ElencoPuppy from "./Components/ElencoPuppy";
+import ElencoPuppy from "./Components/Puppy/ElencoPuppy";
 import RicoveriComponent from "./Components/Ricoveri/RicoveriComponent";
 import Farmacia from "./Components/Farmacia";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import LoginComponent from "./Components/LoginComponent";
-import RegisterComponent from "./Components/RegisterComponent";
+import LoginComponent from "./Components/Auth/LoginComponent";
+import RegisterComponent from "./Components/Auth/RegisterComponent";
 import HomeComponent from "./Components/HomeComponent";
 import NotAuthorized from "./Components/NotAuthorized";
-import RoleRoute from "./Components/roleRoute";
-import AggiungiPuppy from "./Components/AggiungiPuppy";
-import ModificaPuppy from "./Components/ModificaPuppy";
-import PuppyDetails from "./Components/PuppyDetails";
-import VisiteCreateComponent from "./Components/VisiteCreateComponent";
-import VisiteEditComponent from "./Components/VisiteEditComponent";
-import DeleteVisitaComponent from "./Components/DeleteVisitaComponent";
+import RoleRoute from "./Components/Auth/roleRoute";
+import NotFound from "./Components/NotFound";
+import AggiungiPuppy from "./Components/Puppy/AggiungiPuppy";
+import ModificaPuppy from "./Components/Puppy/ModificaPuppy";
+import PuppyDetails from "./Components/Puppy/PuppyDetails";
+import VisiteCreateComponent from "./Components/Visite/VisiteCreateComponent";
+import VisiteEditComponent from "./Components/Visite/VisiteEditComponent";
+import DeleteVisitaComponent from "./Components/Visite/DeleteVisitaComponent";
 import ClientiListComponent from "./Components/Clienti/ClientiListComponent";
 
 const App = () => {
@@ -37,7 +38,12 @@ const MainApp = () => {
       <Routes>
         <Route path="/" element={<HomeComponent />} />
         <Route path="/account" element={<LoginComponent />} />
-        <Route path="/register" element={<RegisterComponent />} />
+        <Route
+          path="/register"
+          element={
+            <RoleRoute component={<RegisterComponent />} requiredRole="Admin" />
+          }
+        />
         <Route
           path="/elencopuppy"
           element={
@@ -91,10 +97,9 @@ const MainApp = () => {
           element={<RoleRoute component={<Farmacia />} requiredRole="Admin" />}
         />
         <Route path="/puppy" element={<Puppy />} />
-        <Route path="/Clienti" element={<ClientiListComponent />} />
-
+        <Route path="/clienti" element={<ClientiListComponent />} />
         <Route path="/not-authorized" element={<NotAuthorized />} />
-        <Route path="*" element={<Navigate to="/" />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
 
       <FooterComponent />

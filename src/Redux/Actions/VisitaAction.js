@@ -10,6 +10,21 @@ export const getAllVisite = async () => {
   }
 };
 
+export const getVisitaById = async (id) => {
+  try {
+    const response = await fetch(`${API}/${id}`);
+    if (response.ok) {
+      return await response.json();
+    } else {
+      console.error("Visita non trovata");
+      return null;
+    }
+  } catch (error) {
+    console.error("Errore nel recupero della visita", error);
+    return null;
+  }
+};
+
 export const createVisita = async (visita) => {
   try {
     const response = await fetch(`${API}`, {
