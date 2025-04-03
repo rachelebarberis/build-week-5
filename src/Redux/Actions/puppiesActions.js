@@ -239,6 +239,8 @@ export const deletePuppyFailure = (error) => {
 
 export const deletePuppy = (puppyId) => {
   return async (dispatch) => {
+    console.log(puppyId);
+
     dispatch(deletePuppyRequest());
 
     try {

@@ -28,7 +28,7 @@ const UpdatePuppyModal = ({ show, handleClose, puppy, onPuppyUpdated }) => {
         setDataNascita(puppy.dataNascita);
         setMicrochipPresente(puppy.microchipPresente);
         setNumeroMicrochip(puppy.numeroMicrochip || '');
-        setUserId(puppy.userId || '');
+        setUserId(puppy.owner.userId || '');
       }
     }
   }, [show, puppy.puppyId, puppies]);

@@ -83,11 +83,13 @@ const ViewPuppyModal = ({ show, handleClose, puppy }) => {
           </Card>
         )}
 
-        {selectedPuppy.userId && (
+        {selectedPuppy.owner && (
           <Card className='shadow-sm mb-4'>
             <Card.Header className='bg-light'>Proprietario</Card.Header>
             <Card.Body>
-              <Card.Text>ID Proprietario: {selectedPuppy.userId}</Card.Text>
+              <Card.Text>
+                {selectedPuppy.owner.firstName} {selectedPuppy.owner.lastName}
+              </Card.Text>
             </Card.Body>
           </Card>
         )}
