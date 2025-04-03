@@ -1,105 +1,253 @@
-import { Container, Table } from 'react-bootstrap';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import {
+  Container,
+  Table,
+  Button,
+  Form,
+  Row,
+  Col,
+  Card,
+} from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { deletePuppy, fetchPuppies } from '../Redux/Actions/puppiesActions';
-import { Link } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
+import { fetchPuppies } from '../Redux/Actions/puppiesActions';
+
+import CreatePuppyModal from './CreatePuppyModal';
+import UpdatePuppyModal from './UpdatePuppyModal';
+import DeletePuppyModal from './DeletePuppyModal';
+import ViewPuppyModal from './ViewPuppyModal';
 
 const ElencoPuppy = () => {
   const dispatch = useDispatch();
-  const { puppies, loading, error } = useSelector((state) => state.puppies);
+  const { puppies } = useSelector((state) => state.puppies);
 
-  const navigate = useNavigate();
+  const [modalState, setModalState] = useState({
+    create: false,
+    update: false,
+    delete: false,
+    view: false,
+  });
 
-  const handleEdit = (puppyId) => {
-    navigate(`/puppies/edit/${puppyId}`);
-  };
+  const [selectedPuppy, setSelectedPuppy] = useState(null);
 
-  const handleDelete = (puppyId) => {
-    if (window.confirm('Sei sicuro di voler eliminare questo puppy?')) {
-      dispatch(deletePuppy(puppyId));
-    }
-  };
-
-  const handleInfo = (puppyId) => {
-    navigate(`/puppies/details/${puppyId}`);
-  };
+  const [showSearch, setShowSearch] = useState(false);
+  const [searchParams, setSearchParams] = useState({
+    nomePuppy: '',
+    razzaPuppy: '',
+  });
 
   useEffect(() => {
     dispatch(fetchPuppies());
   }, [dispatch]);
 
-  if (loading) {
-    return <div>Caricamento...</div>;
-  }
+  const handleSearchInputChange = (e) => {
+    const { name, value } = e.target;
+    setSearchParams((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
 
-  if (error) {
-    return <div>Errore: {error}</div>;
-  }
+  const resetSearch = () => {
+    setSearchParams({
+      nomePuppy: '',
+      razzaPuppy: '',
+    });
+    dispatch(fetchPuppies());
+  };
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+  };
+
+  const toggleModal = (modalName, puppy = null) => {
+    const resetModals = {
+      create: false,
+      update: false,
+      delete: false,
+      view: false,
+    };
+
+    if (modalState[modalName] === true) {
+      setSelectedPuppy(null);
+      setModalState(resetModals);
+    } else {
+      setSelectedPuppy(puppy);
+      setModalState({
+        ...resetModals,
+        [modalName]: true,
+      });
+    }
+  };
+
+  const handlePuppyCreated = () => {
+    dispatch(fetchPuppies());
+    toggleModal('create');
+  };
+
+  const handlePuppyUpdated = () => {
+    dispatch(fetchPuppies());
+    toggleModal('update');
+  };
+
+  const handlePuppyDeleted = () => {
+    dispatch(fetchPuppies());
+    toggleModal('delete');
+  };
 
   return (
     <Container style={{ fontFamily: "'Poppins', sans-serif" }}>
-      <h4 className='text-center'>Sezione Puppies</h4>
-      <div className='d-flex justify-content-end mb-3'>
-        <Link className='btn btn-sm btn-outline-dark' to={'/addPuppy'}>
-          <i className='bi bi-plus text-black'></i> Aggiungi Puppy
-        </Link>
+      <h4 className='text-center mb-4'>Sezione Puppies</h4>
+
+      <div className='d-flex justify-content-between mb-3'>
+        <div>
+          <Button
+            variant='outline-primary'
+            className='me-2'
+            onClick={() => setShowSearch(!showSearch)}
+          >
+            <i className='bi bi-search me-1'></i> Ricerca
+          </Button>
+        </div>
+        <Button variant='outline-primary' onClick={() => toggleModal('create')}>
+          <i className='bi bi-plus'></i> Nuovo Puppy
+        </Button>
       </div>
-      {puppies.length === 0 ? (
-        <p className='text-center'>Nessun puppy ancora in lista!</p>
-      ) : (
-        <Table striped bordered hover>
-          <thead>
+
+      {showSearch && (
+        <Card className='mb-4'>
+          <Card.Body>
+            <Form onSubmit={handleSearch}>
+              <Row>
+                <Col md={6}>
+                  <Form.Group className='mb-3'>
+                    <Form.Label>Nome Puppy</Form.Label>
+                    <Form.Control
+                      type='text'
+                      name='nomePuppy'
+                      value={searchParams.nomePuppy}
+                      onChange={handleSearchInputChange}
+                      placeholder='Cerca per nome puppy'
+                    />
+                  </Form.Group>
+                </Col>
+                <Col md={6}>
+                  <Form.Group className='mb-3'>
+                    <Form.Label>Razza</Form.Label>
+                    <Form.Control
+                      type='text'
+                      name='razzaPuppy'
+                      value={searchParams.razzaPuppy}
+                      onChange={handleSearchInputChange}
+                      placeholder='Cerca per razza'
+                    />
+                  </Form.Group>
+                </Col>
+                <Col
+                  md={6}
+                  className='d-flex align-items-end justify-content-end'
+                >
+                  <Button
+                    variant='secondary'
+                    onClick={resetSearch}
+                    className='me-2'
+                  >
+                    Reset
+                  </Button>
+                  <Button variant='primary' type='submit'>
+                    Cerca
+                  </Button>
+                </Col>
+              </Row>
+            </Form>
+          </Card.Body>
+        </Card>
+      )}
+
+      <Table striped bordered hover responsive>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Nome</th>
+            <th>Razza</th>
+            <th>Colore</th>
+            <th>Data di Nascita</th>
+            <th>Azioni</th>
+          </tr>
+        </thead>
+        <tbody>
+          {puppies.length === 0 ? (
             <tr>
-              <th>Id</th>
-              <th>Nome</th>
-              <th>Razza</th>
-              <th>Colore</th>
-              <th>Data di Nascita</th>
-              <th>Microchip</th>
-              <th>N.Microchip</th>
-              <th>Proprietario</th>
-              <th>Azioni</th>
+              <td colSpan='6' className='text-center'>
+                Nessun puppy trovato
+              </td>
             </tr>
-          </thead>
-          <tbody>
-            {puppies.map((puppy) => (
+          ) : (
+            puppies.map((puppy, index) => (
               <tr key={puppy.puppyId}>
-                <td>{puppy.puppyId}</td>
+                <td>{index + 1}</td>
                 <td>{puppy.nome}</td>
                 <td>{puppy.tipologia}</td>
                 <td>{puppy.coloreMantello}</td>
                 <td>{puppy.dataNascita}</td>
-                <td>{puppy.microchipPresente ? 'Sì' : 'No'}</td>
-                <td>
-                  {puppy.microchipPresente ? puppy.numeroMicrochip : '---'}
-                </td>
-                <td>
-                  {puppy.user
-                    ? `${puppy.user.firstName} ${puppy.user.lastName}`
-                    : 'Non disponibile'}
-                </td>
-                <td>
-                  <i
-                    className='bi bi-pencil-square'
-                    style={{ cursor: 'pointer' }}
-                    onClick={() => handleEdit(puppy.puppyId)}
-                  ></i>
-                  <i
-                    className='bi bi-trash'
-                    style={{ cursor: 'pointer' }}
-                    onClick={() => handleDelete(puppy.puppyId)}
-                  ></i>
-                  <i
-                    className='bi bi-info-square'
-                    style={{ cursor: 'pointer' }}
-                    onClick={() => handleInfo(puppy.puppyId)}
-                  ></i>
+                <td className='text-center'>
+                  <Button
+                    variant='outline-secondary'
+                    size='sm'
+                    className='me-2'
+                    onClick={() => toggleModal('update', puppy)}
+                  >
+                    <i className='bi bi-pencil'></i>
+                  </Button>
+                  <Button
+                    variant='outline-secondary'
+                    size='sm'
+                    className='me-2'
+                    onClick={() => toggleModal('delete', puppy)}
+                  >
+                    <i className='bi bi-trash'></i>
+                  </Button>
+                  <Button
+                    variant='outline-secondary'
+                    size='sm'
+                    onClick={() => toggleModal('view', puppy)}
+                  >
+                    <i className='bi bi-info-circle'></i>
+                  </Button>
                 </td>
               </tr>
-            ))}
-          </tbody>
-        </Table>
+            ))
+          )}
+        </tbody>
+      </Table>
+
+      <CreatePuppyModal
+        show={modalState.create}
+        handleClose={() => toggleModal('create')}
+        onPuppyCreated={handlePuppyCreated}
+      />
+
+      {selectedPuppy && (
+        <>
+          <UpdatePuppyModal
+            show={modalState.update}
+            handleClose={() => toggleModal('update')}
+            puppy={selectedPuppy}
+            onPuppyUpdated={handlePuppyUpdated}
+          />
+
+          <DeletePuppyModal
+            show={modalState.delete}
+            handleClose={() => toggleModal('delete')}
+            puppy={selectedPuppy}
+            onPuppyDeleted={handlePuppyDeleted}
+          />
+
+          <ViewPuppyModal
+            show={modalState.view}
+            handleClose={() => toggleModal('view')}
+            puppy={selectedPuppy}
+          />
+        </>
       )}
     </Container>
   );
