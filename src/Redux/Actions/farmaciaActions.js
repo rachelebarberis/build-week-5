@@ -71,7 +71,7 @@ export const deleteVendita = async (id) => {
   });
 };
 
-// SERVIZI PER I FORNITORI
+// SERVIZI PER I FORNITORIW
 export const getAllFornitori = async () => {
   return fetchWithAuth(`${API_URL}/fornitori`);
 };
