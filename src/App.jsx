@@ -73,33 +73,7 @@ const MainApp = () => {
             <RoleRoute component={<VisiteComponent />} requiredRole='Admin' />
           }
         />
-        <Route
-          path='/visite/create'
-          element={
-            <RoleRoute
-              component={<VisiteCreateComponent />}
-              requiredRole='Admin'
-            />
-          }
-        />
-        <Route
-          path='/visite/edit/:id'
-          element={
-            <RoleRoute
-              component={<VisiteEditComponent />}
-              requiredRole='Admin'
-            />
-          }
-        />
-        <Route
-          path='/visite/delete/:id'
-          element={
-            <RoleRoute
-              component={<DeleteVisitaComponent />}
-              requiredRole='Admin'
-            />
-          }
-        />
+
         <Route
           path='/ricoveri'
           element={

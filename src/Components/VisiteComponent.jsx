@@ -1,11 +1,29 @@
-import { useEffect, useState } from "react";
-import { Container, Table, Button } from "react-bootstrap";
-import { Link } from "react-router-dom";
-
+import React, { useState, useEffect } from "react";
+import {
+  Container,
+  Table,
+  Button,
+  Form,
+  Row,
+  Col,
+  Card,
+} from "react-bootstrap";
 import { getAllVisite } from "../Redux/Actions/VisitaAction";
+import CreateVisitaModal from "./CreateVisitaModal";
+import UpdateVisitaModal from "./UpdateVisitaModal";
+import DeleteVisitaModal from "./DeleteVisitaModal";
+import ViewVisitaModal from "./ViewVisitaModal";
 
 const VisiteComponent = () => {
   const [visite, setVisite] = useState([]);
+  const [selectedVisita, setSelectedVisita] = useState(null);
+
+  const [modalState, setModalState] = useState({
+    create: false,
+    update: false,
+    delete: false,
+    view: false,
+  });
 
   useEffect(() => {
     fetchVisite();
@@ -13,46 +31,136 @@ const VisiteComponent = () => {
 
   const fetchVisite = async () => {
     const data = await getAllVisite();
-    if (data) setVisite(data);
+    setVisite(data);
+  };
+
+  const toggleModal = (modalName, visita = null) => {
+    const resetModals = {
+      create: false,
+      update: false,
+      delete: false,
+      view: false,
+    };
+
+    if (modalState[modalName] === true) {
+      setSelectedVisita(null);
+      setModalState(resetModals);
+    } else {
+      setSelectedVisita(visita);
+      setModalState({
+        ...resetModals,
+        [modalName]: true,
+      });
+    }
+  };
+
+  const formatDate = (dateString) => {
+    if (!dateString) return "N/A";
+    return new Date(dateString).toLocaleDateString("it-IT");
   };
 
   return (
     <Container style={{ fontFamily: "'Poppins', sans-serif" }}>
-      <h4 className="text-center">Sezione Visite</h4>
-      <div className="d-flex justify-content-end">
-        <Link to="/visite/create">
-          <i className="bi bi-plus text-black"></i>
-        </Link>
+      <h4 className="text-center mb-4">Sezione Visite</h4>
+
+      <div className="d-flex justify-content-end mb-3">
+        <Button variant="outline-primary" onClick={() => toggleModal("create")}>
+          <i className="bi bi-plus"></i> Nuova Visita
+        </Button>
       </div>
-      <Table striped>
+
+      <Table striped bordered hover responsive>
         <thead>
           <tr>
-            <th>NomePuppy</th>
-            <th>DataVisita</th>
-            <th>ObiettivoEsame</th>
-            <th>DescrizioneCura</th>
+            <th>#</th>
+            <th>Puppy</th>
+            <th>Data Visita</th>
+            <th>Obiettivo Esame</th>
+            <th>Descrizione Cura</th>
             <th>Azioni</th>
           </tr>
         </thead>
         <tbody>
-          {visite.map((visita) => (
-            <tr key={visita.id}>
-              <td>{visita.animale?.nome || "N/A"}</td>
-              <td>{visita.dataVisita.split("T")[0]}</td>
-              <td>{visita.obiettivoEsame}</td>
-              <td>{visita.descrizioneCura}</td>
-              <td>
-                <Link to={`/visite/edit/${visita.id}`}>
-                  <i className="bi bi-pencil-square mx-2"></i>
-                </Link>
-                <Link to={`/visite/delete/${visita.id}`}>
-                  <i className="bi bi-trash mx-2"></i>
-                </Link>
+          {visite.length === 0 ? (
+            <tr>
+              <td colSpan="6" className="text-center">
+                Nessuna visita trovata
               </td>
             </tr>
-          ))}
+          ) : (
+            visite.map((visita, index) => (
+              <tr key={visita.id}>
+                <td>{index + 1}</td>
+                <td>{visita.animale?.nome || "N/A"}</td>
+                <td>{formatDate(visita.dataVisita)}</td>
+                <td>{visita.obiettivoEsame}</td>
+                <td>{visita.descrizioneCura}</td>
+                <td className="text-center">
+                  <Button
+                    variant="outline-secondary"
+                    size="sm"
+                    className="me-2"
+                    onClick={() => toggleModal("update", visita)}
+                  >
+                    <i className="bi bi-pencil"></i>
+                  </Button>
+                  <Button
+                    variant="outline-secondary"
+                    size="sm"
+                    className="me-2"
+                    onClick={() => toggleModal("delete", visita)}
+                  >
+                    <i className="bi bi-trash"></i>
+                  </Button>
+                  <Button
+                    variant="outline-secondary"
+                    size="sm"
+                    onClick={() => toggleModal("view", visita)}
+                  >
+                    <i className="bi bi-info-circle"></i>
+                  </Button>
+                </td>
+              </tr>
+            ))
+          )}
         </tbody>
       </Table>
+
+      <CreateVisitaModal
+        show={modalState.create}
+        handleClose={() => toggleModal("create")}
+        onVisitaCreated={fetchVisite}
+      />
+
+      {selectedVisita && (
+        <>
+          <UpdateVisitaModal
+            show={modalState.update}
+            handleClose={() => toggleModal("update")}
+            visitaId={selectedVisita.id}
+            onVisitaUpdated={fetchVisite}
+          />
+
+          <DeleteVisitaModal
+            show={modalState.delete}
+            handleClose={() => toggleModal("delete")}
+            visitaId={selectedVisita.id}
+            visitaInfo={selectedVisita}
+            onVisitaDeleted={() => {
+              setVisite((prev) =>
+                prev.filter((v) => v.id !== selectedVisita.id)
+              );
+              toggleModal("delete");
+            }}
+          />
+
+          <ViewVisitaModal
+            show={modalState.view}
+            handleClose={() => toggleModal("view")}
+            visitaId={selectedVisita.id}
+          />
+        </>
+      )}
     </Container>
   );
 };
