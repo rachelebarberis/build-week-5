@@ -13,38 +13,56 @@ const UpdatePuppyModal = ({ show, handleClose, puppy, onPuppyUpdated }) => {
   const [dataNascita, setDataNascita] = useState('');
   const [microchipPresente, setMicrochipPresente] = useState(false);
   const [numeroMicrochip, setNumeroMicrochip] = useState('');
-  const [userId, setUserId] = useState('');
+  const [clienteId, setClienteId] = useState('');
 
   useEffect(() => {
     if (show && puppy) {
-      const puppy = puppies.find(
-        (puppy) => puppy.puppyId === parseInt(puppy.puppyId)
+      const foundPuppy = puppies.find(
+        (p) => p.puppyId === parseInt(puppy.puppyId)
       );
 
-      if (puppy) {
-        setNome(puppy.nome);
-        setTipologia(puppy.tipologia);
-        setColoreMantello(puppy.coloreMantello);
-        setDataNascita(puppy.dataNascita);
-        setMicrochipPresente(puppy.microchipPresente);
-        setNumeroMicrochip(puppy.numeroMicrochip || '');
-        setUserId(puppy.owner.userId || '');
+      if (foundPuppy) {
+        setNome(foundPuppy.nome);
+        setTipologia(foundPuppy.tipologia);
+        setColoreMantello(foundPuppy.coloreMantello);
+        setDataNascita(foundPuppy.dataNascita);
+        setMicrochipPresente(foundPuppy.microchipPresente);
+        setNumeroMicrochip(foundPuppy.numeroMicrochip || '');
+        setClienteId(foundPuppy.clienteId || '');
       }
     }
-  }, [show, puppy.puppyId, puppies]);
+  }, [show, puppy?.puppyId, puppies]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     const updatedPuppy = {
-      Nome: nome,
-      Tipologia: tipologia,
-      ColoreMantello: coloreMantello,
-      DataNascita: dataNascita,
-      MicrochipPresente: microchipPresente,
-      NumeroMicrochip: numeroMicrochip,
-      UserId: userId,
+      nome: nome,
+      tipologia: tipologia,
+      coloreMantello: coloreMantello,
+      dataNascita: dataNascita,
+      microchipPresente: microchipPresente,
     };
+
+    // Aggiunge 'numeroMicrochip' e 'clienteId' solo se presente
+    if (numeroMicrochip) {
+      updatedPuppy.numeroMicrochip = numeroMicrochip;
+    }
+
+    if (clienteId) {
+      updatedPuppy.clienteId = clienteId;
+    }
+
+    const isModified = Object.keys(updatedPuppy).some(
+      (key) => updatedPuppy[key] !== puppy[key]
+    );
+
+    if (!isModified) {
+      console.log('Nessuna modifica, richiesta non inviata');
+      handleClose();
+      return;
+    }
+
     const success = await dispatch(updatePuppy(puppy.puppyId, updatedPuppy));
 
     if (success) {
@@ -121,11 +139,11 @@ const UpdatePuppyModal = ({ show, handleClose, puppy, onPuppyUpdated }) => {
           )}
 
           <Form.Group className='mb-3'>
-            <Form.Label>User ID (opzionale)</Form.Label>
+            <Form.Label>ID Cliente (opzionale)</Form.Label>
             <Form.Control
               type='text'
-              value={userId}
-              onChange={(e) => setUserId(e.target.value)}
+              value={clienteId}
+              onChange={(e) => setClienteId(e.target.value)}
             />
           </Form.Group>
 

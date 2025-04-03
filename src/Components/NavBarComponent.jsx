@@ -9,9 +9,9 @@ const NavBarComponent = () => {
   return (
     <Navbar expand='md' className='bg-body-dark pt-0'>
       <Container fluid={true} style={{ fontFamily: "'Poppins', sans-serif" }}>
-        <Navbar.Brand href='/' className='m-0 p-0'>
+        <Link to='/' className='m-0 p-0'>
           <img src='/public/images/navbar.jpg' id='imglogo' />
-        </Navbar.Brand>
+        </Link>
         <Navbar.Toggle aria-controls='basic-navbar-nav' />
         <Navbar.Collapse
           id='basic-navbar-nav'

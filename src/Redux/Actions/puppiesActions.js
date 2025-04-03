@@ -185,6 +185,7 @@ export const updatePuppy = (puppyId, puppyData) => {
       if (!cleanPuppyData.MicrochipPresente) {
         delete cleanPuppyData.NumeroMicrochip;
       }
+      console.log(cleanPuppyData);
 
       const response = await fetch(
         `https://localhost:7055/api/Animali/${puppyId}`,

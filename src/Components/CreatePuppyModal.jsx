@@ -34,7 +34,7 @@ const CreatePuppyModal = ({ show, handleClose, onPuppyCreated }) => {
       DataNascita: formData.dataNascita,
       MicrochipPresente: formData.microchipPresente,
       NumeroMicrochip: formData.numeroMicrochip,
-      UserId: formData.userId,
+      clienteId: formData.userId,
     };
 
     // Dispatch per aggiungere il puppy
@@ -53,7 +53,7 @@ const CreatePuppyModal = ({ show, handleClose, onPuppyCreated }) => {
       dataNascita: '',
       microchipPresente: false,
       numeroMicrochip: '',
-      userId: '',
+      clienteId: '',
     });
 
     // Chiudiamo la modale

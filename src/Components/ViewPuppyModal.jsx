@@ -8,7 +8,6 @@ const ViewPuppyModal = ({ show, handleClose, puppy }) => {
   const dispatch = useDispatch();
   const { id } = useParams();
 
-  // Assicurati che puppy contenga direttamente il cucciolo e non un oggetto con una proprietà puppy
   const selectedPuppy = puppy;
 
   useEffect(() => {
@@ -18,7 +17,7 @@ const ViewPuppyModal = ({ show, handleClose, puppy }) => {
   }, [show, id, dispatch]);
 
   if (!selectedPuppy) {
-    return <div>Loading...</div>; // Aggiungi un messaggio di caricamento
+    return <div>Loading...</div>;
   }
 
   return (
@@ -83,12 +82,12 @@ const ViewPuppyModal = ({ show, handleClose, puppy }) => {
           </Card>
         )}
 
-        {selectedPuppy.owner && (
+        {selectedPuppy.cliente && (
           <Card className='shadow-sm mb-4'>
             <Card.Header className='bg-light'>Proprietario</Card.Header>
             <Card.Body>
               <Card.Text>
-                {selectedPuppy.owner.firstName} {selectedPuppy.owner.lastName}
+                {selectedPuppy.cliente.nome} {selectedPuppy.cliente.cognome}
               </Card.Text>
             </Card.Body>
           </Card>
