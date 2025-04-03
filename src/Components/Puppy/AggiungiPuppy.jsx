@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addPuppy } from '../Redux/Actions/puppiesActions';
+import { addPuppy } from '../../Redux/Actions/puppiesActions';
 
 const AddPuppyComponent = () => {
   const [nome, setNome] = useState('');

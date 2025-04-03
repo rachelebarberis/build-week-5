@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { updatePuppy } from '../redux/actions/puppiesActions';
+import { updatePuppy } from '../../redux/actions/puppiesActions';
 import { useNavigate, useParams } from 'react-router-dom';
 
 const UpdatePuppyComponent = () => {

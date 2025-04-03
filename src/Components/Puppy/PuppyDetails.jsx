@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useNavigate } from 'react-router-dom';
-import { fetchPuppyById } from '../redux/actions/puppiesActions';
+import { fetchPuppyById } from '../../redux/actions/puppiesActions';
 
 const PuppyDetailComponent = () => {
   const { id } = useParams();

@@ -1,7 +1,7 @@
 import { Container, Table } from 'react-bootstrap';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { deletePuppy, fetchPuppies } from '../Redux/Actions/puppiesActions';
+import { deletePuppy, fetchPuppies } from '../../Redux/Actions/puppiesActions';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 

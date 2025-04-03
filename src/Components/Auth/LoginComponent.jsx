@@ -3,7 +3,7 @@ import { Container, Form, Button } from 'react-bootstrap';
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { login } from '../Redux/Actions/authActions';
+import { login } from '../../Redux/Actions/authActions';
 
 const LoginComponent = () => {
   const [email, setEmail] = useState('');
@@ -62,18 +62,6 @@ const LoginComponent = () => {
           Accedi
         </Button>
       </Form>
-
-      <hr className='w-50 my-4' />
-
-      <div className='text-center'>
-        <h5 className='mb-3'>Non hai un account?</h5>
-        <p className='text-muted'>
-          Registrati ora per accedere a tutte le funzionalità
-        </p>
-        <Link to='/register'>
-          <Button className='btn btn-secondary btn-sm'>Registrati</Button>
-        </Link>
-      </div>
     </Container>
   );
 };
