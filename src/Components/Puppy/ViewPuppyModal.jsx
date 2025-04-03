@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { Modal, Button, Row, Col, Card } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { fetchPuppyById } from '../Redux/Actions/puppiesActions';
+import { fetchPuppyById } from '../../Redux/Actions/puppiesActions';
 
 const ViewPuppyModal = ({ show, handleClose, puppy }) => {
   const dispatch = useDispatch();

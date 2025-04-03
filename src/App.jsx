@@ -13,12 +13,6 @@ import RegisterComponent from './Components/Auth/RegisterComponent';
 import HomeComponent from './Components/HomeComponent';
 import NotAuthorized from './Components/NotAuthorized';
 import RoleRoute from './Components/Auth/roleRoute';
-import AggiungiPuppy from './Components/Puppy/AggiungiPuppy';
-import ModificaPuppy from './Components/Puppy/ModificaPuppy';
-import PuppyDetails from './Components/Puppy/PuppyDetails';
-import VisiteCreateComponent from './Components/VisiteCreateComponent';
-import VisiteEditComponent from './Components/VisiteEditComponent';
-import DeleteVisitaComponent from './Components/DeleteVisitaComponent';
 import NotFound from './Components/NotFound';
 
 const App = () => {
@@ -49,24 +43,7 @@ const MainApp = () => {
             <RoleRoute component={<ElencoPuppy />} requiredRole='Admin' />
           }
         />
-        <Route
-          path='/addPuppy'
-          element={
-            <RoleRoute component={<AggiungiPuppy />} requiredRole='Admin' />
-          }
-        />
-        <Route
-          path='/puppies/edit/:id'
-          element={
-            <RoleRoute component={<ModificaPuppy />} requiredRole='Admin' />
-          }
-        />
-        <Route
-          path='/puppies/details/:id'
-          element={
-            <RoleRoute component={<PuppyDetails />} requiredRole='Admin' />
-          }
-        />
+
         <Route
           path='/visite'
           element={

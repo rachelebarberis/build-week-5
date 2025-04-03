@@ -9,9 +9,8 @@ import {
   Card,
 } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchPuppies } from '../Redux/Actions/puppiesActions';
 
-import CreatePuppyModal from './CreatePuppyModal';
+import CreatePuppyModal from '';
 import UpdatePuppyModal from './UpdatePuppyModal';
 import DeletePuppyModal from './DeletePuppyModal';
 import ViewPuppyModal from './ViewPuppyModal';
