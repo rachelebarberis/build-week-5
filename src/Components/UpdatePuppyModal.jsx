@@ -16,7 +16,6 @@ const UpdatePuppyModal = ({ show, handleClose, puppy, onPuppyUpdated }) => {
   const [userId, setUserId] = useState('');
 
   useEffect(() => {
-    console.log(puppy.puppyId, show);
     if (show && puppy) {
       const puppy = puppies.find(
         (puppy) => puppy.puppyId === parseInt(puppy.puppyId)
