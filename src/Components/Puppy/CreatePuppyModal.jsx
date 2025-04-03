@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Modal, Button, Form } from "react-bootstrap";
 import { useDispatch } from "react-redux";
-import { addPuppy } from "../Redux/Actions/puppiesActions";
+import { addPuppy } from "../../Redux/Actions/puppiesActions";
 
 const CreatePuppyModal = ({ show, handleClose, onPuppyCreated }) => {
   const [formData, setFormData] = useState({
@@ -29,9 +29,7 @@ const CreatePuppyModal = ({ show, handleClose, onPuppyCreated }) => {
   const loadClienti = async () => {
     try {
       setLoading(true);
-
       const token = localStorage.getItem("token");
-
       const response = await fetch("https://localhost:7055/api/Clienti", {
         method: "GET",
         headers: {
@@ -52,7 +50,6 @@ const CreatePuppyModal = ({ show, handleClose, onPuppyCreated }) => {
       setError(null);
     } catch (err) {
       setError("Errore nel caricamento dei clienti: " + err.message);
-      console.error("Errore nel caricamento dei clienti:", err);
     } finally {
       setLoading(false);
     }
@@ -78,14 +75,9 @@ const CreatePuppyModal = ({ show, handleClose, onPuppyCreated }) => {
       ClienteId: formData.clienteId || null,
     };
 
-    // Dispatch per aggiungere il puppy
-    console.log(newPuppy);
     await dispatch(addPuppy(newPuppy));
-
-    // Callback per segnare la creazione del puppy
     onPuppyCreated();
 
-    // Reset dei campi del form
     setFormData({
       nome: "",
       tipologia: "",
@@ -96,17 +88,12 @@ const CreatePuppyModal = ({ show, handleClose, onPuppyCreated }) => {
       clienteId: "",
     });
 
-    // Chiudiamo la modale
     handleClose();
   };
 
   return (
     <Modal show={show} onHide={handleClose} centered backdrop="static">
-      <Modal.Header
-        closeButton
-        className="bg-light"
-        style={{ borderBottom: "2px solid #dee2e6" }}
-      >
+      <Modal.Header closeButton className="bg-light">
         <div className="w-100 text-center">
           <Modal.Title>Nuovo Puppy</Modal.Title>
         </div>
@@ -121,7 +108,6 @@ const CreatePuppyModal = ({ show, handleClose, onPuppyCreated }) => {
               value={formData.nome}
               onChange={handleChange}
               required
-              className="shadow-sm"
             />
           </Form.Group>
 
@@ -133,7 +119,6 @@ const CreatePuppyModal = ({ show, handleClose, onPuppyCreated }) => {
               value={formData.tipologia}
               onChange={handleChange}
               required
-              className="shadow-sm"
             />
           </Form.Group>
 
@@ -145,7 +130,6 @@ const CreatePuppyModal = ({ show, handleClose, onPuppyCreated }) => {
               value={formData.coloreMantello}
               onChange={handleChange}
               required
-              className="shadow-sm"
             />
           </Form.Group>
 
@@ -157,7 +141,6 @@ const CreatePuppyModal = ({ show, handleClose, onPuppyCreated }) => {
               value={formData.dataNascita}
               onChange={handleChange}
               required
-              className="shadow-sm"
             />
           </Form.Group>
 
@@ -179,7 +162,6 @@ const CreatePuppyModal = ({ show, handleClose, onPuppyCreated }) => {
                 name="numeroMicrochip"
                 value={formData.numeroMicrochip}
                 onChange={handleChange}
-                className="shadow-sm"
               />
             </Form.Group>
           )}
@@ -188,11 +170,7 @@ const CreatePuppyModal = ({ show, handleClose, onPuppyCreated }) => {
             <Form.Label className="fw-semibold">Proprietario</Form.Label>
             {loading ? (
               <div className="text-center">
-                <span
-                  className="spinner-border spinner-border-sm me-2"
-                  role="status"
-                  aria-hidden="true"
-                ></span>
+                <span className="spinner-border spinner-border-sm me-2"></span>
                 Caricamento clienti...
               </div>
             ) : error ? (
@@ -202,7 +180,6 @@ const CreatePuppyModal = ({ show, handleClose, onPuppyCreated }) => {
                 name="clienteId"
                 value={formData.clienteId}
                 onChange={handleChange}
-                className="shadow-sm"
               >
                 <option value="">Seleziona un proprietario (opzionale)</option>
                 {clienti.map((cliente) => (

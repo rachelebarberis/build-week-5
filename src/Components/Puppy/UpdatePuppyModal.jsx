@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { updatePuppy } from "../Redux/Actions/puppiesActions";
+import { updatePuppy } from "../../Redux/Actions/puppiesActions";
 import { Modal, Button, Form } from "react-bootstrap";
 
 const UpdatePuppyModal = ({ show, handleClose, puppy, onPuppyUpdated }) => {
