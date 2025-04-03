@@ -3,31 +3,39 @@ const API_URL = "https://localhost:7055/api/Farmacia";
 const fetchWithAuth = async (url, options = {}) => {
   const token = localStorage.getItem("token");
 
-  const defaultHeaders = {
-    "Content-Type": "application/json",
-    Authorization: `Bearer ${token}`,
+  const defaultOptions = {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
   };
 
-  const response = await fetch(url, {
-    ...options,
-    headers: {
-      ...defaultHeaders,
-      ...options.headers,
-    },
-  });
+  const response = await fetch(url, { ...defaultOptions, ...options });
 
   if (!response.ok) {
-    const errorData = await response.json().catch(() => null);
+    const errorText = await response.text();
+    let errorMessage;
+
+    try {
+      const errorJson = JSON.parse(errorText);
+      errorMessage =
+        errorJson.message || errorJson.title || errorJson.error || errorText;
+    } catch {
+      errorMessage = errorText;
+    }
+
+    console.error("API Error Response:", {
+      status: response.status,
+      statusText: response.statusText,
+      errorMessage: errorMessage,
+    });
+
     throw new Error(
-      errorData?.message || `HTTP error! Status: ${response.status}`
+      `HTTP error! Status: ${response.status}. Message: ${errorMessage}`
     );
   }
 
-  if (response.status === 204) {
-    return null;
-  }
-
-  return await response.json();
+  return response.json();
 };
 
 // SERVIZI PER LE VENDITE
@@ -52,10 +60,25 @@ export const getVenditeByProdottoId = async (prodottoId) => {
 };
 
 export const createVendita = async (venditaData) => {
-  return fetchWithAuth(`${API_URL}/vendite`, {
-    method: "POST",
-    body: JSON.stringify(venditaData),
-  });
+  try {
+    console.log(
+      "Creating vendita with data:",
+      JSON.stringify(venditaData, null, 2)
+    );
+
+    const formattedData = {
+      ...venditaData,
+      prodottoId: parseInt(venditaData.prodottoId, 10),
+    };
+
+    return fetchWithAuth(`${API_URL}/vendite`, {
+      method: "POST",
+      body: JSON.stringify(formattedData),
+    });
+  } catch (error) {
+    console.error("Errore dettagliato creazione vendita:", error);
+    throw error;
+  }
 };
 
 export const updateVendita = async (id, venditaData) => {
@@ -66,12 +89,29 @@ export const updateVendita = async (id, venditaData) => {
 };
 
 export const deleteVendita = async (id) => {
-  return fetchWithAuth(`${API_URL}/vendite/${id}`, {
-    method: "DELETE",
-  });
+  try {
+    const token = localStorage.getItem("token");
+    const response = await fetch(`${API_URL}/vendite/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    if (response.status === 204) {
+      return { success: true };
+    }
+
+    const text = await response.text();
+    return text ? JSON.parse(text) : { success: true };
+  } catch (error) {
+    console.error(`Error deleting vendita ${id}:`, error);
+    throw error;
+  }
 };
 
-// SERVIZI PER I FORNITORIW
+// SERVIZI PER I FORNITORI
 export const getAllFornitori = async () => {
   return fetchWithAuth(`${API_URL}/fornitori`);
 };
