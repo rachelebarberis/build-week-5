@@ -16,6 +16,9 @@ import RoleRoute from './Components/roleRoute';
 import AggiungiPuppy from './Components/AggiungiPuppy';
 import ModificaPuppy from './Components/ModificaPuppy';
 import PuppyDetails from './Components/PuppyDetails';
+import VisiteCreateComponent from './Components/VisiteCreateComponent';
+import VisiteEditComponent from './Components/VisiteEditComponent';
+import DeleteVisitaComponent from './Components/DeleteVisitaComponent';
 
 const App = () => {
   return (
