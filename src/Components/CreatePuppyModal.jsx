@@ -54,6 +54,8 @@ const CreatePuppyModal = ({ show, handleClose, onPuppyCreated }) => {
       microchipPresente: false,
       numeroMicrochip: '',
       clienteId: '',
+      numeroMicrochip: '',
+      userId: '',
     });
 
     // Chiudiamo la modale
@@ -68,15 +70,18 @@ const CreatePuppyModal = ({ show, handleClose, onPuppyCreated }) => {
         style={{ borderBottom: '2px solid #dee2e6' }}
       >
         <div className='w-100 text-center'>
-          <Modal.Title>Nuovo Puppy</Modal.Title>
+          <Modal.Title style={{ color: '#2A4D38' }}>Aggiungi Puppy</Modal.Title>
         </div>
       </Modal.Header>
 
       <Modal.Body className='px-4 py-4'>
         <Form onSubmit={handleSubmit}>
           <Form.Group className='mb-4'>
-            <Form.Label className='fw-semibold'>Nome</Form.Label>
+            <Form.Label className='fw-semibold' style={{ color: '#2A4D38' }}>
+              Nome
+            </Form.Label>
             <Form.Control
+              style={{ color: '#2F855A' }}
               type='text'
               name='nome'
               value={formData.nome}
@@ -87,8 +92,11 @@ const CreatePuppyModal = ({ show, handleClose, onPuppyCreated }) => {
           </Form.Group>
 
           <Form.Group className='mb-4'>
-            <Form.Label className='fw-semibold'>Tipologia</Form.Label>
+            <Form.Label className='fw-semibold' style={{ color: '#2A4D38' }}>
+              Tipologia
+            </Form.Label>
             <Form.Control
+              style={{ color: '#2F855A' }}
               type='text'
               name='tipologia'
               value={formData.tipologia}
@@ -99,8 +107,11 @@ const CreatePuppyModal = ({ show, handleClose, onPuppyCreated }) => {
           </Form.Group>
 
           <Form.Group className='mb-4'>
-            <Form.Label className='fw-semibold'>Colore Mantello</Form.Label>
+            <Form.Label className='fw-semibold' style={{ color: '#2A4D38' }}>
+              Colore Mantello
+            </Form.Label>
             <Form.Control
+              style={{ color: '#2F855A' }}
               type='text'
               name='coloreMantello'
               value={formData.coloreMantello}
@@ -111,8 +122,11 @@ const CreatePuppyModal = ({ show, handleClose, onPuppyCreated }) => {
           </Form.Group>
 
           <Form.Group className='mb-4'>
-            <Form.Label className='fw-semibold'>Data di Nascita</Form.Label>
+            <Form.Label className='fw-semibold' style={{ color: '#2A4D38' }}>
+              Data di Nascita
+            </Form.Label>
             <Form.Control
+              style={{ color: '#2F855A' }}
               type='date'
               name='dataNascita'
               value={formData.dataNascita}
@@ -122,9 +136,10 @@ const CreatePuppyModal = ({ show, handleClose, onPuppyCreated }) => {
             />
           </Form.Group>
 
-          <Form.Group className='mb-4'>
+          <Form.Group className='mb-4' style={{ color: '#2A4D38' }}>
             <Form.Label className='fw-semibold'>Microchip Presente</Form.Label>
             <Form.Check
+              style={{ color: '#2F855A' }}
               type='checkbox'
               name='microchipPresente'
               checked={formData.microchipPresente}
@@ -134,8 +149,11 @@ const CreatePuppyModal = ({ show, handleClose, onPuppyCreated }) => {
 
           {formData.microchipPresente && (
             <Form.Group className='mb-4'>
-              <Form.Label className='fw-semibold'>Numero Microchip</Form.Label>
+              <Form.Label className='fw-semibold' style={{ color: '#2A4D38' }}>
+                Numero Microchip
+              </Form.Label>
               <Form.Control
+                style={{ color: '#2F855A' }}
                 type='text'
                 name='numeroMicrochip'
                 value={formData.numeroMicrochip}
@@ -146,8 +164,11 @@ const CreatePuppyModal = ({ show, handleClose, onPuppyCreated }) => {
           )}
 
           <Form.Group className='mb-4'>
-            <Form.Label className='fw-semibold'>User ID (opzionale)</Form.Label>
+            <Form.Label className='fw-semibold' style={{ color: '#2A4D38' }}>
+              Nome Proprietario (opzionale)
+            </Form.Label>
             <Form.Control
+              style={{ color: '#2F855A' }}
               type='text'
               name='userId'
               value={formData.userId}
@@ -164,7 +185,12 @@ const CreatePuppyModal = ({ show, handleClose, onPuppyCreated }) => {
             >
               Annulla
             </Button>
-            <Button variant='primary' type='submit' className='px-4'>
+            <Button
+              variant='outline-muted'
+              style={{ color: '#D8E2DC', backgroundColor: '#2F855A' }}
+              type='submit'
+              className='px-4'
+            >
               Salva
             </Button>
           </div>

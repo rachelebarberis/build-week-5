@@ -34,7 +34,9 @@ const ViewVisitaModal = ({ show, handleClose, visitaId }) => {
         style={{ borderBottom: "2px solid #dee2e6" }}
       >
         <div className="w-100 text-end">
-          <Modal.Title>Dettagli Visita</Modal.Title>
+          <Modal.Title style={{ color: "#2A4D38" }}>
+            Dettagli Visita
+          </Modal.Title>
         </div>
       </Modal.Header>
 
@@ -42,7 +44,9 @@ const ViewVisitaModal = ({ show, handleClose, visitaId }) => {
         {visita ? (
           <>
             <div className="mb-4 p-3 bg-light rounded border">
-              <h6 className="mb-1">Puppy:</h6>
+              <h6 className="mb-1" style={{ color: "#2A4D38" }}>
+                Puppy:
+              </h6>
               <div className="fs-5 fw-bold">{visita.puppyNome || "Puppy"}</div>
             </div>
 
@@ -51,7 +55,7 @@ const ViewVisitaModal = ({ show, handleClose, visitaId }) => {
                 <Card className="shadow-sm h-100">
                   <Card.Header className="bg-light">
                     <i className="bi bi-calendar-plus me-2"></i>
-                    Data Visita
+                    Data Visita:
                   </Card.Header>
                   <Card.Body>
                     <Card.Text className="fs-5">
@@ -98,7 +102,7 @@ const ViewVisitaModal = ({ show, handleClose, visitaId }) => {
       </Modal.Body>
 
       <Modal.Footer className="border-top">
-        <Button variant="primary" onClick={handleClose} className="px-4">
+        <Button variant="secondary" onClick={handleClose} className="px-4">
           <i className="bi bi-x-circle me-1"></i>
           Chiudi
         </Button>

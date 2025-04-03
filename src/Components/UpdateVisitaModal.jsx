@@ -62,19 +62,38 @@ const VisiteEditComponent = ({
   };
 
   return (
+<<<<<<< HEAD
     <Modal show={show} onHide={handleClose} centered backdrop='static'>
       <Modal.Header closeButton className='bg-light'>
         <Modal.Title className='text-center w-100'>Modifica Visita</Modal.Title>
+=======
+    <Modal show={show} onHide={handleClose} centered backdrop="static">
+      <Modal.Header closeButton className="bg-light">
+        <Modal.Title style={{ color: "#2A4D38" }} className="text-center w-100">
+          Modifica Visita
+        </Modal.Title>
+>>>>>>> origin/rachele
       </Modal.Header>
       <Modal.Body>
         <Form onSubmit={handleSubmit}>
           <Row>
             <Col md={6}>
+<<<<<<< HEAD
               <Form.Group className='mb-3'>
                 <Form.Label>Data Visita</Form.Label>
                 <Form.Control
                   type='date'
                   name='dataVisita'
+=======
+              <Form.Group className="mb-3">
+                <Form.Label style={{ color: "#2A4D38" }}>
+                  Data Visita
+                </Form.Label>
+                <Form.Control
+                  style={{ color: "#2F855A" }}
+                  type="date"
+                  name="dataVisita"
+>>>>>>> origin/rachele
                   value={formData.dataVisita}
                   onChange={handleChange}
                   required
@@ -83,22 +102,44 @@ const VisiteEditComponent = ({
             </Col>
           </Row>
 
+<<<<<<< HEAD
           <Form.Group className='mb-3'>
             <Form.Label>Obiettivo Esame</Form.Label>
             <Form.Control
               type='text'
               name='obiettivoEsame'
+=======
+          <Form.Group className="mb-3">
+            <Form.Label style={{ color: "#2A4D38" }}>
+              Obiettivo Esame
+            </Form.Label>
+            <Form.Control
+              style={{ color: "#2F855A" }}
+              type="text"
+              name="obiettivoEsame"
+>>>>>>> origin/rachele
               value={formData.obiettivoEsame}
               onChange={handleChange}
               required
             />
           </Form.Group>
 
+<<<<<<< HEAD
           <Form.Group className='mb-3'>
             <Form.Label>Descrizione Cura</Form.Label>
             <Form.Control
               as='textarea'
               name='descrizioneCura'
+=======
+          <Form.Group className="mb-3">
+            <Form.Label style={{ color: "#2A4D38" }}>
+              Descrizione Cura
+            </Form.Label>
+            <Form.Control
+              style={{ color: "#2F855A" }}
+              as="textarea"
+              name="descrizioneCura"
+>>>>>>> origin/rachele
               value={formData.descrizioneCura}
               onChange={handleChange}
               required
@@ -107,13 +148,26 @@ const VisiteEditComponent = ({
 
           <div className='d-flex justify-content-end'>
             <Button
+<<<<<<< HEAD
               variant='outline-secondary'
+=======
+              variant="outline-muted"
+              style={{ backgroundColor: "#2F855A", color: "#D8E2DC" }}
+>>>>>>> origin/rachele
               onClick={handleClose}
               className='me-2'
             >
               Annulla
             </Button>
+<<<<<<< HEAD
             <Button variant='primary' type='submit'>
+=======
+            <Button
+              variant="outline-muted"
+              style={{ color: "##2A4D38", backgroundColor: "#D8E2DC" }}
+              type="submit"
+            >
+>>>>>>> origin/rachele
               Salva
             </Button>
           </div>

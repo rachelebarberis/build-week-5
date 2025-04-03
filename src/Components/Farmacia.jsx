@@ -246,13 +246,16 @@ const Farmacia = () => {
     <Container style={{ fontFamily: "'Poppins', sans-serif" }}>
       <h4 className='text-center'>Farmacia Interna</h4>
 
-      <Tabs
-        activeKey={activeTab}
-        onSelect={(k) => setActiveTab(k)}
-        className='mb-3'
-      >
-        <Tab eventKey='prodotti' title='Prodotti'>
-          <h6 className='text-center pt-2'>Lista Prodotti</h6>
+      <div className="d-flex justify-content-end mb-3">
+        <Button
+          style={{ color: "#2A4D38" }}
+          variant="outline-secondary"
+          onClick={() => toggleModal("create")}
+        >
+          <i className="bi bi-plus" style={{ color: "#2A4D38" }}></i> Nuovo
+          Prodotto
+        </Button>
+      </div>
 
           <div className='d-flex justify-content-end mb-3'>
             <Button
@@ -271,6 +274,7 @@ const Farmacia = () => {
             </Button>
           </div>
 
+<<<<<<< HEAD
           {error && <Alert variant='danger'>{error}</Alert>}
 
           {loading ? (
@@ -288,110 +292,123 @@ const Farmacia = () => {
                   <th>Armadietto</th>
                   <th>Cassetto</th>
                   <th>Azioni</th>
+=======
+      {loading ? (
+        <div className="text-center my-4">
+          <Spinner animation="border" role="status">
+            <span className="visually-hidden">Caricamento...</span>
+          </Spinner>
+        </div>
+      ) : (
+        <Table striped bordered hover responsive className="mb-md-5">
+          <thead>
+            <tr>
+              <th style={{ color: "#2A4D38" }}>Nome</th>
+              <th style={{ color: "#2A4D38" }}>Uso</th>
+              <th style={{ color: "#2A4D38" }}>Armadietto</th>
+              <th style={{ color: "#2A4D38" }}>Cassetto</th>
+              <th style={{ color: "#2A4D38" }}>Azioni</th>
+            
+>>>>>>> origin/rachele
+</tr>
+          </thead>
+          <tbody>
+            {prodotti.length === 0 ? (
+              <tr>
+                <td colSpan="5" className="text-center">
+                  Nessun prodotto trovato
+                </td>
+              </tr>
+            ) : (
+              prodotti.map((prodotto) => (
+                <tr key={prodotto.id}>
+                  <td style={{ color: "#2A4D38" }}>{prodotto.nome}</td>
+                  <td style={{ color: "#2A4D38" }}>
+                    {prodotto.usiProdotto || "Non specificato"}
+                  </td>
+                  <td style={{ color: "#2A4D38" }} className="text-center">
+                    {prodotto.cassetto?.armadiettoId || "N/A"}
+                  </td>
+                  <td style={{ color: "#2A4D38" }} className="text-center">
+                    {prodotto.cassetto?.cassettoId || "N/A"}
+                  </td>
+                  <td>
+                    <Button
+                      style={{ color: "#2A4D38" }}
+                      variant="outline-muted"
+                      size="sm"
+                      className="me-2"
+                      onClick={() => toggleModal("update", prodotto)}
+                    >
+                      <i
+                        className="bi bi-pencil"
+                        style={{ color: "#2A4D38" }}
+                      ></i>
+                    </Button>
+                    <Button
+                      style={{ color: "#2A4D38" }}
+                      variant="outline-muted"
+                      size="sm"
+                      className="me-2"
+                      onClick={() => toggleModal("delete", prodotto)}
+                    >
+                      <i className="bi bi-trash"></i>
+                    </Button>
+                    <Button
+                      style={{ color: "#2A4D38" }}
+                      variant="outline-muted"
+                      size="sm"
+                      onClick={() => toggleModal("view", prodotto)}
+                    >
+                      <i className="bi bi-info-circle pe-sm-2 pe-md-0"></i>
+                    </Button>
+                  </td>
                 </tr>
-              </thead>
-              <tbody>
-                {prodotti.length === 0 ? (
-                  <tr>
-                    <td colSpan='5' className='text-center'>
-                      Nessun prodotto trovato
-                    </td>
-                  </tr>
-                ) : (
-                  prodotti.map((prodotto) => (
-                    <tr key={prodotto.id}>
-                      <td>{prodotto.nome}</td>
-                      <td>{prodotto.usiProdotto || 'Non specificato'}</td>
-                      <td>{prodotto.cassetto?.armadiettoId || 'N/A'}</td>
-                      <td>{prodotto.cassetto?.cassettoId || 'N/A'}</td>
-                      <td>
-                        <Button
-                          variant='outline-secondary'
-                          size='sm'
-                          className='me-2'
-                          onClick={() => toggleModal('update', prodotto)}
-                        >
-                          <i className='bi bi-pencil'></i>
-                        </Button>
-                        <Button
-                          variant='outline-secondary'
-                          size='sm'
-                          className='me-2'
-                          onClick={() => toggleModal('delete', prodotto)}
-                        >
-                          <i className='bi bi-trash'></i>
-                        </Button>
-                        <Button
-                          variant='outline-secondary'
-                          size='sm'
-                          className='me-2'
-                          onClick={() => toggleModal('view', prodotto)}
-                        >
-                          <i className='bi bi-info-circle'></i>
-                        </Button>
-                        <Button
-                          variant='outline-success'
-                          size='sm'
-                          onClick={() => toggleModal('vendita', prodotto)}
-                        >
-                          <i className='bi bi-cart'></i>
-                        </Button>
-                      </td>
-                    </tr>
-                  ))
-                )}
-              </tbody>
-            </Table>
-          )}
+              ))
+            )}
+          </tbody>
+        </Table>
+      )}
 
-          <Row className='pb-5'>
-            <Col lg={6} className='text-center pt-3 border border-bottom-0'>
-              <Row className='justify-content-between align-items-center'>
-                <Col xs={6}>
-                  <p className='fw-semibold'>Ricerca per Data</p>
-                </Col>
-                <Col xs={6}>
-                  <Form onSubmit={handleDateSearch}>
-                    <Row className='justify-content-center pb-2'>
-                      <Col xs='auto' className='p-0 pe-2'>
-                        <InputGroup>
-                          <Form.Control
-                            type='date'
-                            value={searchDate}
-                            onChange={(e) => setSearchDate(e.target.value)}
-                          />
-                          <Button type='submit' variant='outline-secondary'>
-                            <i className='bi bi-search'></i>
-                          </Button>
-                        </InputGroup>
-                      </Col>
-                    </Row>
-                  </Form>
-                </Col>
-              </Row>
+      <Row className="pb-5">
+        <Col lg={6} className="text-center pt-3 border border-bottom-0">
+          <Row className="justify-content-between align-items-center">
+            <Col xs={6}>
+              <p className="fw-semibold">Ricerca per Data</p>
+            </Col>
+            <Col xs={6}>
+              <Form onSubmit={handleDateSearch}>
+                <Row className="justify-content-center pb-2">
+                  <Col xs="auto" className="p-0 pe-2">
+                    <InputGroup>
+                      <Form.Control
+                        style={{ color: "grey" }}
+                        type="date"
+                        value={searchDate}
+                        onChange={(e) => setSearchDate(e.target.value)}
+                      />
+                      <Button
+                        type="submit"
+                        variant="outline-muted"
+                        style={{ backgroundColor: "white" }}
+                      >
+                        <i className="bi bi-search"></i>
+                      </Button>
+                    </InputGroup>
+                  </Col>
+                </Row>
+              </Form>
+            </Col>
+          </Row>
 
-              <hr></hr>
-              <div>
-                <p className='text-center fw-semibold'>Lista ricerca:</p>
-                <Table striped className='border'>
-                  <thead>
-                    <tr>
-                      <th>Prodotto</th>
-                      <th>Cliente</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {searchResults.length === 0 ? (
-                      <tr>
-                        <td colSpan='2' className='text-center'>
-                          Nessun risultato trovato
-                        </td>
-                      </tr>
-                    ) : (
-                      searchResults.map((prodotto, index) => (
-                        <tr key={index}>
-                          <td>{prodotto.nome}</td>
-                          <td>{prodotto.nomeCliente}</td>
+          <hr></hr>
+          <div>
+            <p className="text-center fw-semibold">Lista ricerca:</p>
+            <Table striped bordered hover responsive className="border">
+              <thead>
+                <tr>
+                  <th style={{ color: "#2A4D38" }}>Prodotto</th>
+                  <th style={{ color: "#2A4D38" }}>Data</th>
                         </tr>
                       ))
                     )}
@@ -399,6 +416,7 @@ const Farmacia = () => {
                 </Table>
               </div>
             </Col>
+<<<<<<< HEAD
 
             <Col lg={6} className='text-center pt-3 border border-bottom-0'>
               <Row className='justify-content-between align-items-center'>
@@ -461,10 +479,35 @@ const Farmacia = () => {
                   </Table>
                 )}
               </div>
+=======
+            <Col xs={6}>
+              <Form onSubmit={handleFiscalCodeSearch}>
+                <Row className="justify-content-center pb-2">
+                  <Col xs="auto" className="p-0 pe-2">
+                    <InputGroup>
+                      <Form.Control
+                        type="text"
+                        placeholder="Codice Fiscale"
+                        value={fiscalCode}
+                        onChange={(e) => setFiscalCode(e.target.value)}
+                      />
+                      <Button
+                        type="submit"
+                        variant="outline-muted"
+                        style={{ backgroundColor: "white" }}
+                      >
+                        <i className="bi bi-search"></i>
+                      </Button>
+                    </InputGroup>
+                  </Col>
+                </Row>
+              </Form>
+>>>>>>> origin/rachele
             </Col>
           </Row>
         </Tab>
 
+<<<<<<< HEAD
         <Tab eventKey='vendite' title='Vendite'>
           <h6 className='text-center pt-2'>Registro Vendite</h6>
 
@@ -541,6 +584,33 @@ const Farmacia = () => {
                         >
                           <i className='bi bi-trash'></i>
                         </Button>
+=======
+          <hr></hr>
+          <div>
+            <p className="text-center fw-semibold">Lista ricerca:</p>
+            {clientError && <Alert variant="danger">{clientError}</Alert>}
+            {clientLoading ? (
+              <div className="text-center my-4">
+                <Spinner animation="border" size="sm" />
+              </div>
+            ) : (
+              <Table striped bordered hover responsive className="border">
+                <thead>
+                  <tr>
+                    <th style={{ color: "#2A4D38" }}>Prodotto</th>
+                    <th style={{ color: "#2A4D38" }}>Cliente</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {clientResults.length === 0 ? (
+                    <tr>
+                      <td
+                        style={{ color: "#2A4D38" }}
+                        colSpan="2"
+                        className="text-center"
+                      >
+                        Nessun risultato trovato
+>>>>>>> origin/rachele
                       </td>
                     </tr>
                   ))

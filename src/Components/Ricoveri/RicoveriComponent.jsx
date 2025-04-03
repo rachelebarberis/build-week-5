@@ -170,11 +170,13 @@ const RicoveriComponent = () => {
       <div className="d-flex justify-content-between mb-3">
         <div>
           <Button
-            variant="outline-primary"
+            style={{ color: "#2A4D38" }}
+            variant="outline-secondary"
             className="me-2"
             onClick={() => setShowSearch(!showSearch)}
           >
-            <i className="bi bi-search me-1"></i> Ricerca
+            <i className="bi bi-search me-1 " style={{ color: "#2A4D38" }}></i>{" "}
+            Ricerca
           </Button>
           <Button
             variant="outline-success"
@@ -187,8 +189,13 @@ const RicoveriComponent = () => {
             <i className="bi bi-arrow-repeat me-1"></i> Tutti
           </Button>
         </div>
-        <Button variant="outline-primary" onClick={() => toggleModal("create")}>
-          <i className="bi bi-plus"></i> Nuovo Ricovero
+        <Button
+          variant="outline-secondary"
+          style={{ color: "#2A4D38" }}
+          onClick={() => toggleModal("create")}
+        >
+          <i className="bi bi-plus" style={{ color: "#2A4D38" }}></i> Nuovo
+          Ricovero
         </Button>
       </div>
 
@@ -246,12 +253,12 @@ const RicoveriComponent = () => {
         <Table striped bordered hover responsive>
           <thead>
             <tr>
-              <th>#</th>
-              <th>Puppy</th>
-              <th>Inizio</th>
-              <th>Descrizione</th>
-              <th>Fine</th>
-              <th>Azioni</th>
+              <th style={{ color: "#2A4D38" }}>#</th>
+              <th style={{ color: "#2A4D38" }}>Puppy</th>
+              <th style={{ color: "#2A4D38" }}>Inizio</th>
+              <th style={{ color: "#2A4D38" }}>Descrizione</th>
+              <th style={{ color: "#2A4D38" }}>Fine</th>
+              <th style={{ color: "#2A4D38" }}>Azioni</th>
             </tr>
           </thead>
           <tbody>
@@ -264,15 +271,21 @@ const RicoveriComponent = () => {
             ) : (
               ricoveri.map((ricovero, index) => (
                 <tr key={ricovero.ricoveroId}>
-                  <td>{index + 1}</td>
-                  <td>{ricovero.puppyNome}</td>
-                  <td>{formatDate(ricovero.dataInizioRicovero) || "N/A"}</td>
-                  <td>{ricovero.descrizione || "-"}</td>
+                  <td style={{ color: "#2A4D38" }}>{index + 1}</td>
+                  <td style={{ color: "#2A4D38" }}>{ricovero.puppyNome}</td>
+                  <td style={{ color: "#2A4D38" }}>
+                    {formatDate(ricovero.dataInizioRicovero) || "N/A"}
+                  </td>
+                  <td style={{ color: "#2A4D38" }}>
+                    {ricovero.descrizione || "-"}
+                  </td>
                   <td>
                     {formatDate(ricovero.dataFineRicovero) || (
                       <Badge
                         bg={null}
-                        style={{ backgroundColor: "purple", color: "white" }}
+                        style={{
+                          color: "green",
+                        }}
                       >
                         Ancora in Ricovero
                       </Badge>
@@ -281,7 +294,8 @@ const RicoveriComponent = () => {
 
                   <td className="text-center">
                     <Button
-                      variant="outline-secondary"
+                      variant="outline-muted"
+                      style={{ color: "#2A4D38" }}
                       size="sm"
                       className="me-2"
                       onClick={() => toggleModal("update", ricovero)}
@@ -289,7 +303,8 @@ const RicoveriComponent = () => {
                       <i className="bi bi-pencil"></i>
                     </Button>
                     <Button
-                      variant="outline-secondary"
+                      variant="outline-muted"
+                      style={{ color: "#2A4D38" }}
                       size="sm"
                       className="me-2"
                       onClick={() => toggleModal("delete", ricovero)}
@@ -297,11 +312,12 @@ const RicoveriComponent = () => {
                       <i className="bi bi-trash"></i>
                     </Button>
                     <Button
-                      variant="outline-secondary"
+                      variant="outline-muted"
+                      style={{ color: "#2A4D38" }}
                       size="sm"
                       onClick={() => toggleModal("view", ricovero)}
                     >
-                      <i className="bi bi-info-circle"></i>
+                      <i className="bi bi-info-circle pe-sm-2 pe-md-0"></i>
                     </Button>
                   </td>
                 </tr>

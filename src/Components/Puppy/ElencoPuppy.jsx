@@ -9,7 +9,11 @@ import {
   Card,
 } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
+<<<<<<< HEAD:src/Components/Puppy/ElencoPuppy.jsx
 import { fetchPuppies } from "../../Redux/Actions/puppiesActions";
+=======
+import { fetchPuppies } from "../Redux/Actions/puppiesActions";
+>>>>>>> origin/rachele:src/Components/ElencoPuppy.jsx
 
 import CreatePuppyModal from "./CreatePuppyModal";
 import UpdatePuppyModal from "./UpdatePuppyModal";
@@ -101,6 +105,7 @@ const ElencoPuppy = () => {
       <div className="d-flex justify-content-between mb-3">
         <div>
           <Button
+<<<<<<< HEAD:src/Components/Puppy/ElencoPuppy.jsx
             variant="outline-primary"
             className="me-2"
             onClick={() => setShowSearch(!showSearch)}
@@ -110,6 +115,24 @@ const ElencoPuppy = () => {
         </div>
         <Button variant="outline-primary" onClick={() => toggleModal("create")}>
           <i className="bi bi-plus"></i> Nuovo Puppy
+=======
+            style={{ color: "#2A4D38" }}
+            variant="outline-secondary"
+            className="me-2"
+            onClick={() => setShowSearch(!showSearch)}
+          >
+            <i className="bi bi-search me-1" style={{ color: "#2A4D38" }}></i>{" "}
+            Ricerca
+          </Button>
+        </div>
+        <Button
+          style={{ color: "#2A4D38" }}
+          variant="outline-secondary"
+          onClick={() => toggleModal("create")}
+        >
+          <i className="bi bi-plus" style={{ color: "#2A4D38" }}></i> Nuovo
+          Puppy
+>>>>>>> origin/rachele:src/Components/ElencoPuppy.jsx
         </Button>
       </div>
 
@@ -120,7 +143,13 @@ const ElencoPuppy = () => {
               <Row>
                 <Col md={6}>
                   <Form.Group className="mb-3">
+<<<<<<< HEAD:src/Components/Puppy/ElencoPuppy.jsx
                     <Form.Label>Nome Puppy</Form.Label>
+=======
+                    <Form.Label style={{ color: "#2A4D38" }}>
+                      Nome Puppy
+                    </Form.Label>
+>>>>>>> origin/rachele:src/Components/ElencoPuppy.jsx
                     <Form.Control
                       type="text"
                       name="nomePuppy"
@@ -132,7 +161,11 @@ const ElencoPuppy = () => {
                 </Col>
                 <Col md={6}>
                   <Form.Group className="mb-3">
+<<<<<<< HEAD:src/Components/Puppy/ElencoPuppy.jsx
                     <Form.Label>Razza</Form.Label>
+=======
+                    <Form.Label style={{ color: "#2A4D38" }}>Razza</Form.Label>
+>>>>>>> origin/rachele:src/Components/ElencoPuppy.jsx
                     <Form.Control
                       type="text"
                       name="razzaPuppy"
@@ -153,7 +186,11 @@ const ElencoPuppy = () => {
                   >
                     Reset
                   </Button>
+<<<<<<< HEAD:src/Components/Puppy/ElencoPuppy.jsx
                   <Button variant="primary" type="submit">
+=======
+                  <Button variant="secondary" type="submit">
+>>>>>>> origin/rachele:src/Components/ElencoPuppy.jsx
                     Cerca
                   </Button>
                 </Col>
@@ -163,15 +200,15 @@ const ElencoPuppy = () => {
         </Card>
       )}
 
-      <Table striped bordered hover responsive>
+      <Table className=" bg-transparent" striped bordered hover responsive>
         <thead>
           <tr>
-            <th>#</th>
-            <th>Nome</th>
-            <th>Razza</th>
-            <th>Colore</th>
-            <th>Data di Nascita</th>
-            <th>Azioni</th>
+            <th style={{ color: "#2A4D38" }}>#</th>
+            <th style={{ color: "#2A4D38" }}>Nome</th>
+            <th style={{ color: "#2A4D38" }}>Razza</th>
+            <th style={{ color: "#2A4D38" }}>Colore</th>
+            <th style={{ color: "#2A4D38" }}>Data di Nascita</th>
+            <th style={{ color: "#2A4D38" }}>Azioni</th>
           </tr>
         </thead>
         <tbody>
@@ -184,6 +221,7 @@ const ElencoPuppy = () => {
           ) : (
             puppies.map((puppy, index) => (
               <tr key={puppy.puppyId}>
+<<<<<<< HEAD:src/Components/Puppy/ElencoPuppy.jsx
                 <td>{index + 1}</td>
                 <td>{puppy.nome}</td>
                 <td>{puppy.tipologia}</td>
@@ -192,6 +230,17 @@ const ElencoPuppy = () => {
                 <td className="text-center">
                   <Button
                     variant="outline-secondary"
+=======
+                <td style={{ color: "#2A4D38" }}>{index + 1}</td>
+                <td style={{ color: "#2A4D38" }}>{puppy.nome}</td>
+                <td style={{ color: "#2A4D38" }}>{puppy.tipologia}</td>
+                <td style={{ color: "#2A4D38" }}>{puppy.coloreMantello}</td>
+                <td style={{ color: "#2A4D38" }}>{puppy.dataNascita}</td>
+                <td className="text-center">
+                  <Button
+                    variant=" outline-secondary"
+                    style={{ color: "#2A4D38" }}
+>>>>>>> origin/rachele:src/Components/ElencoPuppy.jsx
                     size="sm"
                     className="me-2"
                     onClick={() => toggleModal("update", puppy)}
@@ -199,7 +248,12 @@ const ElencoPuppy = () => {
                     <i className="bi bi-pencil"></i>
                   </Button>
                   <Button
+<<<<<<< HEAD:src/Components/Puppy/ElencoPuppy.jsx
                     variant="outline-secondary"
+=======
+                    variant=" outline-secondary"
+                    style={{ color: "#2A4D38" }}
+>>>>>>> origin/rachele:src/Components/ElencoPuppy.jsx
                     size="sm"
                     className="me-2"
                     onClick={() => toggleModal("delete", puppy)}
@@ -207,11 +261,20 @@ const ElencoPuppy = () => {
                     <i className="bi bi-trash"></i>
                   </Button>
                   <Button
+<<<<<<< HEAD:src/Components/Puppy/ElencoPuppy.jsx
                     variant="outline-secondary"
                     size="sm"
                     onClick={() => toggleModal("view", puppy)}
                   >
                     <i className="bi bi-info-circle"></i>
+=======
+                    variant=" outline-secondary"
+                    style={{ color: "#2A4D38" }}
+                    size="sm"
+                    onClick={() => toggleModal("view", puppy)}
+                  >
+                    <i className="bi bi-info-circle pe-sm-2 pe-md-0"></i>
+>>>>>>> origin/rachele:src/Components/ElencoPuppy.jsx
                   </Button>
                 </td>
               </tr>

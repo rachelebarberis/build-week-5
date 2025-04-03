@@ -49,13 +49,16 @@ const CreateVisitaModal = ({ show, handleClose, onVisitaCreated }) => {
   return (
     <Modal show={show} onHide={handleClose} centered backdrop="static">
       <Modal.Header closeButton className="bg-light">
-        <Modal.Title className="text-center w-100">Nuova Visita</Modal.Title>
+        <Modal.Title className="text-center w-100" style={{ color: "#2A4D38" }}>
+          Nuova Visita
+        </Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Form onSubmit={handleSubmit}>
           <Form.Group className="mb-3">
-            <Form.Label>Puppy</Form.Label>
+            <Form.Label style={{ color: "#2A4D38" }}>Puppy</Form.Label>
             <Form.Select
+              style={{ color: "#2F855A" }}
               name="puppyId"
               value={formData.puppyId}
               onChange={handleChange}
@@ -72,8 +75,11 @@ const CreateVisitaModal = ({ show, handleClose, onVisitaCreated }) => {
           <Row>
             <Col md={6}>
               <Form.Group className="mb-3">
-                <Form.Label>Data Visita</Form.Label>
+                <Form.Label style={{ color: "#2A4D38" }}>
+                  Data Visita
+                </Form.Label>
                 <Form.Control
+                  style={{ color: "#2F855A" }}
                   type="date"
                   name="dataVisita"
                   value={formData.dataVisita}
@@ -84,8 +90,11 @@ const CreateVisitaModal = ({ show, handleClose, onVisitaCreated }) => {
             </Col>
           </Row>
           <Form.Group className="mb-3">
-            <Form.Label>Obiettivo Esame</Form.Label>
+            <Form.Label style={{ color: "#2A4D38" }}>
+              Obiettivo Esame
+            </Form.Label>
             <Form.Control
+              style={{ color: "#2F855A" }}
               type="text"
               name="obiettivoEsame"
               value={formData.obiettivoEsame}
@@ -94,8 +103,11 @@ const CreateVisitaModal = ({ show, handleClose, onVisitaCreated }) => {
             />
           </Form.Group>
           <Form.Group className="mb-3">
-            <Form.Label>Descrizione Cura</Form.Label>
+            <Form.Label style={{ color: "#2A4D38" }}>
+              Descrizione Cura
+            </Form.Label>
             <Form.Control
+              style={{ color: "#2F855A" }}
               as="textarea"
               name="descrizioneCura"
               value={formData.descrizioneCura}
@@ -111,7 +123,11 @@ const CreateVisitaModal = ({ show, handleClose, onVisitaCreated }) => {
             >
               Annulla
             </Button>
-            <Button variant="primary" type="submit">
+            <Button
+              variant="outline-muted"
+              style={{ color: "#D8E2DC", backgroundColor: "#2F855A" }}
+              type="submit"
+            >
               Salva
             </Button>
           </div>

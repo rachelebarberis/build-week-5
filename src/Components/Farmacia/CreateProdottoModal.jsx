@@ -101,7 +101,7 @@ const CreateProdottoModal = ({ show, handleClose, onProdottoCreated }) => {
         style={{ borderBottom: "2px solid #dee2e6" }}
       >
         <div className="w-100 text-center">
-          <Modal.Title>Nuovo Prodotto</Modal.Title>
+          <Modal.Title style={{ color: "#2A4D38" }}>Nuovo Prodotto</Modal.Title>
         </div>
       </Modal.Header>
 
@@ -115,11 +115,12 @@ const CreateProdottoModal = ({ show, handleClose, onProdottoCreated }) => {
 
         <Form onSubmit={handleSubmit}>
           <Form.Group className="mb-4">
-            <Form.Label className="fw-semibold">
-              <i className="bi bi-tag me-2"></i>
+            <Form.Label className="fw-semibold" style={{ color: "#2A4D38" }}>
+              <i className="bi bi-tag me-2" style={{ color: "#2A4D38" }}></i>
               Nome Prodotto
             </Form.Label>
             <Form.Control
+              style={{ color: "#2F855A" }}
               type="text"
               name="nome"
               value={formData.nome}
@@ -131,8 +132,11 @@ const CreateProdottoModal = ({ show, handleClose, onProdottoCreated }) => {
           </Form.Group>
 
           <Form.Group className="mb-4">
-            <Form.Label className="fw-semibold">
-              <i className="bi bi-building me-2"></i>
+            <Form.Label className="fw-semibold" style={{ color: "#2A4D38" }}>
+              <i
+                className="bi bi-building me-2"
+                style={{ color: "#2A4D38" }}
+              ></i>
               Fornitore
             </Form.Label>
             {fetchingFornitori ? (
@@ -160,11 +164,18 @@ const CreateProdottoModal = ({ show, handleClose, onProdottoCreated }) => {
           <Row>
             <Col md={6}>
               <Form.Group className="mb-4">
-                <Form.Label className="fw-semibold">
-                  <i className="bi bi-archive me-2"></i>
+                <Form.Label
+                  className="fw-semibold"
+                  style={{ color: "#2A4D38" }}
+                >
+                  <i
+                    className="bi bi-archive me-2"
+                    style={{ color: "#2A4D38" }}
+                  ></i>
                   ID Armadietto
                 </Form.Label>
                 <Form.Control
+                  style={{ color: "#2F855A" }}
                   type="number"
                   name="armadiettoId"
                   value={formData.armadiettoId}
@@ -177,11 +188,18 @@ const CreateProdottoModal = ({ show, handleClose, onProdottoCreated }) => {
             </Col>
             <Col md={6}>
               <Form.Group className="mb-4">
-                <Form.Label className="fw-semibold">
-                  <i className="bi bi-inbox me-2"></i>
+                <Form.Label
+                  className="fw-semibold"
+                  style={{ color: "#2A4D38" }}
+                >
+                  <i
+                    className="bi bi-inbox me-2"
+                    style={{ color: "#2A4D38" }}
+                  ></i>
                   ID Cassetto
                 </Form.Label>
                 <Form.Control
+                  style={{ color: "#2F855A" }}
                   type="number"
                   name="cassettoId"
                   value={formData.cassettoId}
@@ -195,11 +213,15 @@ const CreateProdottoModal = ({ show, handleClose, onProdottoCreated }) => {
           </Row>
 
           <Form.Group className="mb-4">
-            <Form.Label className="fw-semibold">
-              <i className="bi bi-card-text me-2"></i>
+            <Form.Label className="fw-semibold" style={{ color: "#2A4D38" }}>
+              <i
+                className="bi bi-card-text me-2"
+                style={{ color: "#2A4D38" }}
+              ></i>
               Usi Prodotto
             </Form.Label>
             <Form.Control
+              style={{ color: "#2F855A" }}
               as="textarea"
               rows={4}
               name="usiProdotto"
@@ -221,7 +243,8 @@ const CreateProdottoModal = ({ show, handleClose, onProdottoCreated }) => {
               Annulla
             </Button>
             <Button
-              variant="primary"
+              style={{ color: "#D8E2DC", backgroundColor: "#2F855A" }}
+              variant="outline-muted"
               type="submit"
               disabled={loading}
               className="px-4"
