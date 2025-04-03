@@ -1,11 +1,11 @@
-const API_URL = "https://localhost:7055/api/Clienti";
+const API_URL = 'https://localhost:7055/api/Cliente';
 
 const fetchWithAuth = async (url, options = {}) => {
-  const token = localStorage.getItem("token");
+  const token = localStorage.getItem('token');
 
   const defaultOptions = {
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
       Authorization: `Bearer ${token}`,
     },
   };
@@ -17,7 +17,7 @@ const fetchWithAuth = async (url, options = {}) => {
       message:
         "Si è verificato un errore durante l'elaborazione della richiesta",
     }));
-    throw new Error(error.message || "Qualcosa è andato storto");
+    throw new Error(error.message || 'Qualcosa è andato storto');
   }
 
   return response.json();
@@ -25,12 +25,12 @@ const fetchWithAuth = async (url, options = {}) => {
 
 export const fetchClienti = async () => {
   try {
-    console.log("Recupero di tutti i clienti...");
+    console.log('Recupero di tutti i clienti...');
     const data = await fetchWithAuth(`${API_URL}`);
-    console.log("Clienti recuperati:", data);
+    console.log('Clienti recuperati:', data);
     return data;
   } catch (error) {
-    console.error("Errore durante il recupero dei clienti:", error);
+    console.error('Errore durante il recupero dei clienti:', error);
     throw error;
   }
 };
@@ -39,7 +39,7 @@ export const fetchCliente = async (id) => {
   try {
     console.log(`Recupero del cliente con ID: ${id}`);
     const data = await fetchWithAuth(`${API_URL}/${id}`);
-    console.log("Cliente recuperato:", data);
+    console.log('Cliente recuperato:', data);
     return data;
   } catch (error) {
     console.error(`Errore durante il recupero del cliente ${id}:`, error);
@@ -49,12 +49,12 @@ export const fetchCliente = async (id) => {
 
 export const addCliente = async (cliente) => {
   try {
-    console.log("Dati cliente da aggiungere:", cliente);
+    console.log('Dati cliente da aggiungere:', cliente);
     const data = await fetchWithAuth(`${API_URL}`, {
-      method: "POST",
+      method: 'POST',
       body: JSON.stringify(cliente),
     });
-    console.log("Risposta dal server:", data);
+    console.log('Risposta dal server:', data);
     return data;
   } catch (error) {
     console.error("Errore durante l'aggiunta del cliente:", error);
@@ -66,10 +66,10 @@ export const updateCliente = async (id, cliente) => {
   try {
     console.log(`Aggiornamento cliente ${id} con dati:`, cliente);
     const data = await fetchWithAuth(`${API_URL}/${id}`, {
-      method: "PUT",
+      method: 'PUT',
       body: JSON.stringify(cliente),
     });
-    console.log("Risposta dal server:", data);
+    console.log('Risposta dal server:', data);
     return data;
   } catch (error) {
     console.error(`Errore durante l'aggiornamento del cliente ${id}:`, error);
@@ -81,7 +81,7 @@ export const deleteCliente = async (id) => {
   try {
     console.log(`Tentativo di eliminazione del cliente con ID: ${id}`);
     await fetchWithAuth(`${API_URL}/${id}`, {
-      method: "DELETE",
+      method: 'DELETE',
     });
     console.log(`Cliente ${id} eliminato con successo`);
     return { success: true, id };
@@ -129,7 +129,7 @@ export const searchClienti = async (searchParams) => {
       return match;
     });
   } catch (error) {
-    console.error("Errore durante la ricerca dei clienti:", error);
+    console.error('Errore durante la ricerca dei clienti:', error);
     throw error;
   }
 };

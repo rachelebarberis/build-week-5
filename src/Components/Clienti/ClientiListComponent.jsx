@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 import {
   Table,
   Button,
@@ -9,13 +9,13 @@ import {
   Form,
   Alert,
   Spinner,
-} from "react-bootstrap";
+} from 'react-bootstrap';
 import {
   fetchClienti,
   addCliente,
   updateCliente,
   deleteCliente,
-} from "../../Redux/Actions/clienteAction";
+} from '../../Redux/Actions/clienteAction';
 
 const ClientiListComponent = () => {
   const [clienti, setClienti] = useState([]);
@@ -26,11 +26,11 @@ const ClientiListComponent = () => {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [currentCliente, setCurrentCliente] = useState({
     id: 0,
-    nome: "",
-    cognome: "",
-    codiceFiscale: "",
-    dataDiNascita: "",
-    indirizzo: "",
+    nome: '',
+    cognome: '',
+    codiceFiscale: '',
+    dataDiNascita: '',
+    indirizzo: '',
   });
   const [validated, setValidated] = useState(false);
 
@@ -45,19 +45,19 @@ const ClientiListComponent = () => {
       setClienti(data.clienti || []);
       setError(null);
     } catch (err) {
-      setError("Errore nel caricamento dei clienti: " + err.message);
+      setError('Errore nel caricamento dei clienti: ' + err.message);
     } finally {
       setLoading(false);
     }
   };
 
   const formatDate = (dateString) => {
-    if (!dateString) return "";
+    if (!dateString) return '';
     const date = new Date(dateString);
-    return date.toLocaleDateString("it-IT", {
-      day: "2-digit",
-      month: "long",
-      year: "numeric",
+    return date.toLocaleDateString('it-IT', {
+      day: '2-digit',
+      month: 'long',
+      year: 'numeric',
     });
   };
 
@@ -77,11 +77,11 @@ const ClientiListComponent = () => {
       setShowAddModal(false);
       setCurrentCliente({
         id: 0,
-        nome: "",
-        cognome: "",
-        codiceFiscale: "",
-        dataDiNascita: "",
-        indirizzo: "",
+        nome: '',
+        cognome: '',
+        codiceFiscale: '',
+        dataDiNascita: '',
+        indirizzo: '',
       });
       setValidated(false);
       await fetchClientiData();
@@ -109,7 +109,7 @@ const ClientiListComponent = () => {
       setValidated(false);
       await fetchClientiData();
     } catch (err) {
-      setError("Errore durante la modifica del cliente: " + err.message);
+      setError('Errore durante la modifica del cliente: ' + err.message);
     } finally {
       setLoading(false);
     }
@@ -121,6 +121,7 @@ const ClientiListComponent = () => {
       await deleteCliente(currentCliente.id);
       setShowDeleteModal(false);
       await fetchClientiData();
+      setClienti(clienti.filter((cliente) => cliente.id !== currentCliente.id));
     } catch (err) {
       setError("Errore durante l'eliminazione del cliente: " + err.message);
     } finally {
@@ -138,8 +139,8 @@ const ClientiListComponent = () => {
 
   const openEditModal = (cliente) => {
     const formattedDate = cliente.dataDiNascita
-      ? cliente.dataDiNascita.split("T")[0]
-      : "";
+      ? cliente.dataDiNascita.split('T')[0]
+      : '';
     setCurrentCliente({
       ...cliente,
       dataDiNascita: formattedDate,
@@ -153,28 +154,28 @@ const ClientiListComponent = () => {
   };
 
   return (
-    <Container className="mt-4">
-      <Row className="mb-3">
+    <Container className='mt-4'>
+      <Row className='mb-3'>
         <Col>
           <h2>Gestione Clienti</h2>
         </Col>
-        <Col className="text-end">
-          <Button variant="primary" onClick={() => setShowAddModal(true)}>
+        <Col className='text-end'>
+          <Button variant='primary' onClick={() => setShowAddModal(true)}>
             Aggiungi Cliente
           </Button>
         </Col>
       </Row>
 
       {error && (
-        <Alert variant="danger" dismissible onClose={() => setError(null)}>
+        <Alert variant='danger' dismissible onClose={() => setError(null)}>
           {error}
         </Alert>
       )}
 
       {loading ? (
-        <div className="text-center my-4">
-          <Spinner animation="border" role="status">
-            <span className="visually-hidden">Caricamento...</span>
+        <div className='text-center my-4'>
+          <Spinner animation='border' role='status'>
+            <span className='visually-hidden'>Caricamento...</span>
           </Spinner>
         </div>
       ) : (
@@ -202,26 +203,26 @@ const ClientiListComponent = () => {
                   <td>{cliente.indirizzo}</td>
                   <td>
                     <Button
-                      variant="outline-secondary"
-                      size="sm"
-                      className="me-2"
+                      variant='outline-secondary'
+                      size='sm'
+                      className='me-2'
                       onClick={() => openEditModal(cliente)}
                     >
-                      <i className="bi bi-pencil"></i>
+                      <i className='bi bi-pencil'></i>
                     </Button>
                     <Button
-                      variant="outline-secondary"
-                      size="sm"
+                      variant='outline-secondary'
+                      size='sm'
                       onClick={() => openDeleteModal(cliente)}
                     >
-                      <i className="bi bi-trash"></i>
+                      <i className='bi bi-trash'></i>
                     </Button>
                   </td>
                 </tr>
               ))
             ) : (
               <tr>
-                <td colSpan="7" className="text-center">
+                <td colSpan='7' className='text-center'>
                   Nessun cliente trovato
                 </td>
               </tr>
@@ -237,86 +238,86 @@ const ClientiListComponent = () => {
         </Modal.Header>
         <Form noValidate validated={validated} onSubmit={handleAddSubmit}>
           <Modal.Body>
-            <Form.Group className="mb-3">
+            <Form.Group className='mb-3'>
               <Form.Label>Nome</Form.Label>
               <Form.Control
-                type="text"
-                name="nome"
+                type='text'
+                name='nome'
                 value={currentCliente.nome}
                 onChange={handleInputChange}
                 required
                 maxLength={100}
               />
-              <Form.Control.Feedback type="invalid">
+              <Form.Control.Feedback type='invalid'>
                 Inserisci un nome valido.
               </Form.Control.Feedback>
             </Form.Group>
 
-            <Form.Group className="mb-3">
+            <Form.Group className='mb-3'>
               <Form.Label>Cognome</Form.Label>
               <Form.Control
-                type="text"
-                name="cognome"
+                type='text'
+                name='cognome'
                 value={currentCliente.cognome}
                 onChange={handleInputChange}
                 required
                 maxLength={100}
               />
-              <Form.Control.Feedback type="invalid">
+              <Form.Control.Feedback type='invalid'>
                 Inserisci un cognome valido.
               </Form.Control.Feedback>
             </Form.Group>
 
-            <Form.Group className="mb-3">
+            <Form.Group className='mb-3'>
               <Form.Label>Codice Fiscale</Form.Label>
               <Form.Control
-                type="text"
-                name="codiceFiscale"
+                type='text'
+                name='codiceFiscale'
                 value={currentCliente.codiceFiscale}
                 onChange={handleInputChange}
                 required
                 minLength={16}
                 maxLength={16}
               />
-              <Form.Control.Feedback type="invalid">
+              <Form.Control.Feedback type='invalid'>
                 Inserisci un codice fiscale valido (16 caratteri).
               </Form.Control.Feedback>
             </Form.Group>
 
-            <Form.Group className="mb-3">
+            <Form.Group className='mb-3'>
               <Form.Label>Data di Nascita</Form.Label>
               <Form.Control
-                type="date"
-                name="dataDiNascita"
+                type='date'
+                name='dataDiNascita'
                 value={currentCliente.dataDiNascita}
                 onChange={handleInputChange}
                 required
               />
-              <Form.Control.Feedback type="invalid">
+              <Form.Control.Feedback type='invalid'>
                 Inserisci una data di nascita valida.
               </Form.Control.Feedback>
             </Form.Group>
 
-            <Form.Group className="mb-3">
+            <Form.Group className='mb-3'>
               <Form.Label>Indirizzo</Form.Label>
               <Form.Control
-                type="text"
-                name="indirizzo"
+                type='text'
+                name='indirizzo'
                 value={currentCliente.indirizzo}
                 onChange={handleInputChange}
                 required
                 maxLength={200}
               />
-              <Form.Control.Feedback type="invalid">
+              <Form.Control.Feedback type='invalid'>
                 Inserisci un indirizzo valido.
               </Form.Control.Feedback>
             </Form.Group>
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="secondary" onClick={() => setShowAddModal(false)}>
+            <Button variant='secondary' onClick={() => setShowAddModal(false)}>
               Annulla
             </Button>
-            <Button variant="primary" type="submit">
+            <Button variant='primary' type='submit'>
               Salva
             </Button>
           </Modal.Footer>
@@ -330,86 +331,86 @@ const ClientiListComponent = () => {
         </Modal.Header>
         <Form noValidate validated={validated} onSubmit={handleEditSubmit}>
           <Modal.Body>
-            <Form.Group className="mb-3">
+            <Form.Group className='mb-3'>
               <Form.Label>Nome</Form.Label>
               <Form.Control
-                type="text"
-                name="nome"
+                type='text'
+                name='nome'
                 value={currentCliente.nome}
                 onChange={handleInputChange}
                 required
                 maxLength={100}
               />
-              <Form.Control.Feedback type="invalid">
+              <Form.Control.Feedback type='invalid'>
                 Inserisci un nome valido.
               </Form.Control.Feedback>
             </Form.Group>
 
-            <Form.Group className="mb-3">
+            <Form.Group className='mb-3'>
               <Form.Label>Cognome</Form.Label>
               <Form.Control
-                type="text"
-                name="cognome"
+                type='text'
+                name='cognome'
                 value={currentCliente.cognome}
                 onChange={handleInputChange}
                 required
                 maxLength={100}
               />
-              <Form.Control.Feedback type="invalid">
+              <Form.Control.Feedback type='invalid'>
                 Inserisci un cognome valido.
               </Form.Control.Feedback>
             </Form.Group>
 
-            <Form.Group className="mb-3">
+            <Form.Group className='mb-3'>
               <Form.Label>Codice Fiscale</Form.Label>
               <Form.Control
-                type="text"
-                name="codiceFiscale"
+                type='text'
+                name='codiceFiscale'
                 value={currentCliente.codiceFiscale}
                 onChange={handleInputChange}
                 required
                 minLength={16}
                 maxLength={16}
               />
-              <Form.Control.Feedback type="invalid">
+              <Form.Control.Feedback type='invalid'>
                 Inserisci un codice fiscale valido (16 caratteri).
               </Form.Control.Feedback>
             </Form.Group>
 
-            <Form.Group className="mb-3">
+            <Form.Group className='mb-3'>
               <Form.Label>Data di Nascita</Form.Label>
               <Form.Control
-                type="date"
-                name="dataDiNascita"
+                type='date'
+                name='dataDiNascita'
                 value={currentCliente.dataDiNascita}
                 onChange={handleInputChange}
                 required
               />
-              <Form.Control.Feedback type="invalid">
+              <Form.Control.Feedback type='invalid'>
                 Inserisci una data di nascita valida.
               </Form.Control.Feedback>
             </Form.Group>
 
-            <Form.Group className="mb-3">
+            <Form.Group className='mb-3'>
               <Form.Label>Indirizzo</Form.Label>
               <Form.Control
-                type="text"
-                name="indirizzo"
+                type='text'
+                name='indirizzo'
                 value={currentCliente.indirizzo}
                 onChange={handleInputChange}
                 required
                 maxLength={200}
               />
-              <Form.Control.Feedback type="invalid">
+              <Form.Control.Feedback type='invalid'>
                 Inserisci un indirizzo valido.
               </Form.Control.Feedback>
             </Form.Group>
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="secondary" onClick={() => setShowEditModal(false)}>
+            <Button variant='secondary' onClick={() => setShowEditModal(false)}>
               Annulla
             </Button>
-            <Button variant="primary" type="submit">
+            <Button variant='primary' type='submit'>
               Salva Modifiche
             </Button>
           </Modal.Footer>
@@ -421,14 +422,14 @@ const ClientiListComponent = () => {
           <Modal.Title>Conferma Eliminazione</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          Sei sicuro di voler eliminare il cliente {currentCliente.nome}{" "}
+          Sei sicuro di voler eliminare il cliente {currentCliente.nome}{' '}
           {currentCliente.cognome}?
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={() => setShowDeleteModal(false)}>
+          <Button variant='secondary' onClick={() => setShowDeleteModal(false)}>
             Annulla
           </Button>
-          <Button variant="danger" onClick={handleDelete}>
+          <Button variant='danger' onClick={handleDelete}>
             Elimina
           </Button>
         </Modal.Footer>
