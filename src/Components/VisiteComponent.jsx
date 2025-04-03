@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 import {
   Container,
   Table,
@@ -7,12 +7,12 @@ import {
   Row,
   Col,
   Card,
-} from "react-bootstrap";
-import { getAllVisite } from "../Redux/Actions/VisitaAction";
-import CreateVisitaModal from "./CreateVisitaModal";
-import UpdateVisitaModal from "./UpdateVisitaModal";
-import DeleteVisitaModal from "./DeleteVisitaModal";
-import ViewVisitaModal from "./ViewVisitaModal";
+} from 'react-bootstrap';
+import { getAllVisite } from '../Redux/Actions/VisitaAction';
+import CreateVisitaModal from './CreateVisitaModal';
+import UpdateVisitaModal from './UpdateVisitaModal';
+import DeleteVisitaModal from './DeleteVisitaModal';
+import ViewVisitaModal from './ViewVisitaModal';
 
 const VisiteComponent = () => {
   const [visite, setVisite] = useState([]);
@@ -55,17 +55,17 @@ const VisiteComponent = () => {
   };
 
   const formatDate = (dateString) => {
-    if (!dateString) return "N/A";
-    return new Date(dateString).toLocaleDateString("it-IT");
+    if (!dateString) return 'N/A';
+    return new Date(dateString).toLocaleDateString('it-IT');
   };
 
   return (
     <Container style={{ fontFamily: "'Poppins', sans-serif" }}>
-      <h4 className="text-center mb-4">Sezione Visite</h4>
+      <h4 className='text-center mb-4'>Sezione Visite</h4>
 
-      <div className="d-flex justify-content-end mb-3">
-        <Button variant="outline-primary" onClick={() => toggleModal("create")}>
-          <i className="bi bi-plus"></i> Nuova Visita
+      <div className='d-flex justify-content-end mb-3'>
+        <Button variant='outline-primary' onClick={() => toggleModal('create')}>
+          <i className='bi bi-plus'></i> Nuova Visita
         </Button>
       </div>
 
@@ -83,7 +83,7 @@ const VisiteComponent = () => {
         <tbody>
           {visite.length === 0 ? (
             <tr>
-              <td colSpan="6" className="text-center">
+              <td colSpan='6' className='text-center'>
                 Nessuna visita trovata
               </td>
             </tr>
@@ -91,33 +91,33 @@ const VisiteComponent = () => {
             visite.map((visita, index) => (
               <tr key={visita.id}>
                 <td>{index + 1}</td>
-                <td>{visita.animale?.nome || "N/A"}</td>
+                <td>{visita.animale?.nome || 'N/A'}</td>
                 <td>{formatDate(visita.dataVisita)}</td>
                 <td>{visita.obiettivoEsame}</td>
                 <td>{visita.descrizioneCura}</td>
-                <td className="text-center">
+                <td className='text-center'>
                   <Button
-                    variant="outline-secondary"
-                    size="sm"
-                    className="me-2"
-                    onClick={() => toggleModal("update", visita)}
+                    variant='outline-secondary'
+                    size='sm'
+                    className='me-2'
+                    onClick={() => toggleModal('update', visita)}
                   >
-                    <i className="bi bi-pencil"></i>
+                    <i className='bi bi-pencil'></i>
                   </Button>
                   <Button
-                    variant="outline-secondary"
-                    size="sm"
-                    className="me-2"
-                    onClick={() => toggleModal("delete", visita)}
+                    variant='outline-secondary'
+                    size='sm'
+                    className='me-2'
+                    onClick={() => toggleModal('delete', visita)}
                   >
-                    <i className="bi bi-trash"></i>
+                    <i className='bi bi-trash'></i>
                   </Button>
                   <Button
-                    variant="outline-secondary"
-                    size="sm"
-                    onClick={() => toggleModal("view", visita)}
+                    variant='outline-secondary'
+                    size='sm'
+                    onClick={() => toggleModal('view', visita)}
                   >
-                    <i className="bi bi-info-circle"></i>
+                    <i className='bi bi-info-circle'></i>
                   </Button>
                 </td>
               </tr>
@@ -128,7 +128,7 @@ const VisiteComponent = () => {
 
       <CreateVisitaModal
         show={modalState.create}
-        handleClose={() => toggleModal("create")}
+        handleClose={() => toggleModal('create')}
         onVisitaCreated={fetchVisite}
       />
 
@@ -136,28 +136,22 @@ const VisiteComponent = () => {
         <>
           <UpdateVisitaModal
             show={modalState.update}
-            handleClose={() => toggleModal("update")}
+            handleClose={() => toggleModal('update')}
             visitaId={selectedVisita.id}
             onVisitaUpdated={fetchVisite}
           />
 
           <DeleteVisitaModal
             show={modalState.delete}
-            handleClose={() => toggleModal("delete")}
+            handleClose={() => toggleModal('delete')}
             visitaId={selectedVisita.id}
             visitaInfo={selectedVisita}
             onVisitaDeleted={() => {
               setVisite((prev) =>
                 prev.filter((v) => v.id !== selectedVisita.id)
               );
-              toggleModal("delete");
+              toggleModal('delete');
             }}
-          />
-
-          <ViewVisitaModal
-            show={modalState.view}
-            handleClose={() => toggleModal("view")}
-            visitaId={selectedVisita.id}
           />
         </>
       )}
