@@ -1,8 +1,7 @@
 import { Nav, Navbar, Container } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { logout } from '../Redux/Actions/authActions';
+import { LOGOUT } from '../Redux/Actions/authActions';
 
 const NavBarComponent = () => {
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
@@ -45,11 +44,9 @@ const NavBarComponent = () => {
               <Link to='/clientiList' className=' nav-link  '>
                 Clienti
               </Link>
-              <Link
-                to='/'
-                onClick={() => dispatch(logout())}
-                className='nav-link text-danger'
-              ></Link>
+              <Link onClick={LOGOUT} className=' nav-link  text-danger'>
+                Logout
+              </Link>
             </Nav>
           )}
 

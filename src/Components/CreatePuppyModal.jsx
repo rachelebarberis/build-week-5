@@ -53,8 +53,6 @@ const CreatePuppyModal = ({ show, handleClose, onPuppyCreated }) => {
       dataNascita: '',
       microchipPresente: false,
       numeroMicrochip: '',
-      clienteId: '',
-      numeroMicrochip: '',
       userId: '',
     });
 

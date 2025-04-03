@@ -308,9 +308,7 @@ const Farmacia = () => {
               <th style={{ color: "#2A4D38" }}>Armadietto</th>
               <th style={{ color: "#2A4D38" }}>Cassetto</th>
               <th style={{ color: "#2A4D38" }}>Azioni</th>
-            
->>>>>>> origin/rachele
-</tr>
+            </tr>
           </thead>
           <tbody>
             {prodotti.length === 0 ? (
@@ -409,77 +407,37 @@ const Farmacia = () => {
                 <tr>
                   <th style={{ color: "#2A4D38" }}>Prodotto</th>
                   <th style={{ color: "#2A4D38" }}>Data</th>
-                        </tr>
-                      ))
-                    )}
-                  </tbody>
-                </Table>
-              </div>
-            </Col>
-<<<<<<< HEAD
-
-            <Col lg={6} className='text-center pt-3 border border-bottom-0'>
-              <Row className='justify-content-between align-items-center'>
-                <Col xs={6}>
-                  <p className='fw-semibold'>Ricerca per Codice Fiscale</p>
-                </Col>
-                <Col xs={6}>
-                  <Form onSubmit={handleFiscalCodeSearch}>
-                    <Row className='justify-content-center pb-2'>
-                      <Col xs='auto' className='p-0 pe-2'>
-                        <InputGroup>
-                          <Form.Control
-                            type='text'
-                            placeholder='Codice Fiscale'
-                            value={fiscalCode}
-                            onChange={(e) => setFiscalCode(e.target.value)}
-                          />
-                          <Button type='submit' variant='outline-secondary'>
-                            <i className='bi bi-search'></i>
-                          </Button>
-                        </InputGroup>
-                      </Col>
-                    </Row>
-                  </Form>
-                </Col>
-              </Row>
-
-              <hr></hr>
-              <div>
-                <p className='text-center fw-semibold'>Lista ricerca:</p>
-                {clientError && <Alert variant='danger'>{clientError}</Alert>}
-                {clientLoading ? (
-                  <div className='text-center my-4'>
-                    <Spinner animation='border' size='sm' />
-                  </div>
+                </tr>
+              </thead>
+              <tbody>
+                {searchResults.length === 0 ? (
+                  <tr>
+                    <td
+                      colSpan="2"
+                      className="text-center"
+                      style={{ color: "#2A4D38" }}
+                    >
+                      Nessun risultato trovato
+                    </td>
+                  </tr>
                 ) : (
-                  <Table striped className='border'>
-                    <thead>
-                      <tr>
-                        <th>Prodotto</th>
-                        <th>Cliente</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {clientResults.length === 0 ? (
-                        <tr>
-                          <td colSpan='2' className='text-center'>
-                            Nessun risultato trovato
-                          </td>
-                        </tr>
-                      ) : (
-                        clientResults.map((vendita, index) => (
-                          <tr key={index}>
-                            <td>{vendita.nomeProdotto}</td>
-                            <td>{vendita.userName}</td>
-                          </tr>
-                        ))
-                      )}
-                    </tbody>
-                  </Table>
+                  searchResults.map((prodotto, index) => (
+                    <tr key={index}>
+                      <td>{prodotto.nome}</td>
+                      <td>{prodotto.dataDiAcquisto}</td>
+                    </tr>
+                  ))
                 )}
-              </div>
-=======
+              </tbody>
+            </Table>
+          </div>
+        </Col>
+
+        <Col lg={6} className="text-center pt-3 border border-bottom-0">
+          <Row className="justify-content-between align-items-center">
+            <Col xs={6}>
+              <p className="fw-semibold">Ricerca per Codice Fiscale</p>
+            </Col>
             <Col xs={6}>
               <Form onSubmit={handleFiscalCodeSearch}>
                 <Row className="justify-content-center pb-2">

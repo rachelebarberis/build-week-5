@@ -76,7 +76,6 @@ const VisiteComponent = () => {
         >
           <i className="bi bi-plus" style={{ color: "#2A4D38" }}></i> Nuova
           Visita
->>>>>>> origin/rachele
         </Button>
       </div>
 
@@ -101,19 +100,6 @@ const VisiteComponent = () => {
           ) : (
             visite.map((visita, index) => (
               <tr key={visita.id}>
-<<<<<<< HEAD
-                <td>{index + 1}</td>
-                <td>{visita.animale?.nome || 'N/A'}</td>
-                <td>{formatDate(visita.dataVisita)}</td>
-                <td>{visita.obiettivoEsame}</td>
-                <td>{visita.descrizioneCura}</td>
-                <td className='text-center'>
-                  <Button
-                    variant='outline-secondary'
-                    size='sm'
-                    className='me-2'
-                    onClick={() => toggleModal('update', visita)}
-=======
                 <td style={{ color: "#2A4D38" }}>{index + 1}</td>
                 <td style={{ color: "#2A4D38" }}>
                   {visita.animale?.nome || "N/A"}
@@ -135,12 +121,6 @@ const VisiteComponent = () => {
                     <i className='bi bi-pencil'></i>
                   </Button>
                   <Button
-<<<<<<< HEAD
-                    variant='outline-secondary'
-                    size='sm'
-                    className='me-2'
-                    onClick={() => toggleModal('delete', visita)}
-=======
                     variant="outline-muted"
                     style={{ color: "#2A4D38" }}
                     size="sm"
@@ -151,20 +131,12 @@ const VisiteComponent = () => {
                     <i className='bi bi-trash'></i>
                   </Button>
                   <Button
-<<<<<<< HEAD
-                    variant='outline-secondary'
-                    size='sm'
-                    onClick={() => toggleModal('view', visita)}
-                  >
-                    <i className='bi bi-info-circle'></i>
-=======
                     variant="outline-muted"
                     style={{ color: "#2A4D38" }}
                     size="sm"
                     onClick={() => toggleModal("view", visita)}
                   >
                     <i className="bi bi-info-circle pe-sm-2 pe-md-0"></i>
->>>>>>> origin/rachele
                   </Button>
                 </td>
               </tr>

@@ -8,9 +8,6 @@ const ViewPuppyModal = ({ show, handleClose, puppy }) => {
   const dispatch = useDispatch();
   const { id } = useParams();
 
-<<<<<<< HEAD
-  const selectedPuppy = puppy;
-
 =======
 >>>>>>> origin/rachele
   useEffect(() => {
@@ -19,11 +16,7 @@ const ViewPuppyModal = ({ show, handleClose, puppy }) => {
     }
   }, [show, id, dispatch]);
 
-<<<<<<< HEAD
-  if (!selectedPuppy) {
-=======
   if (!puppy) {
->>>>>>> origin/rachele
     return <div>Loading...</div>;
   }
 
@@ -36,73 +29,6 @@ const ViewPuppyModal = ({ show, handleClose, puppy }) => {
       </Modal.Header>
 
       <Modal.Body>
-<<<<<<< HEAD
-        <Row className='mb-4'>
-          <Col md={6}>
-            <Card className='shadow-sm'>
-              <Card.Header className='bg-light'>Nome</Card.Header>
-              <Card.Body>
-                <Card.Text>{selectedPuppy.nome || 'Non specificato'}</Card.Text>
-              </Card.Body>
-            </Card>
-          </Col>
-          <Col md={6}>
-            <Card className='shadow-sm'>
-              <Card.Header className='bg-light'>Tipologia</Card.Header>
-              <Card.Body>
-                <Card.Text>
-                  {selectedPuppy.tipologia || 'Non specificata'}
-                </Card.Text>
-              </Card.Body>
-            </Card>
-          </Col>
-        </Row>
-
-        <Row className='mb-4'>
-          <Col md={6}>
-            <Card className='shadow-sm'>
-              <Card.Header className='bg-light'>Colore Mantello</Card.Header>
-              <Card.Body>
-                <Card.Text>
-                  {selectedPuppy.coloreMantello || 'Non specificato'}
-                </Card.Text>
-              </Card.Body>
-            </Card>
-          </Col>
-          <Col md={6}>
-            <Card className='shadow-sm'>
-              <Card.Header className='bg-light'>Data di Nascita</Card.Header>
-              <Card.Body>
-                <Card.Text>
-                  {selectedPuppy.dataNascita || 'Non specificata'}
-                </Card.Text>
-              </Card.Body>
-            </Card>
-          </Col>
-        </Row>
-
-        {selectedPuppy.microchipPresente && (
-          <Card className='shadow-sm mb-4'>
-            <Card.Header className='bg-light'>Microchip</Card.Header>
-            <Card.Body>
-              <Card.Text>
-                Numero Microchip: {selectedPuppy.numeroMicrochip}
-              </Card.Text>
-            </Card.Body>
-          </Card>
-        )}
-
-        {selectedPuppy.cliente && (
-          <Card className='shadow-sm mb-4'>
-            <Card.Header className='bg-light'>Proprietario</Card.Header>
-            <Card.Body>
-              <Card.Text>
-                {selectedPuppy.cliente.nome} {selectedPuppy.cliente.cognome}
-              </Card.Text>
-            </Card.Body>
-          </Card>
-        )}
-=======
         <Card className="border-0">
           <Card.Body className="text-center">
             <h4 className="text-center mb-3" style={{ color: "#2A4D38" }}>
@@ -147,7 +73,6 @@ const ViewPuppyModal = ({ show, handleClose, puppy }) => {
             </div>
           </Card.Body>
         </Card>
->>>>>>> origin/rachele
       </Modal.Body>
 
       <Modal.Footer>
