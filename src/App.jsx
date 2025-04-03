@@ -13,6 +13,7 @@ import RegisterComponent from './Components/RegisterComponent';
 import HomeComponent from './Components/HomeComponent';
 import NotAuthorized from './Components/NotAuthorized';
 import RoleRoute from './Components/roleRoute';
+import ClientiListComponent from './Components/Clienti/ClientiListComponent';
 
 const App = () => {
   return (
@@ -34,6 +35,8 @@ const MainApp = () => {
         <Route path='/' element={<HomeComponent />} />
         <Route path='/account' element={<LoginComponent />} />
         <Route path='/register' element={<RegisterComponent />} />
+        <Route path='/clientiList' element={<ClientiListComponent />} />
+
         <Route
           path='/elencopuppy'
           element={

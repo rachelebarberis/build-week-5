@@ -62,18 +62,6 @@ const LoginComponent = () => {
           Accedi
         </Button>
       </Form>
-
-      <hr className='w-50 my-4' />
-
-      <div className='text-center'>
-        <h5 className='mb-3'>Non hai un account?</h5>
-        <p className='text-muted'>
-          Registrati ora per accedere a tutte le funzionalità
-        </p>
-        <Link to='/register'>
-          <Button className='btn btn-secondary btn-sm'>Registrati</Button>
-        </Link>
-      </div>
     </Container>
   );
 };

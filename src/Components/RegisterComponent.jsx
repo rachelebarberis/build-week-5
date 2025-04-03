@@ -144,18 +144,6 @@ const RegisterComponent = () => {
           Registrati
         </Button>
       </Form>
-
-      <hr className='w-50 my-4' />
-
-      <div className='text-center'>
-        <h5 className='mb-3'>Hai già un account?</h5>
-        <p className='text-muted'>
-          Accedi al gestionale usando le tue credenziali
-        </p>
-        <Link to='/account'>
-          <Button className='btn btn-secondary btn-sm'>Accedi</Button>
-        </Link>
-      </div>
     </Container>
   );
 };
