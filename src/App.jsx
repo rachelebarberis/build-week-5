@@ -32,19 +32,17 @@ const MainApp = () => {
 
       <Routes>
         <Route path='/' element={<HomeComponent />} />
-
         <Route path='/account' element={<LoginComponent />} />
         <Route path='/register' element={<RegisterComponent />} />
-        <Route path='/addPuppy' element={<AggiungiPuppy />} />
-        <Route path='/puppies/edit/:id' element={<ModificaPuppy />} />
-        <Route path='/puppies/details/:id' element={<PuppyDetails />} />
-
         <Route
           path='/elencopuppy'
           element={
             <RoleRoute component={<ElencoPuppy />} requiredRole='Admin' />
           }
         />
+        <Route path='/addPuppy' element={<AggiungiPuppy />} />
+        <Route path='/puppies/edit/:id' element={<ModificaPuppy />} />
+        <Route path='/puppies/details/:id' element={<PuppyDetails />} />
         <Route
           path='/visite'
           element={
@@ -88,9 +86,7 @@ const MainApp = () => {
           path='/farmacia'
           element={<RoleRoute component={<Farmacia />} requiredRole='Admin' />}
         />
-
         <Route path='/puppy' element={<Puppy />} />
-
         <Route path='/not-authorized' element={<NotAuthorized />} />
         <Route path='*' element={<Navigate to='/' />} />
       </Routes>
