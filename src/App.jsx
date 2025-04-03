@@ -19,6 +19,7 @@ import PuppyDetails from "./Components/PuppyDetails";
 import VisiteCreateComponent from "./Components/VisiteCreateComponent";
 import VisiteEditComponent from "./Components/VisiteEditComponent";
 import DeleteVisitaComponent from "./Components/DeleteVisitaComponent";
+import ClientiListComponent from "./Components/Clienti/ClientiListComponent";
 
 const App = () => {
   return (
@@ -90,6 +91,8 @@ const MainApp = () => {
           element={<RoleRoute component={<Farmacia />} requiredRole="Admin" />}
         />
         <Route path="/puppy" element={<Puppy />} />
+        <Route path="/Clienti" element={<ClientiListComponent />} />
+
         <Route path="/not-authorized" element={<NotAuthorized />} />
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
