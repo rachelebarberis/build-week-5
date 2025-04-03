@@ -1,8 +1,6 @@
 import { Container, Form, Button } from 'react-bootstrap';
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { login } from '../Redux/Actions/authActions';
-import { Link, useNavigate } from 'react-router-dom'; // Per il reindirizzamento
+import { useNavigate } from 'react-router-dom'; // Per il reindirizzamento
 
 const RegisterComponent = () => {
   const [firstName, setFirstName] = useState('');
@@ -12,7 +10,6 @@ const RegisterComponent = () => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [birthDate, setBirthDate] = useState('');
   const [fiscalCode, setFiscalCode] = useState('');
-  const dispatch = useDispatch();
   const navigate = useNavigate(); // Hook per il reindirizzamento
 
   const handleSubmit = async (e) => {
@@ -39,14 +36,7 @@ const RegisterComponent = () => {
         alert('Errore nella registrazione');
         throw new Error('Errore nella registrazione');
       }
-
-      const isLoggedIn = await dispatch(login(email, password));
-
-      if (isLoggedIn) {
-        navigate('/');
-      } else {
-        alert('Login fallito');
-      }
+      navigate('/');
     } catch (error) {
       console.error('Errore nella registrazione e login:', error.message);
     }
@@ -58,7 +48,7 @@ const RegisterComponent = () => {
       className='d-flex flex-column justify-content-start align-items-center pb-5'
       style={{ fontFamily: "'Poppins', sans-serif" }}
     >
-      <h4 className='mb-3'>Registrati</h4>
+      <h4 className='mb-3'>Registra un nuovo admin</h4>
       <p className='text-muted'>
         Crea un account per accedere al gestionale della clinica veterinaria.
       </p>
@@ -68,7 +58,7 @@ const RegisterComponent = () => {
           <Form.Label>Nome</Form.Label>
           <Form.Control
             type='text'
-            placeholder='Inserisci il tuo nome'
+            placeholder='Inserisci il nome'
             required
             value={firstName}
             onChange={(e) => setFirstName(e.target.value)}
@@ -79,7 +69,7 @@ const RegisterComponent = () => {
           <Form.Label>Cognome</Form.Label>
           <Form.Control
             type='text'
-            placeholder='Inserisci il tuo cognome'
+            placeholder='Inserisci il cognome'
             required
             value={lastName}
             onChange={(e) => setLastName(e.target.value)}
@@ -90,7 +80,7 @@ const RegisterComponent = () => {
           <Form.Label>Email</Form.Label>
           <Form.Control
             type='email'
-            placeholder='Inserisci la tua email'
+            placeholder='Inserisci la email'
             required
             value={email}
             onChange={(e) => setEmail(e.target.value)}
@@ -101,7 +91,7 @@ const RegisterComponent = () => {
           <Form.Label>Password</Form.Label>
           <Form.Control
             type='password'
-            placeholder='Inserisci la tua password'
+            placeholder='Inserisci la password'
             required
             value={password}
             onChange={(e) => setPassword(e.target.value)}
@@ -112,7 +102,7 @@ const RegisterComponent = () => {
           <Form.Label>Conferma Password</Form.Label>
           <Form.Control
             type='password'
-            placeholder='Conferma la tua password'
+            placeholder='Conferma la password'
             required
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
@@ -133,7 +123,7 @@ const RegisterComponent = () => {
           <Form.Label>Codice Fiscale</Form.Label>
           <Form.Control
             type='text'
-            placeholder='Inserisci il tuo codice fiscale'
+            placeholder='Inserisci il codice fiscale'
             required
             value={fiscalCode}
             onChange={(e) => setFiscalCode(e.target.value)}
@@ -141,7 +131,7 @@ const RegisterComponent = () => {
         </Form.Group>
 
         <Button type='submit' className='btn btn-sm btn-secondary'>
-          Registrati
+          Registra
         </Button>
       </Form>
     </Container>

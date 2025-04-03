@@ -37,3 +37,11 @@ export const login = (email, password) => {
     }
   };
 };
+
+export const logout = () => {
+  return (dispatch) => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('role');
+    dispatch({ type: LOGOUT });
+  };
+};
