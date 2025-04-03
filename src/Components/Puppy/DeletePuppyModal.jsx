@@ -1,6 +1,6 @@
 import React from 'react';
 import { Modal, Button } from 'react-bootstrap';
-import { deletePuppy } from '../Redux/Actions/puppiesActions';
+import { deletePuppy } from '../../Redux/Actions/puppiesActions';
 import { useDispatch } from 'react-redux';
 
 const DeletePuppyModal = ({ show, handleClose, puppy, onPuppyDeleted }) => {

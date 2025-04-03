@@ -118,9 +118,11 @@ export const addPuppy = (puppyData) => {
     dispatch(addPuppyRequest());
 
     try {
-      if (!puppyData.UserId && !puppyData.MicrochipPresente) {
-        // Rimuovo UserId e NumeroMicrochip se non sono presenti nel form
+      // Rimuovo UserId e NumeroMicrochip se non sono presenti nel form
+      if (!puppyData.UserId) {
         delete puppyData.UserId;
+      }
+      if (!puppyData.MicrochipPresente) {
         delete puppyData.NumeroMicrochip;
       }
       const response = await fetch('https://localhost:7055/api/Animali', {
@@ -183,6 +185,7 @@ export const updatePuppy = (puppyId, puppyData) => {
       if (!cleanPuppyData.MicrochipPresente) {
         delete cleanPuppyData.NumeroMicrochip;
       }
+      console.log(cleanPuppyData);
 
       const response = await fetch(
         `https://localhost:7055/api/Animali/${puppyId}`,
