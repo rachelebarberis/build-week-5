@@ -158,11 +158,12 @@ const Farmacia = () => {
 
       <div className="d-flex justify-content-end mb-3">
         <Button
-          variant="outline-primary"
-          className="btn btn-sm border border-2 rounded-1"
+          style={{ color: "#2A4D38" }}
+          variant="outline-secondary"
           onClick={() => toggleModal("create")}
         >
-          <i className="bi bi-plus text-black"></i>
+          <i className="bi bi-plus" style={{ color: "#2A4D38" }}></i> Nuovo
+          Prodotto
         </Button>
       </div>
 
@@ -175,14 +176,14 @@ const Farmacia = () => {
           </Spinner>
         </div>
       ) : (
-        <Table striped className="mb-md-5">
+        <Table striped bordered hover responsive className="mb-md-5">
           <thead>
             <tr>
-              <th>Nome</th>
-              <th>Uso</th>
-              <th>Armadietto</th>
-              <th>Cassetto</th>
-              <th>Azioni</th>
+              <th style={{ color: "#2A4D38" }}>Nome</th>
+              <th style={{ color: "#2A4D38" }}>Uso</th>
+              <th style={{ color: "#2A4D38" }}>Armadietto</th>
+              <th style={{ color: "#2A4D38" }}>Cassetto</th>
+              <th style={{ color: "#2A4D38" }}>Azioni</th>
             </tr>
           </thead>
           <tbody>
@@ -195,21 +196,32 @@ const Farmacia = () => {
             ) : (
               prodotti.map((prodotto) => (
                 <tr key={prodotto.id}>
-                  <td>{prodotto.nome}</td>
-                  <td>{prodotto.usiProdotto || "Non specificato"}</td>
-                  <td>{prodotto.cassetto?.armadiettoId || "N/A"}</td>
-                  <td>{prodotto.cassetto?.cassettoId || "N/A"}</td>
+                  <td style={{ color: "#2A4D38" }}>{prodotto.nome}</td>
+                  <td style={{ color: "#2A4D38" }}>
+                    {prodotto.usiProdotto || "Non specificato"}
+                  </td>
+                  <td style={{ color: "#2A4D38" }} className="text-center">
+                    {prodotto.cassetto?.armadiettoId || "N/A"}
+                  </td>
+                  <td style={{ color: "#2A4D38" }} className="text-center">
+                    {prodotto.cassetto?.cassettoId || "N/A"}
+                  </td>
                   <td>
                     <Button
-                      variant="outline-secondary"
+                      style={{ color: "#2A4D38" }}
+                      variant="outline-muted"
                       size="sm"
                       className="me-2"
                       onClick={() => toggleModal("update", prodotto)}
                     >
-                      <i className="bi bi-pencil"></i>
+                      <i
+                        className="bi bi-pencil"
+                        style={{ color: "#2A4D38" }}
+                      ></i>
                     </Button>
                     <Button
-                      variant="outline-secondary"
+                      style={{ color: "#2A4D38" }}
+                      variant="outline-muted"
                       size="sm"
                       className="me-2"
                       onClick={() => toggleModal("delete", prodotto)}
@@ -217,11 +229,12 @@ const Farmacia = () => {
                       <i className="bi bi-trash"></i>
                     </Button>
                     <Button
-                      variant="outline-secondary"
+                      style={{ color: "#2A4D38" }}
+                      variant="outline-muted"
                       size="sm"
                       onClick={() => toggleModal("view", prodotto)}
                     >
-                      <i className="bi bi-info-circle"></i>
+                      <i className="bi bi-info-circle pe-sm-2 pe-md-0"></i>
                     </Button>
                   </td>
                 </tr>
@@ -243,11 +256,16 @@ const Farmacia = () => {
                   <Col xs="auto" className="p-0 pe-2">
                     <InputGroup>
                       <Form.Control
+                        style={{ color: "grey" }}
                         type="date"
                         value={searchDate}
                         onChange={(e) => setSearchDate(e.target.value)}
                       />
-                      <Button type="submit" variant="outline-secondary">
+                      <Button
+                        type="submit"
+                        variant="outline-muted"
+                        style={{ backgroundColor: "white" }}
+                      >
                         <i className="bi bi-search"></i>
                       </Button>
                     </InputGroup>
@@ -260,17 +278,21 @@ const Farmacia = () => {
           <hr></hr>
           <div>
             <p className="text-center fw-semibold">Lista ricerca:</p>
-            <Table striped className="border">
+            <Table striped bordered hover responsive className="border">
               <thead>
                 <tr>
-                  <th>Prodotto</th>
-                  <th>Data</th>
+                  <th style={{ color: "#2A4D38" }}>Prodotto</th>
+                  <th style={{ color: "#2A4D38" }}>Data</th>
                 </tr>
               </thead>
               <tbody>
                 {searchResults.length === 0 ? (
                   <tr>
-                    <td colSpan="2" className="text-center">
+                    <td
+                      colSpan="2"
+                      className="text-center"
+                      style={{ color: "#2A4D38" }}
+                    >
                       Nessun risultato trovato
                     </td>
                   </tr>
@@ -303,7 +325,11 @@ const Farmacia = () => {
                         value={fiscalCode}
                         onChange={(e) => setFiscalCode(e.target.value)}
                       />
-                      <Button type="submit" variant="outline-secondary">
+                      <Button
+                        type="submit"
+                        variant="outline-muted"
+                        style={{ backgroundColor: "white" }}
+                      >
                         <i className="bi bi-search"></i>
                       </Button>
                     </InputGroup>
@@ -322,17 +348,21 @@ const Farmacia = () => {
                 <Spinner animation="border" size="sm" />
               </div>
             ) : (
-              <Table striped className="border">
+              <Table striped bordered hover responsive className="border">
                 <thead>
                   <tr>
-                    <th>Prodotto</th>
-                    <th>Cliente</th>
+                    <th style={{ color: "#2A4D38" }}>Prodotto</th>
+                    <th style={{ color: "#2A4D38" }}>Cliente</th>
                   </tr>
                 </thead>
                 <tbody>
                   {clientResults.length === 0 ? (
                     <tr>
-                      <td colSpan="2" className="text-center">
+                      <td
+                        style={{ color: "#2A4D38" }}
+                        colSpan="2"
+                        className="text-center"
+                      >
                         Nessun risultato trovato
                       </td>
                     </tr>

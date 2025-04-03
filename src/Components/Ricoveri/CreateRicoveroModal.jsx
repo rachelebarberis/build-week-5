@@ -98,7 +98,7 @@ const CreateRicoveroModal = ({ show, handleClose, onRicoveroCreated }) => {
         style={{ borderBottom: "2px solid #dee2e6" }}
       >
         <div className="w-100 text-center">
-          <Modal.Title>Nuovo Ricovero</Modal.Title>
+          <Modal.Title style={{ color: "#2A4D38" }}>Nuovo Ricovero</Modal.Title>
         </div>
       </Modal.Header>
 
@@ -112,8 +112,8 @@ const CreateRicoveroModal = ({ show, handleClose, onRicoveroCreated }) => {
 
         <Form onSubmit={handleSubmit}>
           <Form.Group className="mb-4">
-            <Form.Label className="fw-semibold">
-              <i className="bi bi-tag me-2"></i>
+            <Form.Label className="fw-semibold" style={{ color: "#2A4D38" }}>
+              <i className="bi bi-tag me-2" style={{ color: "#2A4D38" }}></i>
               Puppy
             </Form.Label>
             {fetchingPuppies ? (
@@ -123,6 +123,7 @@ const CreateRicoveroModal = ({ show, handleClose, onRicoveroCreated }) => {
               </div>
             ) : (
               <Form.Select
+                style={{ color: "#2F855A" }}
                 name="puppyId"
                 value={formData.puppyId}
                 onChange={handleChange}
@@ -142,11 +143,18 @@ const CreateRicoveroModal = ({ show, handleClose, onRicoveroCreated }) => {
           <Row>
             <Col md={6}>
               <Form.Group className="mb-4">
-                <Form.Label className="fw-semibold">
-                  <i className="bi bi-calendar-plus me-2"></i>
+                <Form.Label
+                  className="fw-semibold"
+                  style={{ color: "#2A4D38" }}
+                >
+                  <i
+                    className="bi bi-calendar-plus me-2"
+                    style={{ color: "#2A4D38" }}
+                  ></i>
                   Data Inizio Ricovero
                 </Form.Label>
                 <Form.Control
+                  style={{ color: "#2F855A" }}
                   type="date"
                   name="dataInizioRicovero"
                   value={formData.dataInizioRicovero}
@@ -158,11 +166,18 @@ const CreateRicoveroModal = ({ show, handleClose, onRicoveroCreated }) => {
             </Col>
             <Col md={6}>
               <Form.Group className="mb-4">
-                <Form.Label className="fw-semibold">
-                  <i className="bi bi-calendar-check me-2"></i>
+                <Form.Label
+                  className="fw-semibold"
+                  style={{ color: "#2A4D38" }}
+                >
+                  <i
+                    className="bi bi-calendar-check me-2"
+                    style={{ color: "#2A4D38" }}
+                  ></i>
                   Data Fine (opzionale)
                 </Form.Label>
                 <Form.Control
+                  style={{ color: "#2F855A" }}
                   type="date"
                   name="dataFineRicovero"
                   value={formData.dataFineRicovero}
@@ -174,11 +189,15 @@ const CreateRicoveroModal = ({ show, handleClose, onRicoveroCreated }) => {
           </Row>
 
           <Form.Group className="mb-4">
-            <Form.Label className="fw-semibold">
-              <i className="bi bi-card-text me-2"></i>
+            <Form.Label className="fw-semibold" style={{ color: "#2A4D38" }}>
+              <i
+                className="bi bi-card-text me-2"
+                style={{ color: "#2A4D38" }}
+              ></i>
               Descrizione
             </Form.Label>
             <Form.Control
+              style={{ color: "#2F855A" }}
               as="textarea"
               rows={4}
               name="descrizione"
@@ -201,7 +220,8 @@ const CreateRicoveroModal = ({ show, handleClose, onRicoveroCreated }) => {
               Annulla
             </Button>
             <Button
-              variant="primary"
+              variant="outline-muted"
+              style={{ color: "#D8E2DC", backgroundColor: "#2F855A" }}
               type="submit"
               disabled={loading}
               className="px-4"

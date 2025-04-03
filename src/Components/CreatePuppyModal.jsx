@@ -1,17 +1,17 @@
-import React, { useState } from 'react';
-import { Modal, Button, Form } from 'react-bootstrap';
-import { useDispatch } from 'react-redux';
-import { addPuppy } from '../Redux/Actions/puppiesActions';
+import React, { useState } from "react";
+import { Modal, Button, Form } from "react-bootstrap";
+import { useDispatch } from "react-redux";
+import { addPuppy } from "../Redux/Actions/puppiesActions";
 
 const CreatePuppyModal = ({ show, handleClose, onPuppyCreated }) => {
   const [formData, setFormData] = useState({
-    nome: '',
-    tipologia: '',
-    coloreMantello: '',
-    dataNascita: '',
+    nome: "",
+    tipologia: "",
+    coloreMantello: "",
+    dataNascita: "",
     microchipPresente: false,
-    numeroMicrochip: '',
-    userId: '',
+    numeroMicrochip: "",
+    userId: "",
   });
 
   const dispatch = useDispatch();
@@ -20,7 +20,7 @@ const CreatePuppyModal = ({ show, handleClose, onPuppyCreated }) => {
     const { name, value, type, checked } = e.target;
     setFormData((prev) => ({
       ...prev,
-      [name]: type === 'checkbox' ? checked : value,
+      [name]: type === "checkbox" ? checked : value,
     }));
   };
 
@@ -47,13 +47,13 @@ const CreatePuppyModal = ({ show, handleClose, onPuppyCreated }) => {
 
     // Reset dei campi del form
     setFormData({
-      nome: '',
-      tipologia: '',
-      coloreMantello: '',
-      dataNascita: '',
+      nome: "",
+      tipologia: "",
+      coloreMantello: "",
+      dataNascita: "",
       microchipPresente: false,
-      numeroMicrochip: '',
-      userId: '',
+      numeroMicrochip: "",
+      userId: "",
     });
 
     // Chiudiamo la modale
@@ -61,110 +61,134 @@ const CreatePuppyModal = ({ show, handleClose, onPuppyCreated }) => {
   };
 
   return (
-    <Modal show={show} onHide={handleClose} centered backdrop='static'>
+    <Modal show={show} onHide={handleClose} centered backdrop="static">
       <Modal.Header
         closeButton
-        className='bg-light'
-        style={{ borderBottom: '2px solid #dee2e6' }}
+        className="bg-light"
+        style={{ borderBottom: "2px solid #dee2e6" }}
       >
-        <div className='w-100 text-center'>
-          <Modal.Title>Nuovo Puppy</Modal.Title>
+        <div className="w-100 text-center">
+          <Modal.Title style={{ color: "#2A4D38" }}>Aggiungi Puppy</Modal.Title>
         </div>
       </Modal.Header>
 
-      <Modal.Body className='px-4 py-4'>
+      <Modal.Body className="px-4 py-4">
         <Form onSubmit={handleSubmit}>
-          <Form.Group className='mb-4'>
-            <Form.Label className='fw-semibold'>Nome</Form.Label>
+          <Form.Group className="mb-4">
+            <Form.Label className="fw-semibold" style={{ color: "#2A4D38" }}>
+              Nome
+            </Form.Label>
             <Form.Control
-              type='text'
-              name='nome'
+              style={{ color: "#2F855A" }}
+              type="text"
+              name="nome"
               value={formData.nome}
               onChange={handleChange}
               required
-              className='shadow-sm'
+              className="shadow-sm"
             />
           </Form.Group>
 
-          <Form.Group className='mb-4'>
-            <Form.Label className='fw-semibold'>Tipologia</Form.Label>
+          <Form.Group className="mb-4">
+            <Form.Label className="fw-semibold" style={{ color: "#2A4D38" }}>
+              Tipologia
+            </Form.Label>
             <Form.Control
-              type='text'
-              name='tipologia'
+              style={{ color: "#2F855A" }}
+              type="text"
+              name="tipologia"
               value={formData.tipologia}
               onChange={handleChange}
               required
-              className='shadow-sm'
+              className="shadow-sm"
             />
           </Form.Group>
 
-          <Form.Group className='mb-4'>
-            <Form.Label className='fw-semibold'>Colore Mantello</Form.Label>
+          <Form.Group className="mb-4">
+            <Form.Label className="fw-semibold" style={{ color: "#2A4D38" }}>
+              Colore Mantello
+            </Form.Label>
             <Form.Control
-              type='text'
-              name='coloreMantello'
+              style={{ color: "#2F855A" }}
+              type="text"
+              name="coloreMantello"
               value={formData.coloreMantello}
               onChange={handleChange}
               required
-              className='shadow-sm'
+              className="shadow-sm"
             />
           </Form.Group>
 
-          <Form.Group className='mb-4'>
-            <Form.Label className='fw-semibold'>Data di Nascita</Form.Label>
+          <Form.Group className="mb-4">
+            <Form.Label className="fw-semibold" style={{ color: "#2A4D38" }}>
+              Data di Nascita
+            </Form.Label>
             <Form.Control
-              type='date'
-              name='dataNascita'
+              style={{ color: "#2F855A" }}
+              type="date"
+              name="dataNascita"
               value={formData.dataNascita}
               onChange={handleChange}
               required
-              className='shadow-sm'
+              className="shadow-sm"
             />
           </Form.Group>
 
-          <Form.Group className='mb-4'>
-            <Form.Label className='fw-semibold'>Microchip Presente</Form.Label>
+          <Form.Group className="mb-4" style={{ color: "#2A4D38" }}>
+            <Form.Label className="fw-semibold">Microchip Presente</Form.Label>
             <Form.Check
-              type='checkbox'
-              name='microchipPresente'
+              style={{ color: "#2F855A" }}
+              type="checkbox"
+              name="microchipPresente"
               checked={formData.microchipPresente}
               onChange={handleChange}
             />
           </Form.Group>
 
           {formData.microchipPresente && (
-            <Form.Group className='mb-4'>
-              <Form.Label className='fw-semibold'>Numero Microchip</Form.Label>
+            <Form.Group className="mb-4">
+              <Form.Label className="fw-semibold" style={{ color: "#2A4D38" }}>
+                Numero Microchip
+              </Form.Label>
               <Form.Control
-                type='text'
-                name='numeroMicrochip'
+                style={{ color: "#2F855A" }}
+                type="text"
+                name="numeroMicrochip"
                 value={formData.numeroMicrochip}
                 onChange={handleChange}
-                className='shadow-sm'
+                className="shadow-sm"
               />
             </Form.Group>
           )}
 
-          <Form.Group className='mb-4'>
-            <Form.Label className='fw-semibold'>User ID (opzionale)</Form.Label>
+          <Form.Group className="mb-4">
+            <Form.Label className="fw-semibold" style={{ color: "#2A4D38" }}>
+              Nome Proprietario (opzionale)
+            </Form.Label>
             <Form.Control
-              type='text'
-              name='userId'
+              style={{ color: "#2F855A" }}
+              type="text"
+              name="userId"
               value={formData.userId}
               onChange={handleChange}
-              className='shadow-sm'
+              className="shadow-sm"
             />
           </Form.Group>
 
-          <div className='d-flex justify-content-end mt-4'>
+          <div className="d-flex justify-content-end mt-4">
             <Button
-              variant='outline-secondary'
+              variant="outline-secondary"
               onClick={handleClose}
-              className='me-2'
+              className="me-2"
             >
               Annulla
             </Button>
-            <Button variant='primary' type='submit' className='px-4'>
+            <Button
+              variant="outline-muted"
+              style={{ color: "#D8E2DC", backgroundColor: "#2F855A" }}
+              type="submit"
+              className="px-4"
+            >
               Salva
             </Button>
           </div>

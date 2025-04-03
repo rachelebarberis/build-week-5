@@ -1,19 +1,19 @@
-import React, { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { updatePuppy } from '../Redux/Actions/puppiesActions';
-import { Modal, Button, Form } from 'react-bootstrap';
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { updatePuppy } from "../Redux/Actions/puppiesActions";
+import { Modal, Button, Form } from "react-bootstrap";
 
 const UpdatePuppyModal = ({ show, handleClose, puppy, onPuppyUpdated }) => {
   const { puppies } = useSelector((state) => state.puppies);
   const dispatch = useDispatch();
 
-  const [nome, setNome] = useState('');
-  const [tipologia, setTipologia] = useState('');
-  const [coloreMantello, setColoreMantello] = useState('');
-  const [dataNascita, setDataNascita] = useState('');
+  const [nome, setNome] = useState("");
+  const [tipologia, setTipologia] = useState("");
+  const [coloreMantello, setColoreMantello] = useState("");
+  const [dataNascita, setDataNascita] = useState("");
   const [microchipPresente, setMicrochipPresente] = useState(false);
-  const [numeroMicrochip, setNumeroMicrochip] = useState('');
-  const [userId, setUserId] = useState('');
+  const [numeroMicrochip, setNumeroMicrochip] = useState("");
+  const [userId, setUserId] = useState("");
 
   useEffect(() => {
     if (show && puppy) {
@@ -27,8 +27,8 @@ const UpdatePuppyModal = ({ show, handleClose, puppy, onPuppyUpdated }) => {
         setColoreMantello(puppy.coloreMantello);
         setDataNascita(puppy.dataNascita);
         setMicrochipPresente(puppy.microchipPresente);
-        setNumeroMicrochip(puppy.numeroMicrochip || '');
-        setUserId(puppy.owner.userId || '');
+        setNumeroMicrochip(puppy.numeroMicrochip || "");
+        setUserId(puppy.owner?.userId || "");
       }
     }
   }, [show, puppy.puppyId, puppies]);
@@ -56,84 +56,110 @@ const UpdatePuppyModal = ({ show, handleClose, puppy, onPuppyUpdated }) => {
   return (
     <Modal show={show} onHide={handleClose} centered>
       <Modal.Header closeButton>
-        <Modal.Title>Modifica Puppy</Modal.Title>
+        <Modal.Title style={{ color: "#2A4D38" }}>Modifica Puppy</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Form onSubmit={handleSubmit}>
-          <Form.Group className='mb-3'>
-            <Form.Label>Nome</Form.Label>
+          <Form.Group className="mb-3">
+            <Form.Label style={{ color: "#2A4D38" }}>Nome</Form.Label>
             <Form.Control
-              type='text'
+              style={{ color: "#2F855A" }}
+              type="text"
               value={nome}
               onChange={(e) => setNome(e.target.value)}
               required
             />
           </Form.Group>
 
-          <Form.Group className='mb-3'>
-            <Form.Label>Tipologia</Form.Label>
+          <Form.Group className="mb-3">
+            <Form.Label style={{ color: "#2A4D38" }}>Tipologia</Form.Label>
             <Form.Control
-              type='text'
+              style={{ color: "#2F855A" }}
+              type="text"
               value={tipologia}
               onChange={(e) => setTipologia(e.target.value)}
               required
             />
           </Form.Group>
 
-          <Form.Group className='mb-3'>
-            <Form.Label>Colore Mantello</Form.Label>
+          <Form.Group className="mb-3">
+            <Form.Label style={{ color: "#2A4D38" }}>
+              Colore Mantello
+            </Form.Label>
             <Form.Control
-              type='text'
+              style={{ color: "#2F855A" }}
+              type="text"
               value={coloreMantello}
               onChange={(e) => setColoreMantello(e.target.value)}
               required
             />
           </Form.Group>
 
-          <Form.Group className='mb-3'>
-            <Form.Label>Data di Nascita</Form.Label>
+          <Form.Group className="mb-3">
+            <Form.Label style={{ color: "#2A4D38" }}>
+              Data di Nascita
+            </Form.Label>
             <Form.Control
-              type='date'
+              style={{ color: "#2F855A" }}
+              type="date"
               value={dataNascita}
               onChange={(e) => setDataNascita(e.target.value)}
               required
             />
           </Form.Group>
 
-          <Form.Group className='mb-3'>
-            <Form.Label>Microchip Presente</Form.Label>
+          <Form.Group className="mb-3">
+            <Form.Label style={{ color: "#2A4D38" }}>
+              Microchip Presente
+            </Form.Label>
             <Form.Check
-              type='checkbox'
+              style={{ color: "#2F855A" }}
+              type="checkbox"
               checked={microchipPresente}
               onChange={(e) => setMicrochipPresente(e.target.checked)}
             />
           </Form.Group>
 
           {microchipPresente && (
-            <Form.Group className='mb-3'>
-              <Form.Label>Numero Microchip</Form.Label>
+            <Form.Group className="mb-3">
+              <Form.Label style={{ color: "#2A4D38" }}>
+                Numero Microchip
+              </Form.Label>
               <Form.Control
-                type='text'
+                style={{ color: "#2F855A" }}
+                type="text"
                 value={numeroMicrochip}
                 onChange={(e) => setNumeroMicrochip(e.target.value)}
               />
             </Form.Group>
           )}
 
-          <Form.Group className='mb-3'>
-            <Form.Label>User ID (opzionale)</Form.Label>
+          <Form.Group className="mb-3">
+            <Form.Label style={{ color: "#2A4D38" }}>
+              Nome Proprietario(opzionale)
+            </Form.Label>
             <Form.Control
-              type='text'
+              style={{ color: "#2F855A" }}
+              type="text"
               value={userId}
               onChange={(e) => setUserId(e.target.value)}
             />
           </Form.Group>
 
-          <div className='d-flex justify-content-end'>
-            <Button variant='secondary' onClick={handleClose} className='me-2'>
+          <div className="d-flex justify-content-end">
+            <Button
+              variant="outline-muted"
+              style={{ color: "##2A4D38", backgroundColor: "#D8E2DC" }}
+              onClick={handleClose}
+              className="me-2"
+            >
               Annulla
             </Button>
-            <Button variant='primary' type='submit'>
+            <Button
+              variant="outline-muted"
+              style={{ backgroundColor: "#2F855A", color: "#D8E2DC" }}
+              type="submit"
+            >
               Aggiorna Puppy
             </Button>
           </div>

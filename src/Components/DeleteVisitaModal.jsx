@@ -43,8 +43,10 @@ const DeleteVisitaComponent = ({ show, handleClose, onVisitaDeleted }) => {
         className="bg-light"
         style={{ borderBottom: "2px solid #dee2e6" }}
       >
-        <div className="w-100 text-end">
-          <Modal.Title>Conferma Eliminazione</Modal.Title>
+        <div className="w-100">
+          <Modal.Title style={{ color: "#2A4D38" }}>
+            Conferma Eliminazione
+          </Modal.Title>
         </div>
       </Modal.Header>
 
@@ -54,9 +56,8 @@ const DeleteVisitaComponent = ({ show, handleClose, onVisitaDeleted }) => {
             <div className="display-1 text-danger mb-3">
               <i className="bi bi-trash"></i>
             </div>
-            <h5>
-              Sei sicuro di voler eliminare la visita con obiettivo:{" "}
-              <strong>{visita.obiettivoEsame}</strong>?
+            <h5 style={{ color: "#2A4D38" }}>
+              Sei sicuro di voler eliminare la visita?
             </h5>
           </div>
         ) : (
@@ -66,10 +67,12 @@ const DeleteVisitaComponent = ({ show, handleClose, onVisitaDeleted }) => {
         {visita && (
           <div className="mb-4 p-3 bg-light rounded border">
             <div className="mb-2">
-              <strong>Puppy:</strong> {visita.puppyNome || "Non specificato"}
+              <strong style={{ color: "#2A4D38" }}>Puppy:</strong>{" "}
+              {visita.puppyNome || "Non specificato"}
             </div>
             <div className="mb-2">
-              <strong>Data Visita:</strong> {formatDate(visita.dataVisita)}
+              <strong style={{ color: "#2A4D38" }}>Data Visita:</strong>{" "}
+              {formatDate(visita.dataVisita)}
             </div>
           </div>
         )}
@@ -90,7 +93,12 @@ const DeleteVisitaComponent = ({ show, handleClose, onVisitaDeleted }) => {
           <i className="bi bi-x-circle me-1"></i>
           Annulla
         </Button>
-        <Button variant="danger" onClick={handleDelete} className="px-4">
+        <Button
+          variant="outline-muted"
+          style={{ color: "##2A4D38", backgroundColor: "#D8E2DC" }}
+          onClick={handleDelete}
+          className="px-4"
+        >
           <i className="bi bi-trash me-1"></i>
           Elimina
         </Button>

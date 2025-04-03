@@ -60,15 +60,20 @@ const VisiteEditComponent = ({ show, handleClose, onVisitaUpdated }) => {
   return (
     <Modal show={show} onHide={handleClose} centered backdrop="static">
       <Modal.Header closeButton className="bg-light">
-        <Modal.Title className="text-center w-100">Modifica Visita</Modal.Title>
+        <Modal.Title style={{ color: "#2A4D38" }} className="text-center w-100">
+          Modifica Visita
+        </Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Form onSubmit={handleSubmit}>
           <Row>
             <Col md={6}>
               <Form.Group className="mb-3">
-                <Form.Label>Data Visita</Form.Label>
+                <Form.Label style={{ color: "#2A4D38" }}>
+                  Data Visita
+                </Form.Label>
                 <Form.Control
+                  style={{ color: "#2F855A" }}
                   type="date"
                   name="dataVisita"
                   value={formData.dataVisita}
@@ -80,8 +85,11 @@ const VisiteEditComponent = ({ show, handleClose, onVisitaUpdated }) => {
           </Row>
 
           <Form.Group className="mb-3">
-            <Form.Label>Obiettivo Esame</Form.Label>
+            <Form.Label style={{ color: "#2A4D38" }}>
+              Obiettivo Esame
+            </Form.Label>
             <Form.Control
+              style={{ color: "#2F855A" }}
               type="text"
               name="obiettivoEsame"
               value={formData.obiettivoEsame}
@@ -91,8 +99,11 @@ const VisiteEditComponent = ({ show, handleClose, onVisitaUpdated }) => {
           </Form.Group>
 
           <Form.Group className="mb-3">
-            <Form.Label>Descrizione Cura</Form.Label>
+            <Form.Label style={{ color: "#2A4D38" }}>
+              Descrizione Cura
+            </Form.Label>
             <Form.Control
+              style={{ color: "#2F855A" }}
               as="textarea"
               name="descrizioneCura"
               value={formData.descrizioneCura}
@@ -103,13 +114,18 @@ const VisiteEditComponent = ({ show, handleClose, onVisitaUpdated }) => {
 
           <div className="d-flex justify-content-end">
             <Button
-              variant="outline-secondary"
+              variant="outline-muted"
+              style={{ backgroundColor: "#2F855A", color: "#D8E2DC" }}
               onClick={handleClose}
               className="me-2"
             >
               Annulla
             </Button>
-            <Button variant="primary" type="submit">
+            <Button
+              variant="outline-muted"
+              style={{ color: "##2A4D38", backgroundColor: "#D8E2DC" }}
+              type="submit"
+            >
               Salva
             </Button>
           </div>
