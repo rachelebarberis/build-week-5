@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 
-import { Modal, Button, Form, Row, Col } from 'react-bootstrap';
-import { updateVisita, getAllVisite } from '../Redux/Actions/VisitaAction';
+import { Modal, Button, Form, Row, Col } from "react-bootstrap";
+import { updateVisita, getAllVisite } from "../Redux/Actions/VisitaAction";
 
 const VisiteEditComponent = ({
   show,
@@ -10,9 +10,9 @@ const VisiteEditComponent = ({
   onVisitaUpdated,
 }) => {
   const [formData, setFormData] = useState({
-    dataVisita: '',
-    obiettivoEsame: '',
-    descrizioneCura: '',
+    dataVisita: "",
+    obiettivoEsame: "",
+    descrizioneCura: "",
   });
 
   useEffect(() => {
@@ -29,13 +29,13 @@ const VisiteEditComponent = ({
 
       if (visitaSelezionata) {
         setFormData({
-          dataVisita: visitaSelezionata.dataVisita.split('T')[0] || '',
-          obiettivoEsame: visitaSelezionata.obiettivoEsame || '',
-          descrizioneCura: visitaSelezionata.descrizioneCura || '',
+          dataVisita: visitaSelezionata.dataVisita.split("T")[0] || "",
+          obiettivoEsame: visitaSelezionata.obiettivoEsame || "",
+          descrizioneCura: visitaSelezionata.descrizioneCura || "",
         });
       }
     } catch (err) {
-      console.error('Errore nel recupero della visita:', err.message);
+      console.error("Errore nel recupero della visita:", err.message);
     }
   };
 
@@ -62,19 +62,21 @@ const VisiteEditComponent = ({
   };
 
   return (
-    <Modal show={show} onHide={handleClose} centered backdrop='static'>
-      <Modal.Header closeButton className='bg-light'>
-        <Modal.Title className='text-center w-100'>Modifica Visita</Modal.Title>
+    <Modal show={show} onHide={handleClose} centered backdrop="static">
+      <Modal.Header closeButton className="bg-light">
+        <Modal.Title id="verde" className="text-center">
+          Modifica Visita
+        </Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Form onSubmit={handleSubmit}>
           <Row>
             <Col md={6}>
-              <Form.Group className='mb-3'>
-                <Form.Label>Data Visita</Form.Label>
+              <Form.Group className="mb-3">
+                <Form.Label id="verde">Data Visita</Form.Label>
                 <Form.Control
-                  type='date'
-                  name='dataVisita'
+                  type="date"
+                  name="dataVisita"
                   value={formData.dataVisita}
                   onChange={handleChange}
                   required
@@ -83,37 +85,37 @@ const VisiteEditComponent = ({
             </Col>
           </Row>
 
-          <Form.Group className='mb-3'>
-            <Form.Label>Obiettivo Esame</Form.Label>
+          <Form.Group className="mb-3">
+            <Form.Label id="verde">Obiettivo Esame</Form.Label>
             <Form.Control
-              type='text'
-              name='obiettivoEsame'
+              type="text"
+              name="obiettivoEsame"
               value={formData.obiettivoEsame}
               onChange={handleChange}
               required
             />
           </Form.Group>
 
-          <Form.Group className='mb-3'>
-            <Form.Label>Descrizione Cura</Form.Label>
+          <Form.Group className="mb-3">
+            <Form.Label id="verde">Descrizione Cura</Form.Label>
             <Form.Control
-              as='textarea'
-              name='descrizioneCura'
+              as="textarea"
+              name="descrizioneCura"
               value={formData.descrizioneCura}
               onChange={handleChange}
               required
             />
           </Form.Group>
 
-          <div className='d-flex justify-content-end'>
+          <div className="d-flex justify-content-end">
             <Button
-              variant='outline-secondary'
+              variant="outline-secondary"
               onClick={handleClose}
-              className='me-2'
+              className="me-2"
             >
               Annulla
             </Button>
-            <Button variant='primary' type='submit'>
+            <Button variant="success" type="submit">
               Salva
             </Button>
           </div>

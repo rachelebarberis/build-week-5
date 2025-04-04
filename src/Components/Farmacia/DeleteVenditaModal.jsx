@@ -29,36 +29,37 @@ const DeleteVenditaModal = ({
   return (
     <Modal show={show} onHide={handleClose} centered>
       <Modal.Header closeButton>
-        <Modal.Title>Conferma Eliminazione</Modal.Title>
+        <Modal.Title id="verde">Conferma Eliminazione</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         {error && <Alert variant="danger">{error}</Alert>}
 
-        <p>Sei sicuro di voler eliminare questa vendita?</p>
+        <p id="verde">Sei sicuro di voler eliminare questa vendita?</p>
 
         <div className="mb-3">
-          <strong>ID Vendita:</strong> {venditaId}
+          <strong id="verde">ID Vendita:</strong> {venditaId}
         </div>
 
         {venditaInfo && (
           <>
             <div className="mb-2">
-              <strong>Prodotto:</strong>{" "}
+              <strong id="verde">Prodotto:</strong>{" "}
               {venditaInfo.nomeProdotto || venditaInfo.prodottoId || "N/A"}
             </div>
             <div className="mb-2">
-              <strong>Cliente:</strong>{" "}
+              <strong id="verde">Cliente:</strong>{" "}
               {venditaInfo.customerId || venditaInfo.codiceFiscale || "N/A"}
             </div>
             <div className="mb-2">
-              <strong>Data Vendita:</strong>{" "}
+              <strong id="verde">Data Vendita:</strong>{" "}
               {venditaInfo.dataVendita
                 ? new Date(venditaInfo.dataVendita).toLocaleDateString("it-IT")
                 : "N/A"}
             </div>
             {venditaInfo.numeroRicetta && (
               <div className="mb-2">
-                <strong>Numero Ricetta:</strong> {venditaInfo.numeroRicetta}
+                <strong id="verde">Numero Ricetta:</strong>{" "}
+                {venditaInfo.numeroRicetta}
               </div>
             )}
           </>

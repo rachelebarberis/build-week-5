@@ -51,7 +51,7 @@ const ViewProdottoModal = ({ show, handleClose, prodottoId }) => {
   return (
     <Modal show={show} onHide={handleClose} size="lg">
       <Modal.Header closeButton>
-        <Modal.Title>Dettagli Prodotto</Modal.Title>
+        <Modal.Title id="verde">Dettagli Prodotto</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         {error && <Alert variant="danger">{error}</Alert>}
@@ -65,16 +65,18 @@ const ViewProdottoModal = ({ show, handleClose, prodottoId }) => {
         ) : prodotto ? (
           <Card className="shadow-sm p-3">
             <Card.Body>
-              <h5 className="mb-3 fs-3">Informazioni Prodotto</h5>
+              <h5 className="mb-3 fs-3" id="verde">
+                Informazioni Prodotto
+              </h5>
               <Row className="mb-3">
-                <Col md={4} className="fw-bold">
+                <Col id="verde" md={4} className="fw-bold">
                   Nome:
                 </Col>
                 <Col md={8}>{displayValue(prodotto.nome)}</Col>
               </Row>
 
               <Row className="mb-3">
-                <Col md={4} className="fw-bold">
+                <Col id="verde" md={4} className="fw-bold">
                   Usi Prodotto:
                 </Col>
                 <Col md={8}>{displayValue(prodotto.usiProdotto)}</Col>
@@ -82,23 +84,25 @@ const ViewProdottoModal = ({ show, handleClose, prodottoId }) => {
 
               <hr />
 
-              <h5 className="mb-3 fs-3">Fornitore</h5>
+              <h5 id="verde" className="mb-3 fs-3">
+                Fornitore
+              </h5>
               <Row className="mb-3">
-                <Col md={4} className="fw-bold">
+                <Col id="verde" md={4} className="fw-bold">
                   Nome:
                 </Col>
                 <Col md={8}>{displayValue(prodotto.fornitore?.nome)}</Col>
               </Row>
 
               <Row className="mb-3">
-                <Col md={4} className="fw-bold">
+                <Col id="verde" md={4} className="fw-bold">
                   Recapito:
                 </Col>
                 <Col md={8}>{displayValue(prodotto.fornitore?.recapito)}</Col>
               </Row>
 
               <Row className="mb-3">
-                <Col md={4} className="fw-bold">
+                <Col id="verde" md={4} className="fw-bold">
                   Indirizzo:
                 </Col>
                 <Col md={8}>{displayValue(prodotto.fornitore?.indirizzo)}</Col>
@@ -106,9 +110,11 @@ const ViewProdottoModal = ({ show, handleClose, prodottoId }) => {
 
               <hr />
 
-              <h5 className="mb-3 fs-3">Posizione in Magazzino</h5>
+              <h5 id="verde" className="mb-3 fs-3">
+                Posizione in Magazzino
+              </h5>
               <Row className="mb-3">
-                <Col md={4} className="fw-bold">
+                <Col id="verde" md={4} className="fw-bold">
                   ID Armadietto:
                 </Col>
                 <Col md={8}>
@@ -117,7 +123,7 @@ const ViewProdottoModal = ({ show, handleClose, prodottoId }) => {
               </Row>
 
               <Row className="mb-3">
-                <Col md={4} className="fw-bold">
+                <Col id="verde" md={4} className="fw-bold">
                   ID Cassetto:
                 </Col>
                 <Col md={8}>{displayValue(prodotto.cassetto?.cassettoId)}</Col>
@@ -125,9 +131,11 @@ const ViewProdottoModal = ({ show, handleClose, prodottoId }) => {
 
               <hr />
 
-              <h5 className="mb-3 fs-3">Vendite</h5>
+              <h5 id="verde" className="mb-3 fs-3">
+                Vendite
+              </h5>
               <Row className="mb-3">
-                <Col md={4} className="fw-bold">
+                <Col id="verde" md={4} className="fw-bold">
                   Numero di vendite:
                 </Col>
                 <Col md={8}>
@@ -138,7 +146,7 @@ const ViewProdottoModal = ({ show, handleClose, prodottoId }) => {
                   ) : (
                     <Badge
                       bg={null}
-                      style={{ backgroundColor: "purple", color: "white" }}
+                      style={{ backgroundColor: "red", color: "white" }}
                     >
                       Nessuna vendita per questo prodotto
                     </Badge>
@@ -148,11 +156,13 @@ const ViewProdottoModal = ({ show, handleClose, prodottoId }) => {
             </Card.Body>
           </Card>
         ) : (
-          <div className="text-center">Nessun dettaglio disponibile</div>
+          <div id="verde" className="text-center">
+            Nessun dettaglio disponibile
+          </div>
         )}
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="primary" onClick={handleClose} className="px-4">
+        <Button variant="success" onClick={handleClose} className="px-4">
           <i className="bi bi-x-circle me-1"></i>
           Chiudi
         </Button>

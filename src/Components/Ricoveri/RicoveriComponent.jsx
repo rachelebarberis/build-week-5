@@ -170,7 +170,8 @@ const RicoveriComponent = () => {
       <div className="d-flex justify-content-between mb-3">
         <div>
           <Button
-            variant="outline-primary"
+            id="addbtn"
+            variant="outline-secondary"
             className="me-2"
             onClick={() => setShowSearch(!showSearch)}
           >
@@ -187,8 +188,12 @@ const RicoveriComponent = () => {
             <i className="bi bi-arrow-repeat me-1"></i> Tutti
           </Button>
         </div>
-        <Button variant="outline-primary" onClick={() => toggleModal("create")}>
-          <i className="bi bi-plus"></i> Nuovo Ricovero
+        <Button
+          id="addbtn"
+          variant="outline-secondary"
+          onClick={() => toggleModal("create")}
+        >
+          <i id="verde" className="bi bi-plus"></i> Nuovo Ricovero
         </Button>
       </div>
 
@@ -199,7 +204,7 @@ const RicoveriComponent = () => {
               <Row>
                 <Col md={6}>
                   <Form.Group className="mb-3">
-                    <Form.Label>Nome Puppy</Form.Label>
+                    <Form.Label id="verde">Nome Puppy</Form.Label>
                     <Form.Control
                       type="text"
                       name="puppyNome"
@@ -220,7 +225,7 @@ const RicoveriComponent = () => {
                   >
                     Reset
                   </Button>
-                  <Button variant="primary" type="submit">
+                  <Button variant="success" type="submit">
                     Cerca
                   </Button>
                 </Col>
@@ -272,7 +277,7 @@ const RicoveriComponent = () => {
                     {formatDate(ricovero.dataFineRicovero) || (
                       <Badge
                         bg={null}
-                        style={{ backgroundColor: "purple", color: "white" }}
+                        style={{ backgroundColor: "white", color: "green" }}
                       >
                         Ancora in Ricovero
                       </Badge>
@@ -281,27 +286,30 @@ const RicoveriComponent = () => {
 
                   <td className="text-center">
                     <Button
-                      variant="outline-secondary"
+                      variant="outline-muted"
                       size="sm"
                       className="me-2"
                       onClick={() => toggleModal("update", ricovero)}
                     >
-                      <i className="bi bi-pencil"></i>
+                      <i id="verde" className="bi bi-pencil"></i>
                     </Button>
                     <Button
-                      variant="outline-secondary"
+                      variant="outline-muted"
                       size="sm"
                       className="me-2"
                       onClick={() => toggleModal("delete", ricovero)}
                     >
-                      <i className="bi bi-trash"></i>
+                      <i id="verde" className="bi bi-trash"></i>
                     </Button>
                     <Button
-                      variant="outline-secondary"
+                      variant="outline-muted"
                       size="sm"
                       onClick={() => toggleModal("view", ricovero)}
                     >
-                      <i className="bi bi-info-circle"></i>
+                      <i
+                        id="verde"
+                        className="bi bi-info-circle pe-sm-2 pe-md-0"
+                      ></i>
                     </Button>
                   </td>
                 </tr>

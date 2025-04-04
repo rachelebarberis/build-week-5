@@ -101,14 +101,19 @@ const ElencoPuppy = () => {
       <div className="d-flex justify-content-between mb-3">
         <div>
           <Button
-            variant="outline-primary"
+            id="addbtn"
+            variant="outline-secondary"
             className="me-2"
             onClick={() => setShowSearch(!showSearch)}
           >
             <i className="bi bi-search me-1"></i> Ricerca
           </Button>
         </div>
-        <Button variant="outline-primary" onClick={() => toggleModal("create")}>
+        <Button
+          id="addbtn"
+          variant="outline-secondary"
+          onClick={() => toggleModal("create")}
+        >
           <i className="bi bi-plus"></i> Nuovo Puppy
         </Button>
       </div>
@@ -191,27 +196,30 @@ const ElencoPuppy = () => {
                 <td>{puppy.dataNascita}</td>
                 <td className="text-center">
                   <Button
-                    variant="outline-secondary"
+                    variant="outline-muted"
                     size="sm"
                     className="me-2"
                     onClick={() => toggleModal("update", puppy)}
                   >
-                    <i className="bi bi-pencil"></i>
+                    <i id="verde" className="bi bi-pencil"></i>
                   </Button>
                   <Button
-                    variant="outline-secondary"
+                    variant="outline-muted"
                     size="sm"
                     className="me-2"
                     onClick={() => toggleModal("delete", puppy)}
                   >
-                    <i className="bi bi-trash"></i>
+                    <i id="verde" className="bi bi-trash"></i>
                   </Button>
                   <Button
-                    variant="outline-secondary"
+                    variant="outline-muted"
                     size="sm"
                     onClick={() => toggleModal("view", puppy)}
                   >
-                    <i className="bi bi-info-circle"></i>
+                    <i
+                      id="verde"
+                      className="bi bi-info-circle pe-sm-2 pe-md-0"
+                    ></i>
                   </Button>
                 </td>
               </tr>

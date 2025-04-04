@@ -135,7 +135,7 @@ const UpdateProdottoModal = ({
         style={{ borderBottom: "2px solid #dee2e6" }}
       >
         <div className="w-100 text-end">
-          <Modal.Title>Modifica Prodotto</Modal.Title>
+          <Modal.Title id="verde">Modifica Prodotto</Modal.Title>
         </div>
       </Modal.Header>
 
@@ -157,10 +157,14 @@ const UpdateProdottoModal = ({
           <Form onSubmit={handleSubmit}>
             {prodottoInfo && (
               <div className="mb-4 p-3 bg-light rounded border">
-                <h6 className="mb-1">Prodotto:</h6>
-                <div className="fs-5 fw-bold">{prodottoInfo.nome}</div>
+                <h6 className="mb-1" id="verde">
+                  Prodotto:
+                </h6>
+                <div id="verde" className="fs-5 fw-bold">
+                  {prodottoInfo.nome}
+                </div>
                 {prodottoInfo.fornitore && (
-                  <div className="small text-muted">
+                  <div id="verde" className="small text-muted">
                     Fornitore: {prodottoInfo.fornitore}
                   </div>
                 )}
@@ -168,8 +172,8 @@ const UpdateProdottoModal = ({
             )}
 
             <Form.Group className="mb-4">
-              <Form.Label className="fw-semibold">
-                <i className="bi bi-tag me-2"></i>
+              <Form.Label id="verde" className="fw-semibold">
+                <i id="verde" className="bi bi-tag me-2"></i>
                 Nome Prodotto
               </Form.Label>
               <Form.Control
@@ -183,8 +187,8 @@ const UpdateProdottoModal = ({
             </Form.Group>
 
             <Form.Group className="mb-4">
-              <Form.Label className="fw-semibold">
-                <i className="bi bi-building me-2"></i>
+              <Form.Label id="verde" className="fw-semibold">
+                <i id="verde" className="bi bi-building me-2"></i>
                 Fornitore
               </Form.Label>
               {fetchingFornitori ? (
@@ -212,8 +216,8 @@ const UpdateProdottoModal = ({
             <Row>
               <Col md={6}>
                 <Form.Group className="mb-4">
-                  <Form.Label className="fw-semibold">
-                    <i className="bi bi-archive me-2"></i>
+                  <Form.Label id="verde" className="fw-semibold">
+                    <i id="verde" className="bi bi-archive me-2"></i>
                     ID Armadietto
                   </Form.Label>
                   <Form.Control
@@ -229,8 +233,8 @@ const UpdateProdottoModal = ({
               </Col>
               <Col md={6}>
                 <Form.Group className="mb-4">
-                  <Form.Label className="fw-semibold">
-                    <i className="bi bi-inbox me-2"></i>
+                  <Form.Label id="verde" className="fw-semibold">
+                    <i id="verde" className="bi bi-inbox me-2"></i>
                     ID Cassetto
                   </Form.Label>
                   <Form.Control
@@ -247,8 +251,8 @@ const UpdateProdottoModal = ({
             </Row>
 
             <Form.Group className="mb-4">
-              <Form.Label className="fw-semibold">
-                <i className="bi bi-card-text me-2"></i>
+              <Form.Label id="verde" className="fw-semibold">
+                <i id="verde" className="bi bi-card-text me-2"></i>
                 Usi Prodotto
               </Form.Label>
               <Form.Control
@@ -272,7 +276,7 @@ const UpdateProdottoModal = ({
                 Annulla
               </Button>
               <Button
-                variant="primary"
+                variant="success"
                 type="submit"
                 disabled={loading}
                 className="px-4"

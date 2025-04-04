@@ -35,7 +35,7 @@ const DeleteProdottoModal = ({
         style={{ borderBottom: "2px solid #dee2e6" }}
       >
         <div className="w-100 text-end">
-          <Modal.Title>Conferma Eliminazione</Modal.Title>
+          <Modal.Title id="verde">Conferma Eliminazione</Modal.Title>
         </div>
       </Modal.Header>
 
@@ -48,23 +48,24 @@ const DeleteProdottoModal = ({
         )}
 
         <div className="text-center mb-4">
-          <div className="display-1 text-danger mb-3">
-            <i className="bi bi-trash"></i>
+          <div className="display-1  mb-3">
+            <i id="verde" className="bi bi-trash"></i>
           </div>
-          <h5>Sei sicuro di voler eliminare questo prodotto?</h5>
+          <h5 id="verde">Sei sicuro di voler eliminare questo prodotto?</h5>
         </div>
 
         <div className="mb-4 p-3 bg-light rounded border">
           <div className="mb-2">
-            <strong>Nome:</strong> {prodottoInfo?.nome || "Non specificato"}
+            <strong id="verde">Nome:</strong>{" "}
+            {prodottoInfo?.nome || "Non specificato"}
           </div>
           <div className="mb-2">
-            <strong>Usi Prodotto:</strong>{" "}
+            <strong id="verde">Usi Prodotto:</strong>{" "}
             {prodottoInfo?.usiProdotto || "Non specificato"}
           </div>
           {prodottoInfo?.fornitore && (
             <div className="mb-2">
-              <strong>Fornitore:</strong>{" "}
+              <strong id="verde">Fornitore:</strong>{" "}
               {prodottoInfo.fornitore.nome || "Non specificato"}
             </div>
           )}
@@ -72,8 +73,8 @@ const DeleteProdottoModal = ({
 
         <Alert variant="warning">
           <i className="bi bi-exclamation-triangle-fill me-2"></i>
-          Questa azione non può essere annullata. Tutti i dati relativi a questo
-          prodotto verranno eliminati permanentemente.
+          Tutti i dati relativi a questo prodotto verranno eliminati
+          permanentemente.
         </Alert>
       </Modal.Body>
 

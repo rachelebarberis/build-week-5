@@ -41,7 +41,7 @@ const DeleteRicoveroModal = ({
         style={{ borderBottom: "2px solid #dee2e6" }}
       >
         <div className="w-100 text-end">
-          <Modal.Title>Conferma Eliminazione</Modal.Title>
+          <Modal.Title id="verde">Conferma Eliminazione</Modal.Title>
         </div>
       </Modal.Header>
 
@@ -54,24 +54,24 @@ const DeleteRicoveroModal = ({
         )}
 
         <div className="text-center mb-4">
-          <div className="display-1 text-danger mb-3">
-            <i className="bi bi-trash"></i>
+          <div className="display-1  mb-3">
+            <i id="verde" className="bi bi-trash"></i>
           </div>
-          <h5>Sei sicuro di voler eliminare questo ricovero?</h5>
+          <h5 id="verde">Sei sicuro di voler eliminare questo ricovero?</h5>
         </div>
 
         <div className="mb-4 p-3 bg-light rounded border">
           <div className="mb-2">
-            <strong>Puppy:</strong>{" "}
+            <strong id="verde">Puppy:</strong>{" "}
             {ricoveroInfo?.puppyNome || "Non specificato"}
           </div>
           <div className="mb-2">
-            <strong>Data inizio:</strong>{" "}
+            <strong id="verde">Data inizio:</strong>{" "}
             {formatDate(ricoveroInfo?.dataInizioRicovero)}
           </div>
           {ricoveroInfo?.dataFineRicovero && (
             <div className="mb-2">
-              <strong>Data fine:</strong>{" "}
+              <strong id="verde">Data fine:</strong>{" "}
               {formatDate(ricoveroInfo?.dataFineRicovero)}
             </div>
           )}
@@ -79,8 +79,8 @@ const DeleteRicoveroModal = ({
 
         <Alert variant="warning">
           <i className="bi bi-exclamation-triangle-fill me-2"></i>
-          Questa azione non può essere annullata. Tutti i dati relativi a questo
-          ricovero verranno eliminati permanentemente.
+          Tutti i dati relativi a questo ricovero verranno eliminati
+          permanentemente.
         </Alert>
       </Modal.Body>
 

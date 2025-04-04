@@ -44,7 +44,6 @@ const UpdatePuppyModal = ({ show, handleClose, puppy, onPuppyUpdated }) => {
       microchipPresente: microchipPresente,
     };
 
-    // Aggiunge 'numeroMicrochip' e 'clienteId' solo se presente
     if (numeroMicrochip) {
       updatedPuppy.numeroMicrochip = numeroMicrochip;
     }
@@ -74,12 +73,12 @@ const UpdatePuppyModal = ({ show, handleClose, puppy, onPuppyUpdated }) => {
   return (
     <Modal show={show} onHide={handleClose} centered>
       <Modal.Header closeButton>
-        <Modal.Title>Modifica Puppy</Modal.Title>
+        <Modal.Title id="verde">Modifica Puppy</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Form onSubmit={handleSubmit}>
           <Form.Group className="mb-3">
-            <Form.Label>Nome</Form.Label>
+            <Form.Label id="verde">Nome</Form.Label>
             <Form.Control
               type="text"
               value={nome}
@@ -89,7 +88,7 @@ const UpdatePuppyModal = ({ show, handleClose, puppy, onPuppyUpdated }) => {
           </Form.Group>
 
           <Form.Group className="mb-3">
-            <Form.Label>Tipologia</Form.Label>
+            <Form.Label id="verde">Razza</Form.Label>
             <Form.Control
               type="text"
               value={tipologia}
@@ -99,7 +98,7 @@ const UpdatePuppyModal = ({ show, handleClose, puppy, onPuppyUpdated }) => {
           </Form.Group>
 
           <Form.Group className="mb-3">
-            <Form.Label>Colore Mantello</Form.Label>
+            <Form.Label id="verde">Colore Mantello</Form.Label>
             <Form.Control
               type="text"
               value={coloreMantello}
@@ -109,7 +108,7 @@ const UpdatePuppyModal = ({ show, handleClose, puppy, onPuppyUpdated }) => {
           </Form.Group>
 
           <Form.Group className="mb-3">
-            <Form.Label>Data di Nascita</Form.Label>
+            <Form.Label id="verde">Data di Nascita</Form.Label>
             <Form.Control
               type="date"
               value={dataNascita}
@@ -119,7 +118,7 @@ const UpdatePuppyModal = ({ show, handleClose, puppy, onPuppyUpdated }) => {
           </Form.Group>
 
           <Form.Group className="mb-3">
-            <Form.Label>Microchip Presente</Form.Label>
+            <Form.Label id="verde">Microchip Presente</Form.Label>
             <Form.Check
               type="checkbox"
               checked={microchipPresente}
@@ -129,7 +128,7 @@ const UpdatePuppyModal = ({ show, handleClose, puppy, onPuppyUpdated }) => {
 
           {microchipPresente && (
             <Form.Group className="mb-3">
-              <Form.Label>Numero Microchip</Form.Label>
+              <Form.Label id="verde">Numero Microchip</Form.Label>
               <Form.Control
                 type="text"
                 value={numeroMicrochip}
@@ -139,7 +138,7 @@ const UpdatePuppyModal = ({ show, handleClose, puppy, onPuppyUpdated }) => {
           )}
 
           <Form.Group className="mb-3">
-            <Form.Label>ID Cliente (opzionale)</Form.Label>
+            <Form.Label id="verde">ID Cliente (opzionale)</Form.Label>
             <Form.Control
               type="text"
               value={clienteId}
@@ -151,7 +150,7 @@ const UpdatePuppyModal = ({ show, handleClose, puppy, onPuppyUpdated }) => {
             <Button variant="secondary" onClick={handleClose} className="me-2">
               Annulla
             </Button>
-            <Button variant="primary" type="submit">
+            <Button variant="success" type="submit">
               Aggiorna Puppy
             </Button>
           </div>

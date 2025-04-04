@@ -49,12 +49,14 @@ const CreateVisitaModal = ({ show, handleClose, onVisitaCreated }) => {
   return (
     <Modal show={show} onHide={handleClose} centered backdrop="static">
       <Modal.Header closeButton className="bg-light">
-        <Modal.Title className="text-center w-100">Nuova Visita</Modal.Title>
+        <Modal.Title className="text-center" id="verde">
+          Nuova Visita
+        </Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Form onSubmit={handleSubmit}>
           <Form.Group className="mb-3">
-            <Form.Label>Puppy</Form.Label>
+            <Form.Label id="verde">Puppy</Form.Label>
             <Form.Select
               name="puppyId"
               value={formData.puppyId}
@@ -72,7 +74,7 @@ const CreateVisitaModal = ({ show, handleClose, onVisitaCreated }) => {
           <Row>
             <Col md={6}>
               <Form.Group className="mb-3">
-                <Form.Label>Data Visita</Form.Label>
+                <Form.Label id="verde">Data Visita</Form.Label>
                 <Form.Control
                   type="date"
                   name="dataVisita"
@@ -84,7 +86,7 @@ const CreateVisitaModal = ({ show, handleClose, onVisitaCreated }) => {
             </Col>
           </Row>
           <Form.Group className="mb-3">
-            <Form.Label>Obiettivo Esame</Form.Label>
+            <Form.Label id="verde">Obiettivo Esame</Form.Label>
             <Form.Control
               type="text"
               name="obiettivoEsame"
@@ -94,7 +96,7 @@ const CreateVisitaModal = ({ show, handleClose, onVisitaCreated }) => {
             />
           </Form.Group>
           <Form.Group className="mb-3">
-            <Form.Label>Descrizione Cura</Form.Label>
+            <Form.Label id="verde">Descrizione Cura</Form.Label>
             <Form.Control
               as="textarea"
               name="descrizioneCura"
@@ -111,7 +113,7 @@ const CreateVisitaModal = ({ show, handleClose, onVisitaCreated }) => {
             >
               Annulla
             </Button>
-            <Button variant="primary" type="submit">
+            <Button variant="success" type="submit">
               Salva
             </Button>
           </div>

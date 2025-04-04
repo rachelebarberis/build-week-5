@@ -101,7 +101,7 @@ const CreateProdottoModal = ({ show, handleClose, onProdottoCreated }) => {
         style={{ borderBottom: "2px solid #dee2e6" }}
       >
         <div className="w-100 text-center">
-          <Modal.Title>Nuovo Prodotto</Modal.Title>
+          <Modal.Title id="verde"> Nuovo Prodotto</Modal.Title>
         </div>
       </Modal.Header>
 
@@ -115,8 +115,8 @@ const CreateProdottoModal = ({ show, handleClose, onProdottoCreated }) => {
 
         <Form onSubmit={handleSubmit}>
           <Form.Group className="mb-4">
-            <Form.Label className="fw-semibold">
-              <i className="bi bi-tag me-2"></i>
+            <Form.Label id="verde" className="fw-semibold">
+              <i id="verde" className="bi bi-tag me-2"></i>
               Nome Prodotto
             </Form.Label>
             <Form.Control
@@ -131,8 +131,8 @@ const CreateProdottoModal = ({ show, handleClose, onProdottoCreated }) => {
           </Form.Group>
 
           <Form.Group className="mb-4">
-            <Form.Label className="fw-semibold">
-              <i className="bi bi-building me-2"></i>
+            <Form.Label id="verde" className="fw-semibold">
+              <i id="verde" className="bi bi-building me-2"></i>
               Fornitore
             </Form.Label>
             {fetchingFornitori ? (
@@ -160,8 +160,8 @@ const CreateProdottoModal = ({ show, handleClose, onProdottoCreated }) => {
           <Row>
             <Col md={6}>
               <Form.Group className="mb-4">
-                <Form.Label className="fw-semibold">
-                  <i className="bi bi-archive me-2"></i>
+                <Form.Label id="verde" className="fw-semibold">
+                  <i id="verde" className="bi bi-archive me-2"></i>
                   ID Armadietto
                 </Form.Label>
                 <Form.Control
@@ -177,8 +177,8 @@ const CreateProdottoModal = ({ show, handleClose, onProdottoCreated }) => {
             </Col>
             <Col md={6}>
               <Form.Group className="mb-4">
-                <Form.Label className="fw-semibold">
-                  <i className="bi bi-inbox me-2"></i>
+                <Form.Label id="verde" className="fw-semibold">
+                  <i id="verde" className="bi bi-inbox me-2"></i>
                   ID Cassetto
                 </Form.Label>
                 <Form.Control
@@ -195,8 +195,8 @@ const CreateProdottoModal = ({ show, handleClose, onProdottoCreated }) => {
           </Row>
 
           <Form.Group className="mb-4">
-            <Form.Label className="fw-semibold">
-              <i className="bi bi-card-text me-2"></i>
+            <Form.Label id="verde" className="fw-semibold">
+              <i id="verde" className="bi bi-card-text me-2"></i>
               Usi Prodotto
             </Form.Label>
             <Form.Control
@@ -221,7 +221,7 @@ const CreateProdottoModal = ({ show, handleClose, onProdottoCreated }) => {
               Annulla
             </Button>
             <Button
-              variant="primary"
+              variant="success"
               type="submit"
               disabled={loading}
               className="px-4"

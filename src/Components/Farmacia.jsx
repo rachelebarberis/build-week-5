@@ -447,7 +447,8 @@ const Farmacia = () => {
 
           <div className="d-flex justify-content-end mb-3">
             <Button
-              variant="outline-primary"
+              id="addbtn"
+              variant="outline-secondary"
               className="btn btn-sm border border-2 rounded-1 me-2"
               onClick={() => toggleModal("create")}
             >
@@ -493,39 +494,40 @@ const Farmacia = () => {
                     <tr key={prodotto.id}>
                       <td>{prodotto.nome}</td>
                       <td>{prodotto.usiProdotto || "Non specificato"}</td>
-                      <td>{prodotto.cassetto?.armadiettoId || "N/A"}</td>
-                      <td>{prodotto.cassetto?.cassettoId || "N/A"}</td>
+                      <td className="text-center">
+                        {prodotto.cassetto?.armadiettoId || "N/A"}
+                      </td>
+                      <td className="text-center">
+                        {prodotto.cassetto?.cassettoId || "N/A"}
+                      </td>
                       <td>
                         <Button
-                          variant="outline-secondary"
+                          variant="outline-muted"
                           size="sm"
-                          className="me-2"
                           onClick={() => toggleModal("update", prodotto)}
                         >
-                          <i className="bi bi-pencil"></i>
+                          <i id="verde" className="bi bi-pencil"></i>
                         </Button>
                         <Button
-                          variant="outline-secondary"
+                          variant="outline-muted"
                           size="sm"
-                          className="me-2"
                           onClick={() => toggleModal("delete", prodotto)}
                         >
-                          <i className="bi bi-trash"></i>
+                          <i id="verde" className="bi bi-trash"></i>
                         </Button>
                         <Button
-                          variant="outline-secondary"
+                          variant="outline-muted"
                           size="sm"
-                          className="me-2"
                           onClick={() => toggleModal("view", prodotto)}
                         >
-                          <i className="bi bi-info-circle"></i>
+                          <i id="verde" className="bi bi-info-circle"></i>
                         </Button>
                         <Button
-                          variant="outline-success"
+                          variant="outline-muted"
                           size="sm"
                           onClick={() => toggleModal("vendita", prodotto)}
                         >
-                          <i className="bi bi-cart"></i>
+                          <i id="verde" className="bi bi-cart"></i>
                         </Button>
                       </td>
                     </tr>
@@ -655,6 +657,7 @@ const Farmacia = () => {
             </Col>
           </Row>
         </Tab>
+
         <Tab eventKey="vendite" title="Vendite">
           <h6 className="text-center pt-2">Registro Vendite</h6>
 
@@ -667,8 +670,8 @@ const Farmacia = () => {
                   value={numeroRicetta}
                   onChange={(e) => setNumeroRicetta(e.target.value)}
                 />
-                <Button type="submit" variant="outline-secondary">
-                  <i className="bi bi-search"></i>
+                <Button id="addbtn" type="submit" variant="outline-secondary">
+                  <i id="verde" className="bi bi-search"></i>
                 </Button>
               </InputGroup>
               <Button
@@ -681,10 +684,11 @@ const Farmacia = () => {
             </Form>
 
             <Button
-              variant="outline-primary"
+              id="addbtn"
+              variant="outline-secondary"
               onClick={() => toggleModal("vendita")}
             >
-              <i className="bi bi-plus"></i> Nuova Vendita
+              <i id="verde" className="bi bi-plus"></i> Nuova Vendita
             </Button>
           </div>
 

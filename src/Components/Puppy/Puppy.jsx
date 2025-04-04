@@ -12,6 +12,7 @@ const Puppy = () => {
 
   useEffect(() => {
     dispatch(fetchPuppies());
+    console.log(filteredPuppy);
   }, [dispatch]);
 
   const handleSearch = (e) => {
@@ -37,7 +38,7 @@ const Puppy = () => {
 
       {/* Form di ricerca */}
       <Form onSubmit={handleSearch}>
-        <Row className="justify-content-end pt-2">
+        <Row className="justify-content-center pt-2">
           <Col xs="auto" className="p-0">
             <Form.Control
               type="text"
@@ -49,14 +50,19 @@ const Puppy = () => {
             />
           </Col>
           <Col xs="auto" className="p-0 ps-1">
-            <Button type="submit" className="btn-secondary">
-              <i className="bi bi-search-heart"></i>
+            <Button
+              id="addbtn"
+              type="submit"
+              className="bg-transparent"
+              variant="outline-white"
+            >
+              <i id="verde" className="bi bi-search-heart"></i>
             </Button>
           </Col>
         </Row>
       </Form>
 
-      <div className="pt-3">
+      <div className="pt-3 text-center">
         <p className="fw-semibold">Ecco i risultati della tua ricerca!</p>
 
         {loading && <p>🔍 Ricerca in corso...</p>}
@@ -82,18 +88,17 @@ const Puppy = () => {
               </p>
               <p>
                 <strong>Proprietario:</strong>{" "}
-                {filteredPuppy.owner?.firstName || "Nessuno"}{" "}
-                {filteredPuppy.owner?.lastName || ""}
+                {filteredPuppy.cliente?.nome || "Nessuno"}{" "}
+                {filteredPuppy.cliente?.cognome || ""}
               </p>
             </Card.Body>
           </Card>
         ) : (
           <>
-            {/* Mostra tutti i puppy senza owner se non è stata fatta una ricerca */}
-            {puppies.filter((puppy) => !puppy.owner || !puppy.owner.userId)
+            {puppies.filter((puppy) => !puppy.cliente || !puppy.clienteId)
               .length > 0 ? (
               puppies
-                .filter((puppy) => !puppy.owner || !puppy.owner.userId)
+                .filter((puppy) => !puppy.cliente || !puppy.clienteId)
                 .map((puppy) => (
                   <Card key={puppy.puppyId} className="mt-3">
                     <Card.Body>
