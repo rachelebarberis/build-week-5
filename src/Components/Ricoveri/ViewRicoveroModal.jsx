@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
-import { Modal, Button, Spinner, Alert, Row, Col, Card } from "react-bootstrap";
-import { getRicoveroById } from "../../Redux/Actions/ricoveriActions";
+import React, { useState, useEffect } from 'react';
+import { Modal, Button, Spinner, Alert, Row, Col, Card } from 'react-bootstrap';
+import { getRicoveroById } from '../../Redux/Actions/ricoveriActions';
 
 const ViewRicoveroModal = ({ show, handleClose, ricoveroId }) => {
   const [ricovero, setRicovero] = useState(null);
@@ -20,83 +20,83 @@ const ViewRicoveroModal = ({ show, handleClose, ricoveroId }) => {
       setRicovero(data);
       setError(null);
     } catch (err) {
-      console.error("Error fetching ricovero details:", err);
-      setError("Errore nel caricamento dei dettagli del ricovero");
+      console.error('Error fetching ricovero details:', err);
+      setError('Errore nel caricamento dei dettagli del ricovero');
     } finally {
       setLoading(false);
     }
   };
 
   const formatDate = (dateString) => {
-    if (!dateString) return "Non specificata";
+    if (!dateString) return 'Non specificata';
     const date = new Date(dateString);
-    return date.toLocaleDateString("it-IT");
+    return date.toLocaleDateString('it-IT');
   };
 
   return (
-    <Modal show={show} onHide={handleClose} centered backdrop="static">
+    <Modal show={show} onHide={handleClose} centered backdrop='static'>
       <Modal.Header
         closeButton
-        className="bg-light"
-        style={{ borderBottom: "2px solid #dee2e6" }}
+        className='bg-light'
+        style={{ borderBottom: '2px solid #dee2e6' }}
       >
-        <div className="w-100 text-end">
-          <Modal.Title id="verde">Dettagli Ricovero</Modal.Title>
+        <div className='w-100 text-end'>
+          <Modal.Title id='verde'>Dettagli Ricovero</Modal.Title>
         </div>
       </Modal.Header>
 
-      <Modal.Body className="px-4 py-4">
+      <Modal.Body className='px-4 py-4'>
         {error && (
-          <Alert variant="danger" className="mb-4">
-            <i className="bi bi-exclamation-triangle-fill me-2"></i>
+          <Alert variant='danger' className='mb-4'>
+            <i className='bi bi-exclamation-triangle-fill me-2'></i>
             {error}
           </Alert>
         )}
 
         {loading ? (
-          <div className="text-center my-4">
-            <Spinner animation="border" role="status">
-              <span className="visually-hidden">Caricamento...</span>
+          <div className='text-center my-4'>
+            <Spinner animation='border' role='status'>
+              <span className='visually-hidden'>Caricamento...</span>
             </Spinner>
           </div>
         ) : ricovero ? (
           <>
-            <div className="mb-4 p-3 bg-light rounded border">
-              <h6 id="verde" className="mb-1">
+            <div className='mb-4 p-3 bg-light rounded border'>
+              <h6 id='verde' className='mb-1'>
                 Puppy:
               </h6>
-              <div className="fs-5 fw-bold">
-                {ricovero.puppyNome || "Puppy"}
-                <span className="ms-2 badge bg-secondary"></span>
+              <div className='fs-5 fw-bold'>
+                {ricovero.puppyNome || 'Puppy'}
+                <span className='ms-2 badge bg-secondary'></span>
               </div>
             </div>
 
-            <Row className="mb-4">
+            <Row className='mb-4'>
               <Col md={6}>
-                <Card className="shadow-sm h-100">
-                  <Card.Header className="bg-light" id="verde">
-                    <i id="verde" className="bi bi-calendar-plus me-2"></i>
+                <Card className='shadow-sm h-100'>
+                  <Card.Header className='bg-light' id='verde'>
+                    <i id='verde' className='bi bi-calendar-plus me-2'></i>
                     Data Inizio Ricovero
                   </Card.Header>
                   <Card.Body>
-                    <Card.Text className="fs-5">
+                    <Card.Text className='fs-5'>
                       {formatDate(ricovero.dataInizioRicovero)}
                     </Card.Text>
                   </Card.Body>
                 </Card>
               </Col>
               <Col md={6}>
-                <Card className="shadow-sm h-100">
-                  <Card.Header id="verde" className="bg-light">
-                    <i id="verde" className="bi bi-calendar-check me-2"></i>
+                <Card className='shadow-sm h-100'>
+                  <Card.Header id='verde' className='bg-light'>
+                    <i id='verde' className='bi bi-calendar-check me-2'></i>
                     Data Fine Ricovero
                   </Card.Header>
                   <Card.Body>
-                    <Card.Text className="fs-5">
+                    <Card.Text className='fs-5 d-flex justify-content-center'>
                       {ricovero.dataFineRicovero ? (
                         formatDate(ricovero.dataFineRicovero)
                       ) : (
-                        <span className="badge bg-white text-success px-3 py-2">
+                        <span className='badge bg-white text-success px-3 py-2'>
                           Ancora in ricovero
                         </span>
                       )}
@@ -106,33 +106,33 @@ const ViewRicoveroModal = ({ show, handleClose, ricoveroId }) => {
               </Col>
             </Row>
 
-            <Card className="shadow-sm mb-4">
-              <Card.Header className="bg-light" id="verde">
-                <i id="verde" className="bi bi-card-text me-2"></i>
+            <Card className='shadow-sm mb-4'>
+              <Card.Header className='bg-light' id='verde'>
+                <i id='verde' className='bi bi-card-text me-2'></i>
                 Descrizione
               </Card.Header>
               <Card.Body>
-                <Card.Text style={{ whiteSpace: "pre-wrap" }}>
-                  {ricovero.descrizione || "Nessuna descrizione disponibile"}
+                <Card.Text style={{ whiteSpace: 'pre-wrap' }}>
+                  {ricovero.descrizione || 'Nessuna descrizione disponibile'}
                 </Card.Text>
               </Card.Body>
             </Card>
 
-            <div className="text-muted small text-center" id="verde">
-              <i className="bi bi-info-circle me-1" id="verde"></i>
+            <div className='text-muted small text-center' id='verde'>
+              <i className='bi bi-info-circle me-1' id='verde'></i>
               ID Ricovero: {ricovero.ricoveroId}
             </div>
           </>
         ) : (
-          <p id="verde" className="text-center text-muted">
+          <p id='verde' className='text-center text-muted'>
             Nessun dato disponibile
           </p>
         )}
       </Modal.Body>
 
-      <Modal.Footer className="border-top">
-        <Button variant="success" onClick={handleClose} className="px-4">
-          <i className="bi bi-x-circle me-1"></i>
+      <Modal.Footer className='border-top'>
+        <Button variant='success' onClick={handleClose} className='px-4'>
+          <i className='bi bi-x-circle me-1'></i>
           Chiudi
         </Button>
       </Modal.Footer>
