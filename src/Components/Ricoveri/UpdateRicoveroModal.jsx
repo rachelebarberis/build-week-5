@@ -95,8 +95,8 @@ const UpdateRicoveroModal = ({
         className="bg-light"
         style={{ borderBottom: "2px solid #dee2e6" }}
       >
-        <div className="w-100 text-end">
-          <Modal.Title>Modifica Ricovero</Modal.Title>
+        <div className="w-100">
+          <Modal.Title id="verde">Modifica Ricovero</Modal.Title>
         </div>
       </Modal.Header>
 
@@ -118,16 +118,17 @@ const UpdateRicoveroModal = ({
           <Form onSubmit={handleSubmit}>
             {puppyInfo && (
               <div className="mb-4 p-3 bg-light rounded border">
-                <h6 className="mb-1">Puppy:</h6>
-                <div className="fs-5 fw-bold">{puppyInfo.nome}</div>
+                <div id="verde" className="fs-5 fw-bold text-center">
+                  {puppyInfo.nome}
+                </div>
               </div>
             )}
 
             <Row>
               <Col md={6}>
                 <Form.Group className="mb-4">
-                  <Form.Label className="fw-semibold">
-                    <i className="bi bi-calendar-plus me-2"></i>
+                  <Form.Label id="verde" className="fw-semibold">
+                    <i id="verde" className="bi bi-calendar-plus me-2"></i>
                     Data Inizio Ricovero
                   </Form.Label>
                   <Form.Control
@@ -143,8 +144,8 @@ const UpdateRicoveroModal = ({
               </Col>
               <Col md={6}>
                 <Form.Group className="mb-4">
-                  <Form.Label className="fw-semibold">
-                    <i className="bi bi-calendar-check me-2"></i>
+                  <Form.Label id="verde" className="fw-semibold">
+                    <i id="verde" className="bi bi-calendar-check me-2"></i>
                     Data Fine (opzionale)
                   </Form.Label>
                   <div className="d-flex">
@@ -172,7 +173,7 @@ const UpdateRicoveroModal = ({
             </Row>
 
             <Form.Group className="mb-4">
-              <Form.Label className="fw-semibold">
+              <Form.Label id="verde" className="fw-semibold">
                 <i className="bi bi-card-text me-2"></i>
                 Descrizione
               </Form.Label>
@@ -198,7 +199,7 @@ const UpdateRicoveroModal = ({
                 Annulla
               </Button>
               <Button
-                variant="primary"
+                variant="success"
                 type="submit"
                 disabled={loading}
                 className="px-4"

@@ -98,7 +98,7 @@ const CreateRicoveroModal = ({ show, handleClose, onRicoveroCreated }) => {
         style={{ borderBottom: "2px solid #dee2e6" }}
       >
         <div className="w-100 text-center">
-          <Modal.Title>Nuovo Ricovero</Modal.Title>
+          <Modal.Title id="verde">Nuovo Ricovero</Modal.Title>
         </div>
       </Modal.Header>
 
@@ -112,8 +112,8 @@ const CreateRicoveroModal = ({ show, handleClose, onRicoveroCreated }) => {
 
         <Form onSubmit={handleSubmit}>
           <Form.Group className="mb-4">
-            <Form.Label className="fw-semibold">
-              <i className="bi bi-tag me-2"></i>
+            <Form.Label id="verde" className="fw-semibold">
+              <i id="verde" className="bi bi-tag me-2"></i>
               Puppy
             </Form.Label>
             {fetchingPuppies ? (
@@ -142,8 +142,8 @@ const CreateRicoveroModal = ({ show, handleClose, onRicoveroCreated }) => {
           <Row>
             <Col md={6}>
               <Form.Group className="mb-4">
-                <Form.Label className="fw-semibold">
-                  <i className="bi bi-calendar-plus me-2"></i>
+                <Form.Label id="verde" className="fw-semibold">
+                  <i id="verde" className="bi bi-calendar-plus me-2"></i>
                   Data Inizio Ricovero
                 </Form.Label>
                 <Form.Control
@@ -158,8 +158,8 @@ const CreateRicoveroModal = ({ show, handleClose, onRicoveroCreated }) => {
             </Col>
             <Col md={6}>
               <Form.Group className="mb-4">
-                <Form.Label className="fw-semibold">
-                  <i className="bi bi-calendar-check me-2"></i>
+                <Form.Label id="verde" className="fw-semibold">
+                  <i id="verde" className="bi bi-calendar-check me-2"></i>
                   Data Fine (opzionale)
                 </Form.Label>
                 <Form.Control
@@ -174,8 +174,8 @@ const CreateRicoveroModal = ({ show, handleClose, onRicoveroCreated }) => {
           </Row>
 
           <Form.Group className="mb-4">
-            <Form.Label className="fw-semibold">
-              <i className="bi bi-card-text me-2"></i>
+            <Form.Label id="verde" className="fw-semibold">
+              <i id="verde" className="bi bi-card-text me-2"></i>
               Descrizione
             </Form.Label>
             <Form.Control
@@ -201,7 +201,7 @@ const CreateRicoveroModal = ({ show, handleClose, onRicoveroCreated }) => {
               Annulla
             </Button>
             <Button
-              variant="primary"
+              variant="success"
               type="submit"
               disabled={loading}
               className="px-4"
@@ -213,7 +213,7 @@ const CreateRicoveroModal = ({ show, handleClose, onRicoveroCreated }) => {
                 </>
               ) : (
                 <>
-                  <i className="bi bi-check-circle me-1"></i>
+                  <i id="verde" className="bi bi-check-circle me-1"></i>
                   Salva
                 </>
               )}

@@ -1,19 +1,19 @@
-import React, { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { updatePuppy } from '../../Redux/Actions/puppiesActions';
-import { Modal, Button, Form } from 'react-bootstrap';
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { updatePuppy } from "../../Redux/Actions/puppiesActions";
+import { Modal, Button, Form } from "react-bootstrap";
 
 const UpdatePuppyModal = ({ show, handleClose, puppy, onPuppyUpdated }) => {
   const { puppies } = useSelector((state) => state.puppies);
   const dispatch = useDispatch();
 
-  const [nome, setNome] = useState('');
-  const [tipologia, setTipologia] = useState('');
-  const [coloreMantello, setColoreMantello] = useState('');
-  const [dataNascita, setDataNascita] = useState('');
+  const [nome, setNome] = useState("");
+  const [tipologia, setTipologia] = useState("");
+  const [coloreMantello, setColoreMantello] = useState("");
+  const [dataNascita, setDataNascita] = useState("");
   const [microchipPresente, setMicrochipPresente] = useState(false);
-  const [numeroMicrochip, setNumeroMicrochip] = useState('');
-  const [clienteId, setClienteId] = useState('');
+  const [numeroMicrochip, setNumeroMicrochip] = useState("");
+  const [clienteId, setClienteId] = useState("");
 
   useEffect(() => {
     if (show && puppy) {
@@ -27,8 +27,8 @@ const UpdatePuppyModal = ({ show, handleClose, puppy, onPuppyUpdated }) => {
         setColoreMantello(foundPuppy.coloreMantello);
         setDataNascita(foundPuppy.dataNascita);
         setMicrochipPresente(foundPuppy.microchipPresente);
-        setNumeroMicrochip(foundPuppy.numeroMicrochip || '');
-        setClienteId(foundPuppy.clienteId || '');
+        setNumeroMicrochip(foundPuppy.numeroMicrochip || "");
+        setClienteId(foundPuppy.clienteId || "");
       }
     }
   }, [show, puppy?.puppyId, puppies]);
@@ -58,7 +58,7 @@ const UpdatePuppyModal = ({ show, handleClose, puppy, onPuppyUpdated }) => {
     );
 
     if (!isModified) {
-      console.log('Nessuna modifica, richiesta non inviata');
+      console.log("Nessuna modifica, richiesta non inviata");
       handleClose();
       return;
     }
@@ -74,84 +74,84 @@ const UpdatePuppyModal = ({ show, handleClose, puppy, onPuppyUpdated }) => {
   return (
     <Modal show={show} onHide={handleClose} centered>
       <Modal.Header closeButton>
-        <Modal.Title>Modifica Puppy</Modal.Title>
+        <Modal.Title id="verde">Modifica Puppy</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Form onSubmit={handleSubmit}>
-          <Form.Group className='mb-3'>
-            <Form.Label>Nome</Form.Label>
+          <Form.Group className="mb-3">
+            <Form.Label id="verde">Nome</Form.Label>
             <Form.Control
-              type='text'
+              type="text"
               value={nome}
               onChange={(e) => setNome(e.target.value)}
               required
             />
           </Form.Group>
 
-          <Form.Group className='mb-3'>
-            <Form.Label>Tipologia</Form.Label>
+          <Form.Group className="mb-3">
+            <Form.Label id="verde">Razza</Form.Label>
             <Form.Control
-              type='text'
+              type="text"
               value={tipologia}
               onChange={(e) => setTipologia(e.target.value)}
               required
             />
           </Form.Group>
 
-          <Form.Group className='mb-3'>
-            <Form.Label>Colore Mantello</Form.Label>
+          <Form.Group className="mb-3">
+            <Form.Label id="verde">Colore Mantello</Form.Label>
             <Form.Control
-              type='text'
+              type="text"
               value={coloreMantello}
               onChange={(e) => setColoreMantello(e.target.value)}
               required
             />
           </Form.Group>
 
-          <Form.Group className='mb-3'>
-            <Form.Label>Data di Nascita</Form.Label>
+          <Form.Group className="mb-3">
+            <Form.Label id="verde">Data di Nascita</Form.Label>
             <Form.Control
-              type='date'
+              type="date"
               value={dataNascita}
               onChange={(e) => setDataNascita(e.target.value)}
               required
             />
           </Form.Group>
 
-          <Form.Group className='mb-3'>
-            <Form.Label>Microchip Presente</Form.Label>
+          <Form.Group className="mb-3">
+            <Form.Label id="verde">Microchip Presente</Form.Label>
             <Form.Check
-              type='checkbox'
+              type="checkbox"
               checked={microchipPresente}
               onChange={(e) => setMicrochipPresente(e.target.checked)}
             />
           </Form.Group>
 
           {microchipPresente && (
-            <Form.Group className='mb-3'>
-              <Form.Label>Numero Microchip</Form.Label>
+            <Form.Group className="mb-3">
+              <Form.Label id="verde">Numero Microchip</Form.Label>
               <Form.Control
-                type='text'
+                type="text"
                 value={numeroMicrochip}
                 onChange={(e) => setNumeroMicrochip(e.target.value)}
               />
             </Form.Group>
           )}
 
-          <Form.Group className='mb-3'>
-            <Form.Label>ID Cliente (opzionale)</Form.Label>
+          <Form.Group className="mb-3">
+            <Form.Label id="verde">ID Cliente (opzionale)</Form.Label>
             <Form.Control
-              type='text'
+              type="text"
               value={clienteId}
               onChange={(e) => setClienteId(e.target.value)}
             />
           </Form.Group>
 
-          <div className='d-flex justify-content-end'>
-            <Button variant='secondary' onClick={handleClose} className='me-2'>
+          <div className="d-flex justify-content-end">
+            <Button variant="secondary" onClick={handleClose} className="me-2">
               Annulla
             </Button>
-            <Button variant='primary' type='submit'>
+            <Button variant="success" type="submit">
               Aggiorna Puppy
             </Button>
           </div>

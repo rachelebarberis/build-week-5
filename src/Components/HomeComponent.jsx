@@ -24,7 +24,7 @@ const HomeComponent = () => {
 
       <div className="mt-4">
         <img
-          src="/public/images/footer1.jpg"
+          src="/public/images/home.png"
           alt="Zampa"
           width="300"
           height="120"

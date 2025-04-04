@@ -95,13 +95,15 @@ const CreatePuppyModal = ({ show, handleClose, onPuppyCreated }) => {
     <Modal show={show} onHide={handleClose} centered backdrop="static">
       <Modal.Header closeButton className="bg-light">
         <div className="w-100 text-center">
-          <Modal.Title>Nuovo Puppy</Modal.Title>
+          <Modal.Title id="verde">Nuovo Puppy</Modal.Title>
         </div>
       </Modal.Header>
       <Modal.Body className="px-4 py-4">
         <Form onSubmit={handleSubmit}>
           <Form.Group className="mb-4">
-            <Form.Label className="fw-semibold">Nome</Form.Label>
+            <Form.Label id="verde" className="fw-semibold">
+              Nome
+            </Form.Label>
             <Form.Control
               type="text"
               name="nome"
@@ -112,7 +114,9 @@ const CreatePuppyModal = ({ show, handleClose, onPuppyCreated }) => {
           </Form.Group>
 
           <Form.Group className="mb-4">
-            <Form.Label className="fw-semibold">Tipologia</Form.Label>
+            <Form.Label id="verde" className="fw-semibold">
+              Razza
+            </Form.Label>
             <Form.Control
               type="text"
               name="tipologia"
@@ -123,7 +127,9 @@ const CreatePuppyModal = ({ show, handleClose, onPuppyCreated }) => {
           </Form.Group>
 
           <Form.Group className="mb-4">
-            <Form.Label className="fw-semibold">Colore Mantello</Form.Label>
+            <Form.Label id="verde" className="fw-semibold">
+              Colore Mantello
+            </Form.Label>
             <Form.Control
               type="text"
               name="coloreMantello"
@@ -134,7 +140,9 @@ const CreatePuppyModal = ({ show, handleClose, onPuppyCreated }) => {
           </Form.Group>
 
           <Form.Group className="mb-4">
-            <Form.Label className="fw-semibold">Data di Nascita</Form.Label>
+            <Form.Label id="verde" className="fw-semibold">
+              Data di Nascita
+            </Form.Label>
             <Form.Control
               type="date"
               name="dataNascita"
@@ -145,7 +153,9 @@ const CreatePuppyModal = ({ show, handleClose, onPuppyCreated }) => {
           </Form.Group>
 
           <Form.Group className="mb-4">
-            <Form.Label className="fw-semibold">Microchip Presente</Form.Label>
+            <Form.Label id="verde" className="fw-semibold">
+              Microchip Presente
+            </Form.Label>
             <Form.Check
               type="checkbox"
               name="microchipPresente"
@@ -156,7 +166,9 @@ const CreatePuppyModal = ({ show, handleClose, onPuppyCreated }) => {
 
           {formData.microchipPresente && (
             <Form.Group className="mb-4">
-              <Form.Label className="fw-semibold">Numero Microchip</Form.Label>
+              <Form.Label id="verde" className="fw-semibold">
+                Numero Microchip
+              </Form.Label>
               <Form.Control
                 type="text"
                 name="numeroMicrochip"
@@ -167,7 +179,9 @@ const CreatePuppyModal = ({ show, handleClose, onPuppyCreated }) => {
           )}
 
           <Form.Group className="mb-4">
-            <Form.Label className="fw-semibold">Proprietario</Form.Label>
+            <Form.Label id="verde" className="fw-semibold">
+              Proprietario
+            </Form.Label>
             {loading ? (
               <div className="text-center">
                 <span className="spinner-border spinner-border-sm me-2"></span>
@@ -199,7 +213,7 @@ const CreatePuppyModal = ({ show, handleClose, onPuppyCreated }) => {
             >
               Annulla
             </Button>
-            <Button variant="primary" type="submit" className="px-4">
+            <Button variant="success" type="submit" className="px-4">
               Salva
             </Button>
           </div>

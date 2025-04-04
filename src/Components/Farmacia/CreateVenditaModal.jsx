@@ -87,7 +87,7 @@ const CreateVenditaModal = ({
   return (
     <Modal show={show} onHide={handleClose} centered backdrop="static">
       <Modal.Header closeButton>
-        <Modal.Title>Registra Nuova Vendita</Modal.Title>
+        <Modal.Title id="verde">Registra Nuova Vendita</Modal.Title>
       </Modal.Header>
 
       <Form noValidate validated={validated} onSubmit={handleSubmit}>
@@ -95,7 +95,7 @@ const CreateVenditaModal = ({
           {error && <Alert variant="danger">{error}</Alert>}
 
           <Form.Group className="mb-3">
-            <Form.Label>ID Prodotto</Form.Label>
+            <Form.Label id="verde">ID Prodotto</Form.Label>
             <Form.Control
               type="number"
               name="prodottoId"
@@ -110,7 +110,7 @@ const CreateVenditaModal = ({
           </Form.Group>
 
           <Form.Group className="mb-3">
-            <Form.Label>Codice Fiscale Cliente</Form.Label>
+            <Form.Label id="verde">Codice Fiscale Cliente</Form.Label>
             <Form.Control
               type="text"
               name="customerId"
@@ -140,7 +140,7 @@ const CreateVenditaModal = ({
 
           {formData.ricettaMedica === "true" && (
             <Form.Group className="mb-3">
-              <Form.Label>Numero Ricetta Medica</Form.Label>
+              <Form.Label id="verde">Numero Ricetta Medica</Form.Label>
               <Form.Control
                 type="text"
                 name="numeroRicettaMedica"
@@ -160,7 +160,7 @@ const CreateVenditaModal = ({
           <Button variant="secondary" onClick={handleClose}>
             Annulla
           </Button>
-          <Button variant="primary" type="submit" disabled={loading}>
+          <Button variant="success" type="submit" disabled={loading}>
             {loading ? (
               <>
                 <Spinner

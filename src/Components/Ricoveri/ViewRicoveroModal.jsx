@@ -41,7 +41,7 @@ const ViewRicoveroModal = ({ show, handleClose, ricoveroId }) => {
         style={{ borderBottom: "2px solid #dee2e6" }}
       >
         <div className="w-100 text-end">
-          <Modal.Title>Dettagli Ricovero</Modal.Title>
+          <Modal.Title id="verde">Dettagli Ricovero</Modal.Title>
         </div>
       </Modal.Header>
 
@@ -62,7 +62,9 @@ const ViewRicoveroModal = ({ show, handleClose, ricoveroId }) => {
         ) : ricovero ? (
           <>
             <div className="mb-4 p-3 bg-light rounded border">
-              <h6 className="mb-1">Puppy:</h6>
+              <h6 id="verde" className="mb-1">
+                Puppy:
+              </h6>
               <div className="fs-5 fw-bold">
                 {ricovero.puppyNome || "Puppy"}
                 <span className="ms-2 badge bg-secondary"></span>
@@ -72,8 +74,8 @@ const ViewRicoveroModal = ({ show, handleClose, ricoveroId }) => {
             <Row className="mb-4">
               <Col md={6}>
                 <Card className="shadow-sm h-100">
-                  <Card.Header className="bg-light">
-                    <i className="bi bi-calendar-plus me-2"></i>
+                  <Card.Header className="bg-light" id="verde">
+                    <i id="verde" className="bi bi-calendar-plus me-2"></i>
                     Data Inizio Ricovero
                   </Card.Header>
                   <Card.Body>
@@ -85,8 +87,8 @@ const ViewRicoveroModal = ({ show, handleClose, ricoveroId }) => {
               </Col>
               <Col md={6}>
                 <Card className="shadow-sm h-100">
-                  <Card.Header className="bg-light">
-                    <i className="bi bi-calendar-check me-2"></i>
+                  <Card.Header id="verde" className="bg-light">
+                    <i id="verde" className="bi bi-calendar-check me-2"></i>
                     Data Fine Ricovero
                   </Card.Header>
                   <Card.Body>
@@ -94,7 +96,7 @@ const ViewRicoveroModal = ({ show, handleClose, ricoveroId }) => {
                       {ricovero.dataFineRicovero ? (
                         formatDate(ricovero.dataFineRicovero)
                       ) : (
-                        <span className="badge bg-purple text-white px-3 py-2">
+                        <span className="badge bg-white text-success px-3 py-2">
                           Ancora in ricovero
                         </span>
                       )}
@@ -105,8 +107,8 @@ const ViewRicoveroModal = ({ show, handleClose, ricoveroId }) => {
             </Row>
 
             <Card className="shadow-sm mb-4">
-              <Card.Header className="bg-light">
-                <i className="bi bi-card-text me-2"></i>
+              <Card.Header className="bg-light" id="verde">
+                <i id="verde" className="bi bi-card-text me-2"></i>
                 Descrizione
               </Card.Header>
               <Card.Body>
@@ -116,18 +118,20 @@ const ViewRicoveroModal = ({ show, handleClose, ricoveroId }) => {
               </Card.Body>
             </Card>
 
-            <div className="text-muted small text-center">
-              <i className="bi bi-info-circle me-1"></i>
+            <div className="text-muted small text-center" id="verde">
+              <i className="bi bi-info-circle me-1" id="verde"></i>
               ID Ricovero: {ricovero.ricoveroId}
             </div>
           </>
         ) : (
-          <p className="text-center text-muted">Nessun dato disponibile</p>
+          <p id="verde" className="text-center text-muted">
+            Nessun dato disponibile
+          </p>
         )}
       </Modal.Body>
 
       <Modal.Footer className="border-top">
-        <Button variant="primary" onClick={handleClose} className="px-4">
+        <Button variant="success" onClick={handleClose} className="px-4">
           <i className="bi bi-x-circle me-1"></i>
           Chiudi
         </Button>

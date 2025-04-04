@@ -2,9 +2,26 @@
 
 #root {
   margin: 0 auto;
-  
+  background-color: #D8E2DC;
+  color:#2A4D38;
   height: 100vh;
+  font-family: 'Poppins';
 }
+#navabar {
+  background-color: #D8E2DC;
+  color:#2A4D38;
+}
+
+
+table th, table td {
+  color:#2A4D38 !important;
+}
+#addbtn, #verde {
+  color:#2A4D38 !important;
+
+}
+
+
 
 .logo {
   height: 6em;
@@ -43,7 +60,7 @@
 }
 
 #footer {
- 
+  background-color: #D8E2DC;
   position: fixed;
   bottom: 0;
   left: 0;
@@ -64,4 +81,6 @@
   padding: 0px;
   margin: 0px;
 }
+
+
 
