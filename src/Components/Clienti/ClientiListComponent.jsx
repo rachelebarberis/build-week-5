@@ -5,10 +5,8 @@ import {
   Container,
   Row,
   Col,
-  Modal,
   Alert,
   Spinner,
-  Form,
 } from "react-bootstrap";
 import {
   fetchClienti,
@@ -16,6 +14,10 @@ import {
   updateCliente,
   deleteCliente,
 } from "../../Redux/Actions/clienteAction";
+
+import AddClienteModal from "./AddClienteModal";
+import EditClienteModal from "./EditClienteModal";
+import DeleteClienteModal from "./DeleteClienteModal";
 
 const ClientiListComponent = () => {
   const [clienti, setClienti] = useState([]);
@@ -152,8 +154,30 @@ const ClientiListComponent = () => {
     setShowDeleteModal(true);
   };
 
+  const handleCloseAddModal = () => {
+    setShowAddModal(false);
+    setValidated(false);
+    setCurrentCliente({
+      id: 0,
+      nome: "",
+      cognome: "",
+      codiceFiscale: "",
+      dataDiNascita: "",
+      indirizzo: "",
+    });
+  };
+
+  const handleCloseEditModal = () => {
+    setShowEditModal(false);
+    setValidated(false);
+  };
+
+  const handleCloseDeleteModal = () => {
+    setShowDeleteModal(false);
+  };
+
   return (
-    <Container className="mt-4">
+    <Container className="mt-4" style={{ fontFamily: "Poppins, sans-serif" }}>
       <h4 className="text-center">Gestione Clienti</h4>
       <Row className="mb-3">
         <Col className="text-end">
@@ -180,7 +204,13 @@ const ClientiListComponent = () => {
           </Spinner>
         </div>
       ) : (
-        <Table striped bordered hover responsive>
+        <Table
+          striped
+          bordered
+          hover
+          responsive
+          className="rounded-3 overflow-hidden"
+        >
           <thead>
             <tr>
               <th>ID</th>
@@ -209,7 +239,7 @@ const ClientiListComponent = () => {
                       className="me-2"
                       onClick={() => openEditModal(cliente)}
                     >
-                      <i id="verde" className="bi bi-muted"></i>
+                      <i id="verde" className="bi bi-pencil"></i>
                     </Button>
                     <Button
                       variant="outline-muted"
@@ -232,209 +262,30 @@ const ClientiListComponent = () => {
         </Table>
       )}
 
-      {/* Modal per aggiungere un cliente */}
-      <Modal show={showAddModal} onHide={() => setShowAddModal(false)}>
-        <Modal.Header closeButton>
-          <Modal.Title id="verde">Aggiungi Cliente</Modal.Title>
-        </Modal.Header>
-        <Form noValidate validated={validated} onSubmit={handleAddSubmit}>
-          <Modal.Body>
-            <Form.Group className="mb-3">
-              <Form.Label id="verde">Nome</Form.Label>
-              <Form.Control
-                type="text"
-                name="nome"
-                value={currentCliente.nome}
-                onChange={handleInputChange}
-                required
-                maxLength={100}
-              />
-              <Form.Control.Feedback type="invalid">
-                Inserisci un nome valido.
-              </Form.Control.Feedback>
-            </Form.Group>
+      <AddClienteModal
+        show={showAddModal}
+        handleClose={handleCloseAddModal}
+        handleSubmit={handleAddSubmit}
+        cliente={currentCliente}
+        handleInputChange={handleInputChange}
+        validated={validated}
+      />
 
-            <Form.Group className="mb-3">
-              <Form.Label id="verde">Cognome</Form.Label>
-              <Form.Control
-                type="text"
-                name="cognome"
-                value={currentCliente.cognome}
-                onChange={handleInputChange}
-                required
-                maxLength={100}
-              />
-              <Form.Control.Feedback type="invalid">
-                Inserisci un cognome valido.
-              </Form.Control.Feedback>
-            </Form.Group>
+      <EditClienteModal
+        show={showEditModal}
+        handleClose={handleCloseEditModal}
+        handleSubmit={handleEditSubmit}
+        cliente={currentCliente}
+        handleInputChange={handleInputChange}
+        validated={validated}
+      />
 
-            <Form.Group className="mb-3">
-              <Form.Label id="verde">Codice Fiscale</Form.Label>
-              <Form.Control
-                type="text"
-                name="codiceFiscale"
-                value={currentCliente.codiceFiscale}
-                onChange={handleInputChange}
-                required
-                minLength={16}
-                maxLength={16}
-              />
-              <Form.Control.Feedback type="invalid">
-                Inserisci un codice fiscale valido (16 caratteri).
-              </Form.Control.Feedback>
-            </Form.Group>
-
-            <Form.Group className="mb-3">
-              <Form.Label id="verde">Data di Nascita</Form.Label>
-              <Form.Control
-                type="date"
-                name="dataDiNascita"
-                value={currentCliente.dataDiNascita}
-                onChange={handleInputChange}
-                required
-              />
-              <Form.Control.Feedback type="invalid">
-                Inserisci una data di nascita valida.
-              </Form.Control.Feedback>
-            </Form.Group>
-
-            <Form.Group className="mb-3">
-              <Form.Label id="verde">Indirizzo</Form.Label>
-              <Form.Control
-                type="text"
-                name="indirizzo"
-                value={currentCliente.indirizzo}
-                onChange={handleInputChange}
-                required
-                maxLength={200}
-              />
-              <Form.Control.Feedback type="invalid">
-                Inserisci un indirizzo valido.
-              </Form.Control.Feedback>
-            </Form.Group>
-          </Modal.Body>
-          <Modal.Footer>
-            <Button variant="secondary" onClick={() => setShowAddModal(false)}>
-              Annulla
-            </Button>
-            <Button variant="success" type="submit">
-              Salva
-            </Button>
-          </Modal.Footer>
-        </Form>
-      </Modal>
-
-      {/* Modal per modificare un cliente */}
-      <Modal show={showEditModal} onHide={() => setShowEditModal(false)}>
-        <Modal.Header closeButton>
-          <Modal.Title id="verde">Modifica Cliente</Modal.Title>
-        </Modal.Header>
-        <Form noValidate validated={validated} onSubmit={handleEditSubmit}>
-          <Modal.Body>
-            <Form.Group className="mb-3">
-              <Form.Label id="verde">Nome</Form.Label>
-              <Form.Control
-                type="text"
-                name="nome"
-                value={currentCliente.nome}
-                onChange={handleInputChange}
-                required
-                maxLength={100}
-              />
-              <Form.Control.Feedback type="invalid">
-                Inserisci un nome valido.
-              </Form.Control.Feedback>
-            </Form.Group>
-
-            <Form.Group className="mb-3">
-              <Form.Label id="verde">Cognome</Form.Label>
-              <Form.Control
-                type="text"
-                name="cognome"
-                value={currentCliente.cognome}
-                onChange={handleInputChange}
-                required
-                maxLength={100}
-              />
-              <Form.Control.Feedback type="invalid">
-                Inserisci un cognome valido.
-              </Form.Control.Feedback>
-            </Form.Group>
-
-            <Form.Group className="mb-3">
-              <Form.Label id="verde">Codice Fiscale</Form.Label>
-              <Form.Control
-                type="text"
-                name="codiceFiscale"
-                value={currentCliente.codiceFiscale}
-                onChange={handleInputChange}
-                required
-                minLength={16}
-                maxLength={16}
-              />
-              <Form.Control.Feedback type="invalid">
-                Inserisci un codice fiscale valido (16 caratteri).
-              </Form.Control.Feedback>
-            </Form.Group>
-
-            <Form.Group className="mb-3">
-              <Form.Label id="verde">Data di Nascita</Form.Label>
-              <Form.Control
-                type="date"
-                name="dataDiNascita"
-                value={currentCliente.dataDiNascita}
-                onChange={handleInputChange}
-                required
-              />
-              <Form.Control.Feedback type="invalid">
-                Inserisci una data di nascita valida.
-              </Form.Control.Feedback>
-            </Form.Group>
-
-            <Form.Group className="mb-3">
-              <Form.Label id="verde">Indirizzo</Form.Label>
-              <Form.Control
-                type="text"
-                name="indirizzo"
-                value={currentCliente.indirizzo}
-                onChange={handleInputChange}
-                required
-                maxLength={200}
-              />
-              <Form.Control.Feedback type="invalid">
-                Inserisci un indirizzo valido.
-              </Form.Control.Feedback>
-            </Form.Group>
-          </Modal.Body>
-          <Modal.Footer>
-            <Button variant="secondary" onClick={() => setShowEditModal(false)}>
-              Annulla
-            </Button>
-            <Button variant="success" type="submit">
-              Salva Modifiche
-            </Button>
-          </Modal.Footer>
-        </Form>
-      </Modal>
-
-      <Modal show={showDeleteModal} onHide={() => setShowDeleteModal(false)}>
-        <Modal.Header closeButton>
-          <Modal.Title id="verde">Conferma Eliminazione</Modal.Title>
-        </Modal.Header>
-        <Modal.Body id="verde">
-          Sei sicuro di voler eliminare il cliente {currentCliente.nome}{" "}
-          {currentCliente.cognome}?
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={() => setShowDeleteModal(false)}>
-            Annulla
-          </Button>
-          <Button variant="danger" onClick={handleDelete}>
-            Elimina
-          </Button>
-        </Modal.Footer>
-      </Modal>
+      <DeleteClienteModal
+        show={showDeleteModal}
+        handleClose={handleCloseDeleteModal}
+        handleDelete={handleDelete}
+        cliente={currentCliente}
+      />
     </Container>
   );
 };

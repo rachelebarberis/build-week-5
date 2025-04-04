@@ -1,5 +1,5 @@
 import React from "react";
-import { Modal, Button, Form } from "react-bootstrap";
+import { Modal, Button, Form, Alert, Spinner } from "react-bootstrap";
 
 const AddFornitoreModal = ({
   show,
@@ -8,22 +8,68 @@ const AddFornitoreModal = ({
   fornitore,
   handleInputChange,
   validated,
+  loading,
+  error,
 }) => {
   return (
-    <Modal show={show} onHide={handleClose}>
-      <Modal.Header closeButton>
-        <Modal.Title id="verde">Aggiungi Fornitore</Modal.Title>
+    <Modal
+      show={show}
+      onHide={handleClose}
+      centered
+      backdrop="static"
+      style={{ fontFamily: "'Poppins', sans-serif" }}
+    >
+      <Modal.Header
+        closeButton
+        className="bg-light"
+        style={{ borderBottom: "2px solid #dee2e6" }}
+      >
+        <div className="w-100 text-center">
+          <Modal.Title id="verde">
+            <i className="bi bi-building-add me-2"></i>
+            Aggiungi Fornitore
+          </Modal.Title>
+        </div>
       </Modal.Header>
-      <Form noValidate validated={validated} onSubmit={handleSubmit}>
-        <Modal.Body>
+
+      <Modal.Body className="px-4 py-4">
+        {error && (
+          <Alert variant="danger" className="mb-4 rounded-3">
+            <i className="bi bi-exclamation-triangle-fill me-2"></i>
+            {error}
+          </Alert>
+        )}
+
+        <div className="text-center mb-4">
+          <div
+            className="rounded-circle bg-light d-inline-flex align-items-center justify-content-center mb-3"
+            style={{
+              width: "70px",
+              height: "70px",
+              border: "2px dashed #2A4D38",
+            }}
+          >
+            <i className="bi bi-truck fs-2" id="verde"></i>
+          </div>
+          <p className="text-muted mb-0">
+            Inserisci i dati del nuovo fornitore
+          </p>
+        </div>
+
+        <Form noValidate validated={validated} onSubmit={handleSubmit}>
           <Form.Group className="mb-3">
-            <Form.Label id="verde">Nome</Form.Label>
+            <Form.Label id="verde" className="fw-semibold">
+              <i className="bi bi-building me-2" id="verde"></i>
+              Nome Azienda
+            </Form.Label>
             <Form.Control
               type="text"
               name="nome"
               value={fornitore.nome}
               onChange={handleInputChange}
               required
+              className="shadow-sm"
+              placeholder="Inserisci il nome dell'azienda"
             />
             <Form.Control.Feedback type="invalid">
               Inserisci un nome valido.
@@ -31,42 +77,78 @@ const AddFornitoreModal = ({
           </Form.Group>
 
           <Form.Group className="mb-3">
-            <Form.Label id="verde">Recapito</Form.Label>
+            <Form.Label id="verde" className="fw-semibold">
+              <i className="bi bi-telephone me-2" id="verde"></i>
+              Recapito
+            </Form.Label>
             <Form.Control
               type="text"
               name="recapito"
               value={fornitore.recapito}
               onChange={handleInputChange}
               required
+              className="shadow-sm"
+              placeholder="Inserisci il numero di telefono o email"
             />
             <Form.Control.Feedback type="invalid">
               Inserisci un recapito valido.
             </Form.Control.Feedback>
+            <Form.Text className="text-muted">
+              Inserisci un numero di telefono o un indirizzo email per
+              contattare il fornitore
+            </Form.Text>
           </Form.Group>
 
-          <Form.Group className="mb-3">
-            <Form.Label id="verde">Indirizzo</Form.Label>
+          <Form.Group className="mb-4">
+            <Form.Label id="verde" className="fw-semibold">
+              <i className="bi bi-geo-alt me-2" id="verde"></i>
+              Indirizzo
+            </Form.Label>
             <Form.Control
               type="text"
               name="indirizzo"
               value={fornitore.indirizzo}
               onChange={handleInputChange}
               required
+              className="shadow-sm"
+              placeholder="Inserisci l'indirizzo completo"
             />
             <Form.Control.Feedback type="invalid">
               Inserisci un indirizzo valido.
             </Form.Control.Feedback>
           </Form.Group>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Annulla
-          </Button>
-          <Button variant="success" type="submit">
-            Salva
-          </Button>
-        </Modal.Footer>
-      </Form>
+
+          <div className="d-flex justify-content-end mt-4">
+            <Button
+              variant="outline-secondary"
+              onClick={handleClose}
+              className="me-2"
+              disabled={loading}
+            >
+              <i className="bi bi-x-circle me-1"></i>
+              Annulla
+            </Button>
+            <Button
+              variant="success"
+              type="submit"
+              className="px-4"
+              disabled={loading}
+            >
+              {loading ? (
+                <>
+                  <Spinner animation="border" size="sm" className="me-2" />
+                  Salvataggio...
+                </>
+              ) : (
+                <>
+                  <i className="bi bi-check-circle me-1"></i>
+                  Salva
+                </>
+              )}
+            </Button>
+          </div>
+        </Form>
+      </Modal.Body>
     </Modal>
   );
 };

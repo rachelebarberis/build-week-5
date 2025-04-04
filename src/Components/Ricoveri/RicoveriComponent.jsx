@@ -248,7 +248,13 @@ const RicoveriComponent = () => {
           </Spinner>
         </div>
       ) : (
-        <Table striped bordered hover responsive>
+        <Table
+          striped
+          bordered
+          hover
+          responsive
+          className="rounded-3 overflow-hidden mb md-5"
+        >
           <thead>
             <tr>
               <th>#</th>

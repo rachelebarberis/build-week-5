@@ -168,7 +168,13 @@ const ElencoPuppy = () => {
         </Card>
       )}
 
-      <Table striped bordered hover responsive>
+      <Table
+        striped
+        bordered
+        hover
+        responsive
+        className="rounded-3 overflow-hidden mb md-5"
+      >
         <thead>
           <tr>
             <th>#</th>

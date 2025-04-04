@@ -440,11 +440,11 @@ const Farmacia = () => {
       <Tabs
         activeKey={activeTab}
         onSelect={(k) => setActiveTab(k)}
-        className="mb-3"
+        className="mb-3 custom-tabs"
       >
         <Tab
           eventKey="prodotti"
-          title={<span style={{ color: "#ff6347" }}>Prodotti</span>}
+          title={<span style={{ color: "#2a4d38" }}>Prodotti</span>}
         >
           <h6 className="text-center pt-2">Lista Prodotti</h6>
 
@@ -475,7 +475,13 @@ const Farmacia = () => {
               </Spinner>
             </div>
           ) : (
-            <Table striped className="mb-md-5">
+            <Table
+              striped
+              bordered
+              hover
+              responsive
+              className="rounded-3 overflow-hidden mb md-5"
+            >
               <thead>
                 <tr>
                   <th>Nome</th>
@@ -540,8 +546,8 @@ const Farmacia = () => {
             </Table>
           )}
 
-          <Row className="pb-5">
-            <Col lg={6} className="text-center pt-3 border border-bottom-0">
+          <Row className="pb-5 ">
+            <Col lg={6} className="text-center pt-3 border border-bottom-0 ">
               <Row className="justify-content-between align-items-center">
                 <Col xs={6}>
                   <p className="fw-semibold">Ricerca per Data</p>
@@ -569,7 +575,7 @@ const Farmacia = () => {
               <hr></hr>
               <div>
                 <p className="text-center fw-semibold">Lista ricerca:</p>
-                <Table striped className="border">
+                <Table striped className="border rounded-3 overflow-hidden">
                   <thead>
                     <tr>
                       <th>Prodotto</th>
@@ -631,7 +637,7 @@ const Farmacia = () => {
                     <Spinner animation="border" size="sm" />
                   </div>
                 ) : (
-                  <Table striped className="border">
+                  <Table striped className="border rounded-3 overflow-hidden">
                     <thead>
                       <tr>
                         <th>Prodotto</th>
@@ -661,7 +667,10 @@ const Farmacia = () => {
           </Row>
         </Tab>
 
-        <Tab eventKey="vendite" title="Vendite">
+        <Tab
+          eventKey="vendite"
+          title={<span style={{ color: "#2a4d38" }}>Vendite</span>}
+        >
           <h6 className="text-center pt-2">Registro Vendite</h6>
 
           <div className="d-flex justify-content-between mb-3">
@@ -704,7 +713,13 @@ const Farmacia = () => {
               </Spinner>
             </div>
           ) : (
-            <Table striped bordered hover responsive>
+            <Table
+              striped
+              bordered
+              hover
+              responsive
+              className="rounded-3 overflow-hidden mb md-5"
+            >
               <thead>
                 <tr>
                   <th>ID</th>
@@ -747,7 +762,10 @@ const Farmacia = () => {
           )}
         </Tab>
 
-        <Tab eventKey="fornitori" title="Fornitori">
+        <Tab
+          eventKey="fornitori"
+          title={<span style={{ color: "#2a4d38" }}>Fornitori</span>}
+        >
           <h6 className="text-center pt-2">Lista Fornitori</h6>
 
           <div className="d-flex justify-content-end mb-3">
@@ -761,7 +779,13 @@ const Farmacia = () => {
             </Button>
           </div>
 
-          <Table striped bordered hover responsive>
+          <Table
+            striped
+            bordered
+            hover
+            responsive
+            className="rounded-3 overflow-hidden mb md-5"
+          >
             <thead>
               <tr>
                 <th>ID</th>

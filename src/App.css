@@ -81,3 +81,28 @@ table td {
   padding: 0px;
   margin: 0px;
 }
+
+.custom-tabs .nav-link {
+  border: none !important;
+  padding: 0.5rem 1rem;
+  margin-right: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+.custom-tabs .nav-link:hover {
+  color: #2a4d38;
+  background-color: rgba(42, 77, 56, 0.05);
+  border-bottom: 2px solid rgba(42, 77, 56, 0.3);
+}
+
+.custom-tabs .nav-link.active {
+  color: #2a4d38 !important;
+  font-weight: 600;
+  background-color: transparent;
+  border-bottom: 2px solid #2a4d38 !important;
+}
+
+.custom-tabs .nav-tabs .nav-item.show .nav-link,
+.custom-tabs .nav-tabs .nav-link.active {
+  border-color: transparent transparent #2a4d38 transparent;
+}
