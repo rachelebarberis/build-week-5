@@ -30,7 +30,7 @@ const CreatePuppyModal = ({ show, handleClose, onPuppyCreated }) => {
     try {
       setLoading(true);
       const token = localStorage.getItem("token");
-      const response = await fetch("https://localhost:7055/api/Clienti", {
+      const response = await fetch("https://localhost:7055/api/Cliente", {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,

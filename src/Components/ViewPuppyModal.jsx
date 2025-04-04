@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react';
-import { Modal, Button, Row, Col, Card } from 'react-bootstrap';
-import { useDispatch } from 'react-redux';
-import { useParams } from 'react-router-dom';
-import { fetchPuppyById } from '../Redux/Actions/puppiesActions';
+import React, { useEffect } from "react";
+import { Modal, Button, Row, Col, Card } from "react-bootstrap";
+import { useDispatch } from "react-redux";
+import { useParams } from "react-router-dom";
+import { fetchPuppyById } from "../Redux/Actions/puppiesActions";
 
 const ViewPuppyModal = ({ show, handleClose, puppy }) => {
   const dispatch = useDispatch();
@@ -21,50 +21,50 @@ const ViewPuppyModal = ({ show, handleClose, puppy }) => {
   }
 
   return (
-    <Modal show={show} onHide={handleClose} centered backdrop='static'>
+    <Modal show={show} onHide={handleClose} centered backdrop="static">
       <Modal.Header closeButton>
         <Modal.Title>Dettagli Cucciolo</Modal.Title>
       </Modal.Header>
 
       <Modal.Body>
-        <Row className='mb-4'>
+        <Row className="mb-4">
           <Col md={6}>
-            <Card className='shadow-sm'>
-              <Card.Header className='bg-light'>Nome</Card.Header>
+            <Card className="shadow-sm">
+              <Card.Header className="bg-light">Nome</Card.Header>
               <Card.Body>
-                <Card.Text>{selectedPuppy.nome || 'Non specificato'}</Card.Text>
+                <Card.Text>{selectedPuppy.nome || "Non specificato"}</Card.Text>
               </Card.Body>
             </Card>
           </Col>
           <Col md={6}>
-            <Card className='shadow-sm'>
-              <Card.Header className='bg-light'>Tipologia</Card.Header>
+            <Card className="shadow-sm">
+              <Card.Header className="bg-light">Tipologia</Card.Header>
               <Card.Body>
                 <Card.Text>
-                  {selectedPuppy.tipologia || 'Non specificata'}
+                  {selectedPuppy.tipologia || "Non specificata"}
                 </Card.Text>
               </Card.Body>
             </Card>
           </Col>
         </Row>
 
-        <Row className='mb-4'>
+        <Row className="mb-4">
           <Col md={6}>
-            <Card className='shadow-sm'>
-              <Card.Header className='bg-light'>Colore Mantello</Card.Header>
+            <Card className="shadow-sm">
+              <Card.Header className="bg-light">Colore Mantello</Card.Header>
               <Card.Body>
                 <Card.Text>
-                  {selectedPuppy.coloreMantello || 'Non specificato'}
+                  {selectedPuppy.coloreMantello || "Non specificato"}
                 </Card.Text>
               </Card.Body>
             </Card>
           </Col>
           <Col md={6}>
-            <Card className='shadow-sm'>
-              <Card.Header className='bg-light'>Data di Nascita</Card.Header>
+            <Card className="shadow-sm">
+              <Card.Header className="bg-light">Data di Nascita</Card.Header>
               <Card.Body>
                 <Card.Text>
-                  {selectedPuppy.dataNascita || 'Non specificata'}
+                  {selectedPuppy.dataNascita || "Non specificata"}
                 </Card.Text>
               </Card.Body>
             </Card>
@@ -72,8 +72,8 @@ const ViewPuppyModal = ({ show, handleClose, puppy }) => {
         </Row>
 
         {selectedPuppy.microchipPresente && (
-          <Card className='shadow-sm mb-4'>
-            <Card.Header className='bg-light'>Microchip</Card.Header>
+          <Card className="shadow-sm mb-4">
+            <Card.Header className="bg-light">Microchip</Card.Header>
             <Card.Body>
               <Card.Text>
                 Numero Microchip: {selectedPuppy.numeroMicrochip}
@@ -83,8 +83,8 @@ const ViewPuppyModal = ({ show, handleClose, puppy }) => {
         )}
 
         {selectedPuppy.cliente && (
-          <Card className='shadow-sm mb-4'>
-            <Card.Header className='bg-light'>Proprietario</Card.Header>
+          <Card className="shadow-sm mb-4">
+            <Card.Header className="bg-light">Proprietario</Card.Header>
             <Card.Body>
               <Card.Text>
                 {selectedPuppy.cliente.nome} {selectedPuppy.cliente.cognome}
@@ -95,7 +95,7 @@ const ViewPuppyModal = ({ show, handleClose, puppy }) => {
       </Modal.Body>
 
       <Modal.Footer>
-        <Button variant='secondary' onClick={handleClose}>
+        <Button variant="secondary" onClick={handleClose}>
           Chiudi
         </Button>
       </Modal.Footer>
