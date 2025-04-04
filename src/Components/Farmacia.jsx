@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import {
   Container,
   Table,
@@ -11,22 +11,22 @@ import {
   Alert,
   Tabs,
   Tab,
-} from 'react-bootstrap';
+} from "react-bootstrap";
 import {
   getProdotti,
   getVenditeByFiscalCode,
   getAllVendite,
   getVenditaByNumeroRicetta,
-} from '../Redux/Actions/farmaciaActions';
-import CreateProdottoModal from './Farmacia/CreateProdottoModal';
-import UpdateProdottoModal from './Farmacia/UpdateProdottoModal';
-import DeleteProdottoModal from './Farmacia/DeleteProdottoModal';
-import ViewProdottoModal from './Farmacia/ViewProdottoModal';
-import CreateVenditaModal from './Farmacia/CreateVenditaModal';
-import DeleteVenditaModal from './Farmacia/DeleteVenditaModal';
-import AddFornitoreModal from './Farmacia/AddFornitoreModal';
-import EditFornitoreModal from './Farmacia/EditFornitoreModal';
-import DeleteFornitoreModal from './Farmacia/DeleteFornitoreModal';
+} from "../Redux/Actions/farmaciaActions";
+import CreateProdottoModal from "./Farmacia/CreateProdottoModal";
+import UpdateProdottoModal from "./Farmacia/UpdateProdottoModal";
+import DeleteProdottoModal from "./Farmacia/DeleteProdottoModal";
+import ViewProdottoModal from "./Farmacia/ViewProdottoModal";
+import CreateVenditaModal from "./Farmacia/CreateVenditaModal";
+import DeleteVenditaModal from "./Farmacia/DeleteVenditaModal";
+import AddFornitoreModal from "./Farmacia/AddFornitoreModal";
+import EditFornitoreModal from "./Farmacia/EditFornitoreModal";
+import DeleteFornitoreModal from "./Farmacia/DeleteFornitoreModal";
 
 const Farmacia = () => {
   const [prodotti, setProdotti] = useState([]);
@@ -34,22 +34,22 @@ const Farmacia = () => {
   const [loading, setLoading] = useState(true);
   const [venditaLoading, setVenditaLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [searchDate, setSearchDate] = useState('');
+  const [searchDate, setSearchDate] = useState("");
   const [searchResults, setSearchResults] = useState([]);
-  const [fiscalCode, setFiscalCode] = useState('');
-  const [numeroRicetta, setNumeroRicetta] = useState('');
+  const [fiscalCode, setFiscalCode] = useState("");
+  const [numeroRicetta, setNumeroRicetta] = useState("");
   const [clientResults, setClientResults] = useState([]);
   const [clientLoading, setClientLoading] = useState(false);
   const [clientError, setClientError] = useState(null);
   const [selectedProdotto, setSelectedProdotto] = useState(null);
-  const [activeTab, setActiveTab] = useState('prodotti');
+  const [activeTab, setActiveTab] = useState("prodotti");
   const [selectedVendita, setSelectedVendita] = useState(null);
   const [fornitori, setFornitori] = useState([]);
   const [currentFornitore, setCurrentFornitore] = useState({
     id: 0,
-    nome: '',
-    recapito: '',
-    indirizzo: '',
+    nome: "",
+    recapito: "",
+    indirizzo: "",
   });
   const [showAddFornitoreModal, setShowAddFornitoreModal] = useState(false);
   const [showEditFornitoreModal, setShowEditFornitoreModal] = useState(false);
@@ -68,9 +68,9 @@ const Farmacia = () => {
 
   useEffect(() => {
     fetchProdotti();
-    if (activeTab === 'vendite') {
+    if (activeTab === "vendite") {
       fetchVendite();
-    } else if (activeTab === 'fornitori') {
+    } else if (activeTab === "fornitori") {
       fetchFornitori();
     }
 
@@ -96,10 +96,10 @@ const Farmacia = () => {
       setError(null);
     } catch (err) {
       setError(
-        'Errore nel caricamento dei prodotti: ' +
-          (err.message || 'Errore sconosciuto')
+        "Errore nel caricamento dei prodotti: " +
+          (err.message || "Errore sconosciuto")
       );
-      console.error('Errore nel caricamento dei prodotti:', err);
+      console.error("Errore nel caricamento dei prodotti:", err);
     } finally {
       setLoading(false);
     }
@@ -112,8 +112,8 @@ const Farmacia = () => {
       setVendite(response || []);
     } catch (err) {
       setError(
-        'Errore nel caricamento delle vendite: ' +
-          (err.message || 'Errore sconosciuto')
+        "Errore nel caricamento delle vendite: " +
+          (err.message || "Errore sconosciuto")
       );
     } finally {
       setVenditaLoading(false);
@@ -127,21 +127,21 @@ const Farmacia = () => {
     try {
       setLoading(true);
 
-      const token = localStorage.getItem('token');
+      const token = localStorage.getItem("token");
 
       const response = await fetch(
         `https://localhost:7055/api/Farmacia/vendite/prodotto/bydate/${searchDate}`,
         {
-          method: 'GET',
+          method: "GET",
           headers: {
             Authorization: `Bearer ${token}`,
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
           },
         }
       );
 
       if (!response.ok) {
-        throw new Error('Errore nella ricerca per data');
+        throw new Error("Errore nella ricerca per data");
       }
 
       const data = await response.json();
@@ -149,8 +149,8 @@ const Farmacia = () => {
       setError(null);
     } catch (err) {
       setError(
-        'Errore nella ricerca per data: ' +
-          (err.message || 'Errore sconosciuto')
+        "Errore nella ricerca per data: " +
+          (err.message || "Errore sconosciuto")
       );
     } finally {
       setLoading(false);
@@ -169,10 +169,10 @@ const Farmacia = () => {
       setClientResults(response || []);
     } catch (err) {
       setClientError(
-        'Errore nella ricerca per codice fiscale: ' +
-          (err.message || 'Errore sconosciuto')
+        "Errore nella ricerca per codice fiscale: " +
+          (err.message || "Errore sconosciuto")
       );
-      console.error('Errore nella ricerca per codice fiscale:', err);
+      console.error("Errore nella ricerca per codice fiscale:", err);
     } finally {
       setClientLoading(false);
     }
@@ -189,8 +189,8 @@ const Farmacia = () => {
       setVendite(response ? [response] : []);
     } catch (err) {
       setError(
-        'Errore nella ricerca per numero ricetta: ' +
-          (err.message || 'Errore sconosciuto')
+        "Errore nella ricerca per numero ricetta: " +
+          (err.message || "Errore sconosciuto")
       );
     } finally {
       setVenditaLoading(false);
@@ -236,47 +236,47 @@ const Farmacia = () => {
 
   const handleProdottoCreated = () => {
     fetchProdotti();
-    toggleModal('create');
+    toggleModal("create");
   };
 
   const handleProdottoUpdated = () => {
     fetchProdotti();
-    toggleModal('update');
+    toggleModal("update");
   };
 
   const handleProdottoDeleted = () => {
     setProdotti((prev) => prev.filter((p) => p.id !== selectedProdotto.id));
-    toggleModal('delete');
+    toggleModal("delete");
   };
 
   const handleVenditaCreated = () => {
     fetchVendite();
-    toggleModal('vendita');
+    toggleModal("vendita");
   };
 
   const formatDate = (dateString) => {
-    if (!dateString) return 'N/A';
-    return new Date(dateString).toLocaleDateString('it-IT');
+    if (!dateString) return "N/A";
+    return new Date(dateString).toLocaleDateString("it-IT");
   };
 
   const fetchFornitori = async () => {
     try {
       setLoading(true);
-      const token = localStorage.getItem('token');
+      const token = localStorage.getItem("token");
 
       const response = await fetch(
-        'https://localhost:7055/api/Farmacia/fornitori',
+        "https://localhost:7055/api/Farmacia/fornitori",
         {
-          method: 'GET',
+          method: "GET",
           headers: {
             Authorization: `Bearer ${token}`,
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
           },
         }
       );
 
       if (!response.ok) {
-        throw new Error('Errore nel caricamento dei fornitori');
+        throw new Error("Errore nel caricamento dei fornitori");
       }
 
       const data = await response.json();
@@ -284,10 +284,10 @@ const Farmacia = () => {
       setError(null);
     } catch (err) {
       setError(
-        'Errore nel caricamento dei fornitori: ' +
-          (err.message || 'Errore sconosciuto')
+        "Errore nel caricamento dei fornitori: " +
+          (err.message || "Errore sconosciuto")
       );
-      console.error('Errore nel caricamento dei fornitori:', err);
+      console.error("Errore nel caricamento dei fornitori:", err);
     } finally {
       setLoading(false);
     }
@@ -305,15 +305,15 @@ const Farmacia = () => {
 
     try {
       setLoading(true);
-      const token = localStorage.getItem('token');
+      const token = localStorage.getItem("token");
 
       const response = await fetch(
-        'https://localhost:7055/api/Farmacia/fornitori',
+        "https://localhost:7055/api/Farmacia/fornitori",
         {
-          method: 'POST',
+          method: "POST",
           headers: {
             Authorization: `Bearer ${token}`,
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
           },
           body: JSON.stringify(currentFornitore),
         }
@@ -324,13 +324,13 @@ const Farmacia = () => {
       }
 
       setShowAddFornitoreModal(false);
-      setCurrentFornitore({ id: 0, nome: '', recapito: '', indirizzo: '' });
+      setCurrentFornitore({ id: 0, nome: "", recapito: "", indirizzo: "" });
       setFornitoreValidated(false);
       fetchFornitori();
     } catch (err) {
       setError(
         "Errore durante l'aggiunta del fornitore: " +
-          (err.message || 'Errore sconosciuto')
+          (err.message || "Errore sconosciuto")
       );
       console.error("Errore durante l'aggiunta del fornitore:", err);
     } finally {
@@ -350,22 +350,22 @@ const Farmacia = () => {
 
     try {
       setLoading(true);
-      const token = localStorage.getItem('token');
+      const token = localStorage.getItem("token");
 
       const response = await fetch(
         `https://localhost:7055/api/Farmacia/fornitori/${currentFornitore.id}`,
         {
-          method: 'PUT',
+          method: "PUT",
           headers: {
             Authorization: `Bearer ${token}`,
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
           },
           body: JSON.stringify(currentFornitore),
         }
       );
 
       if (!response.ok) {
-        throw new Error('Errore durante la modifica del fornitore');
+        throw new Error("Errore durante la modifica del fornitore");
       }
 
       setShowEditFornitoreModal(false);
@@ -373,10 +373,10 @@ const Farmacia = () => {
       fetchFornitori();
     } catch (err) {
       setError(
-        'Errore durante la modifica del fornitore: ' +
-          (err.message || 'Errore sconosciuto')
+        "Errore durante la modifica del fornitore: " +
+          (err.message || "Errore sconosciuto")
       );
-      console.error('Errore durante la modifica del fornitore:', err);
+      console.error("Errore durante la modifica del fornitore:", err);
     } finally {
       setLoading(false);
     }
@@ -385,15 +385,15 @@ const Farmacia = () => {
   const handleDeleteFornitore = async () => {
     try {
       setLoading(true);
-      const token = localStorage.getItem('token');
+      const token = localStorage.getItem("token");
 
       const response = await fetch(
         `https://localhost:7055/api/Farmacia/fornitori/${currentFornitore.id}`,
         {
-          method: 'DELETE',
+          method: "DELETE",
           headers: {
             Authorization: `Bearer ${token}`,
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
           },
         }
       );
@@ -407,7 +407,7 @@ const Farmacia = () => {
     } catch (err) {
       setError(
         "Errore durante l'eliminazione del fornitore: " +
-          (err.message || 'Errore sconosciuto')
+          (err.message || "Errore sconosciuto")
       );
       console.error("Errore durante l'eliminazione del fornitore:", err);
     } finally {
@@ -435,44 +435,47 @@ const Farmacia = () => {
 
   return (
     <Container style={{ fontFamily: "'Poppins', sans-serif" }}>
-      <h4 className='text-center'>Farmacia Interna</h4>
+      <h4 className="text-center">Farmacia Interna</h4>
 
       <Tabs
         activeKey={activeTab}
         onSelect={(k) => setActiveTab(k)}
-        className='mb-3'
+        className="mb-3"
       >
-        <Tab eventKey='prodotti' title='Prodotti'>
-          <h6 className='text-center pt-2'>Lista Prodotti</h6>
+        <Tab
+          eventKey="prodotti"
+          title={<span style={{ color: "#ff6347" }}>Prodotti</span>}
+        >
+          <h6 className="text-center pt-2">Lista Prodotti</h6>
 
-          <div className='d-flex justify-content-end mb-3'>
+          <div className="d-flex justify-content-end mb-3">
             <Button
-              id='addbtn'
-              variant='outline-secondary'
-              className='btn btn-sm border border-2 rounded-1 me-2'
-              onClick={() => toggleModal('create')}
+              id="addbtn"
+              variant="outline-secondary"
+              className="btn btn-sm border border-2 rounded-1 me-2"
+              onClick={() => toggleModal("create")}
             >
-              <i id='verde' className='bi bi-plus'></i> Prodotto
+              <i id="verde" className="bi bi-plus"></i> Prodotto
             </Button>
             <Button
-              variant='outline-success'
-              className='btn btn-sm border border-2 rounded-1'
-              onClick={() => toggleModal('vendita')}
+              variant="outline-success"
+              className="btn btn-sm border border-2 rounded-1"
+              onClick={() => toggleModal("vendita")}
             >
-              <i id='verde' className='bi bi-cart-plus text-black'></i> Vendita
+              <i id="verde" className="bi bi-cart-plus text-black"></i> Vendita
             </Button>
           </div>
 
-          {error && <Alert variant='danger'>{error}</Alert>}
+          {error && <Alert variant="danger">{error}</Alert>}
 
           {loading ? (
-            <div className='text-center my-4'>
-              <Spinner animation='border' role='status'>
-                <span className='visually-hidden'>Caricamento...</span>
+            <div className="text-center my-4">
+              <Spinner animation="border" role="status">
+                <span className="visually-hidden">Caricamento...</span>
               </Spinner>
             </div>
           ) : (
-            <Table striped className='mb-md-5'>
+            <Table striped className="mb-md-5">
               <thead>
                 <tr>
                   <th>Nome</th>
@@ -485,7 +488,7 @@ const Farmacia = () => {
               <tbody>
                 {prodotti.length === 0 ? (
                   <tr>
-                    <td colSpan='5' className='text-center'>
+                    <td colSpan="5" className="text-center">
                       Nessun prodotto trovato
                     </td>
                   </tr>
@@ -493,41 +496,41 @@ const Farmacia = () => {
                   prodotti.map((prodotto) => (
                     <tr key={prodotto.id}>
                       <td>{prodotto.nome}</td>
-                      <td>{prodotto.usiProdotto || 'Non specificato'}</td>
-                      <td className='text-center'>
-                        {prodotto.cassetto?.armadiettoId || 'N/A'}
+                      <td>{prodotto.usiProdotto || "Non specificato"}</td>
+                      <td className="text-center">
+                        {prodotto.cassetto?.armadiettoId || "N/A"}
                       </td>
-                      <td className='text-center'>
-                        {prodotto.cassetto?.cassettoId || 'N/A'}
+                      <td className="text-center">
+                        {prodotto.cassetto?.cassettoId || "N/A"}
                       </td>
                       <td>
                         <Button
-                          variant='outline-muted'
-                          size='sm'
-                          onClick={() => toggleModal('update', prodotto)}
+                          variant="outline-muted"
+                          size="sm"
+                          onClick={() => toggleModal("update", prodotto)}
                         >
-                          <i id='verde' className='bi bi-pencil'></i>
+                          <i id="verde" className="bi bi-pencil"></i>
                         </Button>
                         <Button
-                          variant='outline-muted'
-                          size='sm'
-                          onClick={() => toggleModal('delete', prodotto)}
+                          variant="outline-muted"
+                          size="sm"
+                          onClick={() => toggleModal("delete", prodotto)}
                         >
-                          <i id='verde' className='bi bi-trash'></i>
+                          <i id="verde" className="bi bi-trash"></i>
                         </Button>
                         <Button
-                          variant='outline-muted'
-                          size='sm'
-                          onClick={() => toggleModal('view', prodotto)}
+                          variant="outline-muted"
+                          size="sm"
+                          onClick={() => toggleModal("view", prodotto)}
                         >
-                          <i id='verde' className='bi bi-info-circle'></i>
+                          <i id="verde" className="bi bi-info-circle"></i>
                         </Button>
                         <Button
-                          variant='outline-muted'
-                          size='sm'
-                          onClick={() => toggleModal('vendita', prodotto)}
+                          variant="outline-muted"
+                          size="sm"
+                          onClick={() => toggleModal("vendita", prodotto)}
                         >
-                          <i id='verde' className='bi bi-cart'></i>
+                          <i id="verde" className="bi bi-cart"></i>
                         </Button>
                       </td>
                     </tr>
@@ -537,24 +540,24 @@ const Farmacia = () => {
             </Table>
           )}
 
-          <Row className='pb-5'>
-            <Col lg={6} className='text-center pt-3 border border-bottom-0'>
-              <Row className='justify-content-between align-items-center'>
+          <Row className="pb-5">
+            <Col lg={6} className="text-center pt-3 border border-bottom-0">
+              <Row className="justify-content-between align-items-center">
                 <Col xs={6}>
-                  <p className='fw-semibold'>Ricerca per Data</p>
+                  <p className="fw-semibold">Ricerca per Data</p>
                 </Col>
                 <Col xs={6}>
                   <Form onSubmit={handleDateSearch}>
-                    <Row className='justify-content-center pb-2'>
-                      <Col xs='auto' className='p-0 pe-2'>
+                    <Row className="justify-content-center pb-2">
+                      <Col xs="auto" className="p-0 pe-2">
                         <InputGroup>
                           <Form.Control
-                            type='date'
+                            type="date"
                             value={searchDate}
                             onChange={(e) => setSearchDate(e.target.value)}
                           />
-                          <Button type='submit' variant='outline-secondary'>
-                            <i className='bi bi-search'></i>
+                          <Button type="submit" variant="outline-secondary">
+                            <i className="bi bi-search"></i>
                           </Button>
                         </InputGroup>
                       </Col>
@@ -565,8 +568,8 @@ const Farmacia = () => {
 
               <hr></hr>
               <div>
-                <p className='text-center fw-semibold'>Lista ricerca:</p>
-                <Table striped className='border'>
+                <p className="text-center fw-semibold">Lista ricerca:</p>
+                <Table striped className="border">
                   <thead>
                     <tr>
                       <th>Prodotto</th>
@@ -576,7 +579,7 @@ const Farmacia = () => {
                   <tbody>
                     {searchResults.length === 0 ? (
                       <tr>
-                        <td colSpan='2' className='text-center'>
+                        <td colSpan="2" className="text-center">
                           Nessun risultato trovato
                         </td>
                       </tr>
@@ -593,24 +596,24 @@ const Farmacia = () => {
               </div>
             </Col>
 
-            <Col lg={6} className='text-center pt-3 border border-bottom-0'>
-              <Row className='justify-content-between align-items-center'>
+            <Col lg={6} className="text-center pt-3 border border-bottom-0">
+              <Row className="justify-content-between align-items-center">
                 <Col xs={6}>
-                  <p className='fw-semibold'>Ricerca per Codice Fiscale</p>
+                  <p className="fw-semibold">Ricerca per Codice Fiscale</p>
                 </Col>
                 <Col xs={6}>
                   <Form onSubmit={handleFiscalCodeSearch}>
-                    <Row className='justify-content-center pb-2'>
-                      <Col xs='auto' className='p-0 pe-2'>
+                    <Row className="justify-content-center pb-2">
+                      <Col xs="auto" className="p-0 pe-2">
                         <InputGroup>
                           <Form.Control
-                            type='text'
-                            placeholder='Codice Fiscale'
+                            type="text"
+                            placeholder="Codice Fiscale"
                             value={fiscalCode}
                             onChange={(e) => setFiscalCode(e.target.value)}
                           />
-                          <Button type='submit' variant='outline-secondary'>
-                            <i className='bi bi-search'></i>
+                          <Button type="submit" variant="outline-secondary">
+                            <i className="bi bi-search"></i>
                           </Button>
                         </InputGroup>
                       </Col>
@@ -621,14 +624,14 @@ const Farmacia = () => {
 
               <hr></hr>
               <div>
-                <p className='text-center fw-semibold'>Lista ricerca:</p>
-                {clientError && <Alert variant='danger'>{clientError}</Alert>}
+                <p className="text-center fw-semibold">Lista ricerca:</p>
+                {clientError && <Alert variant="danger">{clientError}</Alert>}
                 {clientLoading ? (
-                  <div className='text-center my-4'>
-                    <Spinner animation='border' size='sm' />
+                  <div className="text-center my-4">
+                    <Spinner animation="border" size="sm" />
                   </div>
                 ) : (
-                  <Table striped className='border'>
+                  <Table striped className="border">
                     <thead>
                       <tr>
                         <th>Prodotto</th>
@@ -638,7 +641,7 @@ const Farmacia = () => {
                     <tbody>
                       {clientResults.length === 0 ? (
                         <tr>
-                          <td colSpan='2' className='text-center'>
+                          <td colSpan="2" className="text-center">
                             Nessun risultato trovato
                           </td>
                         </tr>
@@ -658,46 +661,46 @@ const Farmacia = () => {
           </Row>
         </Tab>
 
-        <Tab eventKey='vendite' title='Vendite'>
-          <h6 className='text-center pt-2'>Registro Vendite</h6>
+        <Tab eventKey="vendite" title="Vendite">
+          <h6 className="text-center pt-2">Registro Vendite</h6>
 
-          <div className='d-flex justify-content-between mb-3'>
-            <Form onSubmit={handleRicettaSearch} className='d-flex'>
+          <div className="d-flex justify-content-between mb-3">
+            <Form onSubmit={handleRicettaSearch} className="d-flex">
               <InputGroup>
                 <Form.Control
-                  type='text'
-                  placeholder='Numero Ricetta'
+                  type="text"
+                  placeholder="Numero Ricetta"
                   value={numeroRicetta}
                   onChange={(e) => setNumeroRicetta(e.target.value)}
                 />
-                <Button id='addbtn' type='submit' variant='outline-secondary'>
-                  <i id='verde' className='bi bi-search'></i>
+                <Button id="addbtn" type="submit" variant="outline-secondary">
+                  <i id="verde" className="bi bi-search"></i>
                 </Button>
               </InputGroup>
               <Button
-                variant='outline-secondary'
-                className='ms-2'
+                variant="outline-secondary"
+                className="ms-2"
                 onClick={fetchVendite}
               >
-                <i className='bi bi-arrow-repeat'></i>
+                <i className="bi bi-arrow-repeat"></i>
               </Button>
             </Form>
 
             <Button
-              id='addbtn'
-              variant='border-0'
-              onClick={() => toggleModal('vendita')}
+              id="addbtn"
+              variant="border-0"
+              onClick={() => toggleModal("vendita")}
             >
-              <i id='verde' className='bi bi-plus'></i> Nuova Vendita
+              <i id="verde" className="bi bi-plus"></i> Nuova Vendita
             </Button>
           </div>
 
-          {error && <Alert variant='danger'>{error}</Alert>}
+          {error && <Alert variant="danger">{error}</Alert>}
 
           {venditaLoading ? (
-            <div className='text-center my-4'>
-              <Spinner animation='border' role='status'>
-                <span className='visually-hidden'>Caricamento...</span>
+            <div className="text-center my-4">
+              <Spinner animation="border" role="status">
+                <span className="visually-hidden">Caricamento...</span>
               </Spinner>
             </div>
           ) : (
@@ -715,7 +718,7 @@ const Farmacia = () => {
               <tbody>
                 {vendite.length === 0 ? (
                   <tr>
-                    <td colSpan='7' className='text-center'>
+                    <td colSpan="7" className="text-center">
                       Nessuna vendita trovata
                     </td>
                   </tr>
@@ -726,14 +729,14 @@ const Farmacia = () => {
                       <td>{vendita.nomeProdotto || vendita.prodottoId}</td>
                       <td>{vendita.userName}</td>
                       <td>{formatDate(vendita.dataVendita)}</td>
-                      <td>{vendita.numeroRicettaMedica || 'N/A'}</td>
-                      <td className='text-center'>
+                      <td>{vendita.numeroRicettaMedica || "N/A"}</td>
+                      <td className="text-center">
                         <Button
-                          variant='outline-muted'
-                          size='sm'
+                          variant="outline-muted"
+                          size="sm"
                           onClick={() => handleDeleteVendita(vendita)}
                         >
-                          <i id='verde' className='bi bi-trash'></i>
+                          <i id="verde" className="bi bi-trash"></i>
                         </Button>
                       </td>
                     </tr>
@@ -744,17 +747,17 @@ const Farmacia = () => {
           )}
         </Tab>
 
-        <Tab eventKey='fornitori' title='Fornitori'>
-          <h6 className='text-center pt-2'>Lista Fornitori</h6>
+        <Tab eventKey="fornitori" title="Fornitori">
+          <h6 className="text-center pt-2">Lista Fornitori</h6>
 
-          <div className='d-flex justify-content-end mb-3'>
+          <div className="d-flex justify-content-end mb-3">
             <Button
-              id='addbtn'
-              variant='outline-success'
-              className='btn btn-sm border border-2 rounded-1'
+              id="addbtn"
+              variant="outline-success"
+              className="btn btn-sm border border-2 rounded-1"
               onClick={() => setShowAddFornitoreModal(true)}
             >
-              <i id='verde' className='bi bi-plus text-black'></i> Fornitore
+              <i id="verde" className="bi bi-plus text-black"></i> Fornitore
             </Button>
           </div>
 
@@ -771,7 +774,7 @@ const Farmacia = () => {
             <tbody>
               {fornitori.length === 0 ? (
                 <tr>
-                  <td colSpan='5' className='text-center'>
+                  <td colSpan="5" className="text-center">
                     Nessun fornitore trovato
                   </td>
                 </tr>
@@ -782,21 +785,21 @@ const Farmacia = () => {
                     <td>{fornitore.nome}</td>
                     <td>{fornitore.recapito}</td>
                     <td>{fornitore.indirizzo}</td>
-                    <td className='text-center'>
+                    <td className="text-center">
                       <Button
-                        variant='outline-muted'
-                        size='sm'
-                        className='me-2'
+                        variant="outline-muted"
+                        size="sm"
+                        className="me-2"
                         onClick={() => openEditFornitoreModal(fornitore)}
                       >
-                        <i id='verde' className='bi bi-pencil'></i>
+                        <i id="verde" className="bi bi-pencil"></i>
                       </Button>
                       <Button
-                        variant='outline-muted'
-                        size='sm'
+                        variant="outline-muted"
+                        size="sm"
                         onClick={() => openDeleteFornitoreModal(fornitore)}
                       >
-                        <i id='verde' className='bi bi-trash'></i>
+                        <i id="verde" className="bi bi-trash"></i>
                       </Button>
                     </td>
                   </tr>
@@ -835,7 +838,7 @@ const Farmacia = () => {
 
       <CreateProdottoModal
         show={modalState.create}
-        handleClose={() => toggleModal('create')}
+        handleClose={() => toggleModal("create")}
         onProdottoCreated={handleProdottoCreated}
       />
 
@@ -843,14 +846,14 @@ const Farmacia = () => {
         <>
           <UpdateProdottoModal
             show={modalState.update}
-            handleClose={() => toggleModal('update')}
+            handleClose={() => toggleModal("update")}
             prodottoId={selectedProdotto.id}
             onProdottoUpdated={handleProdottoUpdated}
           />
 
           <DeleteProdottoModal
             show={modalState.delete}
-            handleClose={() => toggleModal('delete')}
+            handleClose={() => toggleModal("delete")}
             prodottoId={selectedProdotto.id}
             prodottoInfo={selectedProdotto}
             onProdottoDeleted={handleProdottoDeleted}
@@ -858,7 +861,7 @@ const Farmacia = () => {
 
           <ViewProdottoModal
             show={modalState.view}
-            handleClose={() => toggleModal('view')}
+            handleClose={() => toggleModal("view")}
             prodottoId={selectedProdotto.id}
           />
         </>
@@ -866,7 +869,7 @@ const Farmacia = () => {
 
       <CreateVenditaModal
         show={modalState.vendita}
-        handleClose={() => toggleModal('vendita')}
+        handleClose={() => toggleModal("vendita")}
         onVenditaCreated={handleVenditaCreated}
         prodottoId={selectedProdotto?.id}
       />

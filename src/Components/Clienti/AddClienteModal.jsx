@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Modal, Button, Form, Alert } from "react-bootstrap";
+import React from "react";
+import { Modal, Button, Form } from "react-bootstrap";
 
 const AddClienteModal = ({
   show,
@@ -9,42 +9,8 @@ const AddClienteModal = ({
   handleInputChange,
   validated,
 }) => {
-  const [ageError, setAgeError] = useState(false);
-
-  const checkAge = (date) => {
-    if (!date) {
-      setAgeError(true);
-      return false;
-    }
-
-    const birthDate = new Date(date);
-    const today = new Date();
-
-    let age = today.getFullYear() - birthDate.getFullYear();
-    const monthDiff = today.getMonth() - birthDate.getMonth();
-
-    if (
-      monthDiff < 0 ||
-      (monthDiff === 0 && today.getDate() < birthDate.getDate())
-    ) {
-      age--;
-    }
-
-    const isValid = age >= 18;
-    setAgeError(!isValid);
-    return isValid;
-  };
-
-  const handleDateChange = (e) => {
-    handleInputChange(e);
-    checkAge(e.target.value);
-  };
-
   const onSubmit = (e) => {
-    if (!checkAge(cliente.dataDiNascita)) {
-      e.preventDefault();
-      return;
-    }
+    e.preventDefault();
     handleSubmit(e);
   };
 
@@ -55,12 +21,6 @@ const AddClienteModal = ({
       </Modal.Header>
       <Form noValidate validated={validated} onSubmit={onSubmit}>
         <Modal.Body>
-          {ageError && (
-            <Alert variant="danger">
-              Il cliente deve avere almeno 18 anni.
-            </Alert>
-          )}
-
           <Form.Group className="mb-3">
             <Form.Label>Nome</Form.Label>
             <Form.Control
@@ -113,12 +73,11 @@ const AddClienteModal = ({
               type="date"
               name="dataDiNascita"
               value={cliente.dataDiNascita}
-              onChange={handleDateChange}
+              onChange={handleInputChange}
               required
-              isInvalid={ageError}
             />
             <Form.Control.Feedback type="invalid">
-              Il cliente deve avere almeno 18 anni.
+              Inserisci una data di nascita valida.
             </Form.Control.Feedback>
           </Form.Group>
 
@@ -141,7 +100,7 @@ const AddClienteModal = ({
           <Button variant="secondary" onClick={handleClose}>
             Annulla
           </Button>
-          <Button variant="primary" type="submit" disabled={ageError}>
+          <Button variant="primary" type="submit">
             Salva
           </Button>
         </Modal.Footer>

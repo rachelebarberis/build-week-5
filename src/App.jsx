@@ -26,48 +26,58 @@ const App = () => {
 
 const MainApp = () => {
   return (
-    <>
+    <div className="d-flex flex-column min-vh-100">
       <NavBarComponent />
 
-      <Routes>
-        <Route path="/" element={<HomeComponent />} />
-        <Route path="/account" element={<LoginComponent />} />
-        <Route
-          path="/register"
-          element={
-            <RoleRoute component={<RegisterComponent />} requiredRole="Admin" />
-          }
-        />
-        <Route
-          path="/elencopuppy"
-          element={
-            <RoleRoute component={<ElencoPuppy />} requiredRole="Admin" />
-          }
-        />
-        <Route
-          path="/visite"
-          element={
-            <RoleRoute component={<VisiteComponent />} requiredRole="Admin" />
-          }
-        />
-        <Route
-          path="/ricoveri"
-          element={
-            <RoleRoute component={<RicoveriComponent />} requiredRole="Admin" />
-          }
-        />
-        <Route
-          path="/farmacia"
-          element={<RoleRoute component={<Farmacia />} requiredRole="Admin" />}
-        />
-        <Route path="/clientiList" element={<ClientiListComponent />} />
-        <Route path="/puppy" element={<Puppy />} />
-        <Route path="/not-authorized" element={<NotAuthorized />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
+      <div className="flex-grow-1">
+        <Routes>
+          <Route path="/" element={<HomeComponent />} />
+          <Route path="/account" element={<LoginComponent />} />
+          <Route
+            path="/register"
+            element={
+              <RoleRoute
+                component={<RegisterComponent />}
+                requiredRole="Admin"
+              />
+            }
+          />
+          <Route
+            path="/elencopuppy"
+            element={
+              <RoleRoute component={<ElencoPuppy />} requiredRole="Admin" />
+            }
+          />
+          <Route
+            path="/visite"
+            element={
+              <RoleRoute component={<VisiteComponent />} requiredRole="Admin" />
+            }
+          />
+          <Route
+            path="/ricoveri"
+            element={
+              <RoleRoute
+                component={<RicoveriComponent />}
+                requiredRole="Admin"
+              />
+            }
+          />
+          <Route
+            path="/farmacia"
+            element={
+              <RoleRoute component={<Farmacia />} requiredRole="Admin" />
+            }
+          />
+          <Route path="/clientiList" element={<ClientiListComponent />} />
+          <Route path="/puppy" element={<Puppy />} />
+          <Route path="/not-authorized" element={<NotAuthorized />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </div>
 
       <FooterComponent />
-    </>
+    </div>
   );
 };
 
