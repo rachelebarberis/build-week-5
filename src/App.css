@@ -2,26 +2,28 @@
 
 #root {
   margin: 0 auto;
-  background-color: #D8E2DC;
-  color:#2A4D38;
+  background-color: #d8e2dc;
+  color: #2a4d38;
   height: 100vh;
   font-family: 'Poppins';
 }
 #navabar {
-  background-color: #D8E2DC;
-  color:#2A4D38;
+  background-color: #d8e2dc;
+  color: #2a4d38;
 }
 
-
-table th, table td {
-  color:#2A4D38 !important;
+table th,
+table td {
+  color: #2a4d38 !important;
 }
-#addbtn, #verde {
-  color:#2A4D38 !important;
-
+#addbtn,
+#verde {
+  color: #2a4d38 !important;
 }
 
-
+#addbtn:hover {
+  background-color: #838383 !important;
+}
 
 .logo {
   height: 6em;
@@ -60,12 +62,11 @@ table th, table td {
 }
 
 #footer {
-  background-color: #D8E2DC;
+  background-color: #d8e2dc;
   position: fixed;
   bottom: 0;
   left: 0;
   width: 100%;
-
 }
 
 #imglogo {
@@ -81,6 +82,3 @@ table th, table td {
   padding: 0px;
   margin: 0px;
 }
-
-
-
