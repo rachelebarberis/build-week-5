@@ -2,18 +2,6 @@ import { useState, useEffect } from 'react';
 import { Container, Row, Col, Form, Button, Card } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchPuppies } from '../../Redux/Actions/puppiesActions';
-import { useState, useEffect } from 'react';
-import {
-  Container,
-  Row,
-  Col,
-  Form,
-  Button,
-  Card,
-  Spinner,
-} from 'react-bootstrap';
-import { useSelector, useDispatch } from 'react-redux';
-import { fetchPuppies } from '../../Redux/Actions/puppiesActions';
 
 const Puppy = () => {
   const [microchip, setMicrochip] = useState('');
@@ -107,30 +95,69 @@ const Puppy = () => {
         </Row>
       </Form>
 
-      <div className='pt-4 text-center'>
+      <div className='pt-3 text-center'>
         <p className='fw-semibold'>Ecco i risultati della tua ricerca!</p>
 
-        {loading && (
-          <div className='text-center my-4'>
-            <Spinner animation='border' role='status' variant='success'>
-              <span className='visually-hidden'>Caricamento...</span>
-            </Spinner>
-          </div>
-        )}
-
-        {error && <p className='text-danger'> {error}</p>}
+        {loading && <p>🔍 Ricerca in corso...</p>}
+        {error && <p className='text-danger'>❌ {error}</p>}
 
         {filteredPuppy ? (
-          <PuppyCard puppy={filteredPuppy} />
+          <Card className='mt-3'>
+            <Card.Body>
+              <h5>🐶 {filteredPuppy.nome}</h5>
+              <p>
+                <strong>Razza:</strong> {filteredPuppy.tipologia}
+              </p>
+              <p>
+                <strong>Colore Mantello:</strong> {filteredPuppy.coloreMantello}
+              </p>
+              <p>
+                <strong>Data di Nascita:</strong> {filteredPuppy.dataNascita}
+              </p>
+              <p>
+                <strong>Numero Microchip:</strong>{' '}
+                {filteredPuppy.numeroMicrochip}
+              </p>
+              <p>
+                <strong>Proprietario:</strong>{' '}
+                {filteredPuppy.cliente?.nome || 'Nessuno'}{' '}
+                {filteredPuppy.cliente?.cognome || ''}
+              </p>
+            </Card.Body>
+          </Card>
         ) : (
           <>
             {puppies.filter((puppy) => !puppy.cliente || !puppy.clienteId)
               .length > 0 ? (
               puppies
                 .filter((puppy) => !puppy.cliente || !puppy.clienteId)
-                .map((puppy) => <PuppyCard key={puppy.puppyId} puppy={puppy} />)
+                .map((puppy) => (
+                  <Card key={puppy.puppyId} className='mt-3'>
+                    <Card.Body>
+                      <h5>🐶 {puppy.nome}</h5>
+                      <p>
+                        <strong>Razza:</strong> {puppy.tipologia}
+                      </p>
+                      <p>
+                        <strong>Colore Mantello:</strong> {puppy.coloreMantello}
+                      </p>
+                      <p>
+                        <strong>Data di Nascita:</strong> {puppy.dataNascita}
+                      </p>
+                      <p>
+                        <strong>Numero Microchip:</strong>{' '}
+                        {puppy.numeroMicrochip}
+                      </p>
+                      <p>
+                        <strong>Proprietario:</strong> Nessuno
+                      </p>
+                    </Card.Body>
+                  </Card>
+                ))
             ) : (
-              <p className='text-muted'>Nessun puppy con questo microchip.</p>
+              <p className='text-muted'>
+                Nessun puppy senza proprietario disponibile.
+              </p>
             )}
           </>
         )}
