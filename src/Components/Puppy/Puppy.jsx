@@ -1,10 +1,10 @@
-import { useState, useEffect } from "react";
-import { Container, Row, Col, Form, Button, Card } from "react-bootstrap";
-import { useSelector, useDispatch } from "react-redux";
-import { fetchPuppies } from "../../Redux/Actions/puppiesActions";
+import { useState, useEffect } from 'react';
+import { Container, Row, Col, Form, Button, Card } from 'react-bootstrap';
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchPuppies } from '../../Redux/Actions/puppiesActions';
 
 const Puppy = () => {
-  const [microchip, setMicrochip] = useState("");
+  const [microchip, setMicrochip] = useState('');
   const [filteredPuppy, setFilteredPuppy] = useState(null);
   const dispatch = useDispatch();
 
@@ -12,6 +12,7 @@ const Puppy = () => {
 
   useEffect(() => {
     dispatch(fetchPuppies());
+    console.log(filteredPuppy);
   }, [dispatch]);
 
   const handleSearch = (e) => {
@@ -30,46 +31,46 @@ const Puppy = () => {
 
   return (
     <Container style={{ fontFamily: "'Poppins', sans-serif" }}>
-      <h1 className="text-center">Cerca il tuo puppy!</h1>
-      <p className="text-center">
+      <h1 className='text-center'>Cerca il tuo puppy!</h1>
+      <p className='text-center'>
         Inserisci il Microchip del tuo puppy, speriamo di riuscire ad aiutarti!
       </p>
 
       {/* Form di ricerca */}
       <Form onSubmit={handleSearch}>
-        <Row className="justify-content-center pt-2">
-          <Col xs="auto" className="p-0">
+        <Row className='justify-content-center pt-2'>
+          <Col xs='auto' className='p-0'>
             <Form.Control
-              type="text"
-              placeholder="Numero Microchip"
-              className="mr-sm-2"
+              type='text'
+              placeholder='Numero Microchip'
+              className='mr-sm-2'
               value={microchip}
               onChange={(e) => setMicrochip(e.target.value)}
               required
             />
           </Col>
-          <Col xs="auto" className="p-0 ps-1">
+          <Col xs='auto' className='p-0 ps-1'>
             <Button
-              id="addbtn"
-              type="submit"
-              className="bg-transparent"
-              variant="outline-white"
+              id='addbtn'
+              type='submit'
+              className='bg-transparent'
+              variant='outline-white'
             >
-              <i id="verde" className="bi bi-search-heart"></i>
+              <i id='verde' className='bi bi-search-heart'></i>
             </Button>
           </Col>
         </Row>
       </Form>
 
-      <div className="pt-3 text-center">
-        <p className="fw-semibold">Ecco i risultati della tua ricerca!</p>
+      <div className='pt-3 text-center'>
+        <p className='fw-semibold'>Ecco i risultati della tua ricerca!</p>
 
         {loading && <p>🔍 Ricerca in corso...</p>}
-        {error && <p className="text-danger">❌ {error}</p>}
+        {error && <p className='text-danger'>❌ {error}</p>}
 
         {/* Se un puppy è stato trovato, mostra solo lui */}
         {filteredPuppy ? (
-          <Card className="mt-3">
+          <Card className='mt-3'>
             <Card.Body>
               <h5>🐶 {filteredPuppy.nome}</h5>
               <p>
@@ -82,25 +83,25 @@ const Puppy = () => {
                 <strong>Data di Nascita:</strong> {filteredPuppy.dataNascita}
               </p>
               <p>
-                <strong>Numero Microchip:</strong>{" "}
+                <strong>Numero Microchip:</strong>{' '}
                 {filteredPuppy.numeroMicrochip}
               </p>
               <p>
-                <strong>Proprietario:</strong>{" "}
-                {filteredPuppy.owner?.firstName || "Nessuno"}{" "}
-                {filteredPuppy.owner?.lastName || ""}
+                <strong>Proprietario:</strong>{' '}
+                {filteredPuppy.cliente?.nome || 'Nessuno'}{' '}
+                {filteredPuppy.cliente?.cognome || ''}
               </p>
             </Card.Body>
           </Card>
         ) : (
           <>
             {/* Mostra tutti i puppy senza owner se non è stata fatta una ricerca */}
-            {puppies.filter((puppy) => !puppy.owner || !puppy.owner.userId)
+            {puppies.filter((puppy) => !puppy.cliente || !puppy.clienteId)
               .length > 0 ? (
               puppies
-                .filter((puppy) => !puppy.owner || !puppy.owner.userId)
+                .filter((puppy) => !puppy.cliente || !puppy.clienteId)
                 .map((puppy) => (
-                  <Card key={puppy.puppyId} className="mt-3">
+                  <Card key={puppy.puppyId} className='mt-3'>
                     <Card.Body>
                       <h5>🐶 {puppy.nome}</h5>
                       <p>
@@ -113,7 +114,7 @@ const Puppy = () => {
                         <strong>Data di Nascita:</strong> {puppy.dataNascita}
                       </p>
                       <p>
-                        <strong>Numero Microchip:</strong>{" "}
+                        <strong>Numero Microchip:</strong>{' '}
                         {puppy.numeroMicrochip}
                       </p>
                       <p>
@@ -123,7 +124,7 @@ const Puppy = () => {
                   </Card>
                 ))
             ) : (
-              <p className="text-muted">
+              <p className='text-muted'>
                 Nessun puppy senza proprietario disponibile.
               </p>
             )}
