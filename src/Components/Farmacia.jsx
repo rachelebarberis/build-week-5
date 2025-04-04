@@ -442,7 +442,10 @@ const Farmacia = () => {
         onSelect={(k) => setActiveTab(k)}
         className="mb-3"
       >
-        <Tab eventKey="prodotti" title="Prodotti">
+        <Tab
+          eventKey="prodotti"
+          title={<span style={{ color: "#ff6347" }}>Prodotti</span>}
+        >
           <h6 className="text-center pt-2">Lista Prodotti</h6>
 
           <div className="d-flex justify-content-end mb-3">
