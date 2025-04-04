@@ -10,9 +10,9 @@ const DeleteFornitoreModal = ({
   return (
     <Modal show={show} onHide={handleClose}>
       <Modal.Header closeButton>
-        <Modal.Title>Conferma Eliminazione</Modal.Title>
+        <Modal.Title id="verde">Conferma Eliminazione</Modal.Title>
       </Modal.Header>
-      <Modal.Body>
+      <Modal.Body id="verde">
         Sei sicuro di voler eliminare il fornitore{" "}
         <strong>{fornitore.nome}</strong>?
       </Modal.Body>

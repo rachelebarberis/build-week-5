@@ -12,12 +12,12 @@ const AddFornitoreModal = ({
   return (
     <Modal show={show} onHide={handleClose}>
       <Modal.Header closeButton>
-        <Modal.Title>Aggiungi Fornitore</Modal.Title>
+        <Modal.Title id="verde">Aggiungi Fornitore</Modal.Title>
       </Modal.Header>
       <Form noValidate validated={validated} onSubmit={handleSubmit}>
         <Modal.Body>
           <Form.Group className="mb-3">
-            <Form.Label>Nome</Form.Label>
+            <Form.Label id="verde">Nome</Form.Label>
             <Form.Control
               type="text"
               name="nome"
@@ -31,7 +31,7 @@ const AddFornitoreModal = ({
           </Form.Group>
 
           <Form.Group className="mb-3">
-            <Form.Label>Recapito</Form.Label>
+            <Form.Label id="verde">Recapito</Form.Label>
             <Form.Control
               type="text"
               name="recapito"
@@ -45,7 +45,7 @@ const AddFornitoreModal = ({
           </Form.Group>
 
           <Form.Group className="mb-3">
-            <Form.Label>Indirizzo</Form.Label>
+            <Form.Label id="verde">Indirizzo</Form.Label>
             <Form.Control
               type="text"
               name="indirizzo"
@@ -62,7 +62,7 @@ const AddFornitoreModal = ({
           <Button variant="secondary" onClick={handleClose}>
             Annulla
           </Button>
-          <Button variant="primary" type="submit">
+          <Button variant="success" type="submit">
             Salva
           </Button>
         </Modal.Footer>

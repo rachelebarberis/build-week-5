@@ -452,14 +452,14 @@ const Farmacia = () => {
               className="btn btn-sm border border-2 rounded-1 me-2"
               onClick={() => toggleModal("create")}
             >
-              <i className="bi bi-plus text-black"></i> Prodotto
+              <i id="verde" className="bi bi-plus"></i> Prodotto
             </Button>
             <Button
               variant="outline-success"
               className="btn btn-sm border border-2 rounded-1"
               onClick={() => toggleModal("vendita")}
             >
-              <i className="bi bi-cart-plus text-black"></i> Vendita
+              <i id="verde" className="bi bi-cart-plus text-black"></i> Vendita
             </Button>
           </div>
 
@@ -729,11 +729,11 @@ const Farmacia = () => {
                       <td>{vendita.numeroRicettaMedica || "N/A"}</td>
                       <td>
                         <Button
-                          variant="outline-danger"
+                          variant="outline-secondary"
                           size="sm"
                           onClick={() => handleDeleteVendita(vendita)}
                         >
-                          <i className="bi bi-trash"></i>
+                          <i id="verde" className="bi bi-trash"></i>
                         </Button>
                       </td>
                     </tr>
@@ -749,11 +749,12 @@ const Farmacia = () => {
 
           <div className="d-flex justify-content-end mb-3">
             <Button
-              variant="outline-primary"
+              id="addbtn"
+              variant="outline-success"
               className="btn btn-sm border border-2 rounded-1"
               onClick={() => setShowAddFornitoreModal(true)}
             >
-              <i className="bi bi-plus text-black"></i> Fornitore
+              <i id="verde" className="bi bi-plus text-black"></i> Fornitore
             </Button>
           </div>
 
@@ -781,21 +782,21 @@ const Farmacia = () => {
                     <td>{fornitore.nome}</td>
                     <td>{fornitore.recapito}</td>
                     <td>{fornitore.indirizzo}</td>
-                    <td>
+                    <td className="text-center">
                       <Button
-                        variant="outline-secondary"
+                        variant="outline-muted"
                         size="sm"
                         className="me-2"
                         onClick={() => openEditFornitoreModal(fornitore)}
                       >
-                        <i className="bi bi-pencil"></i>
+                        <i id="verde" className="bi bi-pencil"></i>
                       </Button>
                       <Button
-                        variant="outline-secondary"
+                        variant="outline-muted"
                         size="sm"
                         onClick={() => openDeleteFornitoreModal(fornitore)}
                       >
-                        <i className="bi bi-trash"></i>
+                        <i id="verde" className="bi bi-trash"></i>
                       </Button>
                     </td>
                   </tr>
