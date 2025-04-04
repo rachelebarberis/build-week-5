@@ -10,7 +10,7 @@ const NavBarComponent = () => {
     <Navbar expand="md" className=" pt-0" style={{ color: "rgb(42, 77, 56)" }}>
       <Container fluid={true} style={{ fontFamily: "'Poppins', sans-serif" }}>
         <Navbar.Brand href="/" className="m-0 p-0">
-          <img src="/public/images/navbar.jpg" id="imglogo" />
+          <img src="/public/images/logonav.jpg" id="imglogo" />
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse

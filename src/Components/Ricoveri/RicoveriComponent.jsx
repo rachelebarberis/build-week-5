@@ -279,7 +279,7 @@ const RicoveriComponent = () => {
                   <td style={{ color: "#2A4D38" }}>
                     {ricovero.descrizione || "-"}
                   </td>
-                  <td>
+                  <td style={{ color: "#2A4D38" }}>
                     {formatDate(ricovero.dataFineRicovero) || (
                       <Badge
                         bg={null}
