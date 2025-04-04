@@ -1,7 +1,7 @@
 import { Container } from "react-bootstrap";
 
 const FooterComponent = () => (
-  <footer className="mt-auto py-3" id="footer">
+  <footer className="py-3 border-top mt-3" id="footer">
     <Container style={{ fontFamily: "'Poppins', sans-serif" }}>
       <div className="text-center">
         <span>
