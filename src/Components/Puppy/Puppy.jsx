@@ -66,7 +66,7 @@ const Puppy = () => {
         <p className="fw-semibold">Ecco i risultati della tua ricerca!</p>
 
         {loading && <p>🔍 Ricerca in corso...</p>}
-        {error && <p className="text-danger">❌ {error}</p>}
+        {/* {error && <p className="text-danger">❌ {error}</p>} */}
 
         {/* Se un puppy è stato trovato, mostra solo lui */}
         {filteredPuppy ? (
