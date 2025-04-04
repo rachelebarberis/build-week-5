@@ -44,7 +44,6 @@ const UpdatePuppyModal = ({ show, handleClose, puppy, onPuppyUpdated }) => {
       microchipPresente: microchipPresente,
     };
 
-    // Aggiunge 'numeroMicrochip' e 'clienteId' solo se presente
     if (numeroMicrochip) {
       updatedPuppy.numeroMicrochip = numeroMicrochip;
     }

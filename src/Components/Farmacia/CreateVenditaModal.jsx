@@ -18,7 +18,6 @@ const CreateVenditaModal = ({
   });
   const [validated, setValidated] = useState(false);
 
-  // Reset form when modal is opened
   useEffect(() => {
     if (show) {
       setFormData({
@@ -35,7 +34,6 @@ const CreateVenditaModal = ({
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
 
-    // Special handling for checkbox to set string value
     if (type === "checkbox") {
       setFormData({
         ...formData,
@@ -63,11 +61,10 @@ const CreateVenditaModal = ({
       setLoading(true);
       setError(null);
 
-      // Format data according to the successful Swagger example
       const venditaData = {
         prodottoId: parseInt(formData.prodottoId, 10),
         customerId: formData.customerId,
-        ricettaMedica: formData.ricettaMedica, // Keep as string "true" or "false"
+        ricettaMedica: formData.ricettaMedica,
         numeroRicettaMedica:
           formData.ricettaMedica === "true" ? formData.numeroRicettaMedica : "",
       };
@@ -123,7 +120,7 @@ const CreateVenditaModal = ({
               Inserisci il codice fiscale del cliente.
             </Form.Control.Feedback>
             <Form.Text className="text-muted">
-              Esempio: CodiceFiscale345
+              Esempio: RNGDLR65A12H789L
             </Form.Text>
           </Form.Group>
 

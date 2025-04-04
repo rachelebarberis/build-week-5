@@ -6,9 +6,9 @@ import {
   Row,
   Col,
   Modal,
-  Form,
   Alert,
   Spinner,
+  Form,
 } from "react-bootstrap";
 import {
   fetchClienti,
@@ -121,7 +121,6 @@ const ClientiListComponent = () => {
       await deleteCliente(currentCliente.id);
       setShowDeleteModal(false);
       await fetchClientiData();
-      setClienti(clienti.filter((cliente) => cliente.id !== currentCliente.id));
     } catch (err) {
       setError("Errore durante l'eliminazione del cliente: " + err.message);
     } finally {

@@ -24,6 +24,9 @@ import DeleteProdottoModal from "./Farmacia/DeleteProdottoModal";
 import ViewProdottoModal from "./Farmacia/ViewProdottoModal";
 import CreateVenditaModal from "./Farmacia/CreateVenditaModal";
 import DeleteVenditaModal from "./Farmacia/DeleteVenditaModal";
+import AddFornitoreModal from "./Farmacia/AddFornitoreModal";
+import EditFornitoreModal from "./Farmacia/EditFornitoreModal";
+import DeleteFornitoreModal from "./Farmacia/DeleteFornitoreModal";
 
 const Farmacia = () => {
   const [prodotti, setProdotti] = useState([]);
@@ -41,6 +44,18 @@ const Farmacia = () => {
   const [selectedProdotto, setSelectedProdotto] = useState(null);
   const [activeTab, setActiveTab] = useState("prodotti");
   const [selectedVendita, setSelectedVendita] = useState(null);
+  const [fornitori, setFornitori] = useState([]);
+  const [currentFornitore, setCurrentFornitore] = useState({
+    id: 0,
+    nome: "",
+    recapito: "",
+    indirizzo: "",
+  });
+  const [showAddFornitoreModal, setShowAddFornitoreModal] = useState(false);
+  const [showEditFornitoreModal, setShowEditFornitoreModal] = useState(false);
+  const [showDeleteFornitoreModal, setShowDeleteFornitoreModal] =
+    useState(false);
+  const [fornitoreValidated, setFornitoreValidated] = useState(false);
 
   const [modalState, setModalState] = useState({
     create: false,
@@ -55,6 +70,8 @@ const Farmacia = () => {
     fetchProdotti();
     if (activeTab === "vendite") {
       fetchVendite();
+    } else if (activeTab === "fornitori") {
+      fetchFornitori();
     }
 
     return () => {
@@ -240,6 +257,180 @@ const Farmacia = () => {
   const formatDate = (dateString) => {
     if (!dateString) return "N/A";
     return new Date(dateString).toLocaleDateString("it-IT");
+  };
+
+  const fetchFornitori = async () => {
+    try {
+      setLoading(true);
+      const token = localStorage.getItem("token");
+
+      const response = await fetch(
+        "https://localhost:7055/api/Farmacia/fornitori",
+        {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Errore nel caricamento dei fornitori");
+      }
+
+      const data = await response.json();
+      setFornitori(data || []);
+      setError(null);
+    } catch (err) {
+      setError(
+        "Errore nel caricamento dei fornitori: " +
+          (err.message || "Errore sconosciuto")
+      );
+      console.error("Errore nel caricamento dei fornitori:", err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleAddFornitore = async (e) => {
+    e.preventDefault();
+    const form = e.currentTarget;
+
+    if (form.checkValidity() === false) {
+      e.stopPropagation();
+      setFornitoreValidated(true);
+      return;
+    }
+
+    try {
+      setLoading(true);
+      const token = localStorage.getItem("token");
+
+      const response = await fetch(
+        "https://localhost:7055/api/Farmacia/fornitori",
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(currentFornitore),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Errore durante l'aggiunta del fornitore");
+      }
+
+      setShowAddFornitoreModal(false);
+      setCurrentFornitore({ id: 0, nome: "", recapito: "", indirizzo: "" });
+      setFornitoreValidated(false);
+      fetchFornitori();
+    } catch (err) {
+      setError(
+        "Errore durante l'aggiunta del fornitore: " +
+          (err.message || "Errore sconosciuto")
+      );
+      console.error("Errore durante l'aggiunta del fornitore:", err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleEditFornitore = async (e) => {
+    e.preventDefault();
+    const form = e.currentTarget;
+
+    if (form.checkValidity() === false) {
+      e.stopPropagation();
+      setFornitoreValidated(true);
+      return;
+    }
+
+    try {
+      setLoading(true);
+      const token = localStorage.getItem("token");
+
+      const response = await fetch(
+        `https://localhost:7055/api/Farmacia/fornitori/${currentFornitore.id}`,
+        {
+          method: "PUT",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(currentFornitore),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Errore durante la modifica del fornitore");
+      }
+
+      setShowEditFornitoreModal(false);
+      setFornitoreValidated(false);
+      fetchFornitori();
+    } catch (err) {
+      setError(
+        "Errore durante la modifica del fornitore: " +
+          (err.message || "Errore sconosciuto")
+      );
+      console.error("Errore durante la modifica del fornitore:", err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleDeleteFornitore = async () => {
+    try {
+      setLoading(true);
+      const token = localStorage.getItem("token");
+
+      const response = await fetch(
+        `https://localhost:7055/api/Farmacia/fornitori/${currentFornitore.id}`,
+        {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Errore durante l'eliminazione del fornitore");
+      }
+
+      setShowDeleteFornitoreModal(false);
+      fetchFornitori();
+    } catch (err) {
+      setError(
+        "Errore durante l'eliminazione del fornitore: " +
+          (err.message || "Errore sconosciuto")
+      );
+      console.error("Errore durante l'eliminazione del fornitore:", err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleInputChangeFornitore = (e) => {
+    const { name, value } = e.target;
+    setCurrentFornitore({
+      ...currentFornitore,
+      [name]: value,
+    });
+  };
+
+  const openEditFornitoreModal = (fornitore) => {
+    setCurrentFornitore(fornitore);
+    setShowEditFornitoreModal(true);
+  };
+
+  const openDeleteFornitoreModal = (fornitore) => {
+    setCurrentFornitore(fornitore);
+    setShowDeleteFornitoreModal(true);
   };
 
   return (
@@ -551,6 +742,93 @@ const Farmacia = () => {
               </tbody>
             </Table>
           )}
+        </Tab>
+
+        <Tab eventKey="fornitori" title="Fornitori">
+          <h6 className="text-center pt-2">Lista Fornitori</h6>
+
+          <div className="d-flex justify-content-end mb-3">
+            <Button
+              variant="outline-primary"
+              className="btn btn-sm border border-2 rounded-1"
+              onClick={() => setShowAddFornitoreModal(true)}
+            >
+              <i className="bi bi-plus text-black"></i> Fornitore
+            </Button>
+          </div>
+
+          <Table striped bordered hover responsive>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Recapito</th>
+                <th>Indirizzo</th>
+                <th>Azioni</th>
+              </tr>
+            </thead>
+            <tbody>
+              {fornitori.length === 0 ? (
+                <tr>
+                  <td colSpan="5" className="text-center">
+                    Nessun fornitore trovato
+                  </td>
+                </tr>
+              ) : (
+                fornitori.map((fornitore) => (
+                  <tr key={fornitore.id}>
+                    <td>{fornitore.id}</td>
+                    <td>{fornitore.nome}</td>
+                    <td>{fornitore.recapito}</td>
+                    <td>{fornitore.indirizzo}</td>
+                    <td>
+                      <Button
+                        variant="outline-secondary"
+                        size="sm"
+                        className="me-2"
+                        onClick={() => openEditFornitoreModal(fornitore)}
+                      >
+                        <i className="bi bi-pencil"></i>
+                      </Button>
+                      <Button
+                        variant="outline-secondary"
+                        size="sm"
+                        onClick={() => openDeleteFornitoreModal(fornitore)}
+                      >
+                        <i className="bi bi-trash"></i>
+                      </Button>
+                    </td>
+                  </tr>
+                ))
+              )}
+            </tbody>
+          </Table>
+
+          {/* Usa i componenti modali */}
+          <AddFornitoreModal
+            show={showAddFornitoreModal}
+            handleClose={() => setShowAddFornitoreModal(false)}
+            handleSubmit={handleAddFornitore}
+            fornitore={currentFornitore}
+            handleInputChange={handleInputChangeFornitore}
+            validated={fornitoreValidated}
+          />
+
+          <EditFornitoreModal
+            show={showEditFornitoreModal}
+            handleClose={() => setShowEditFornitoreModal(false)}
+            handleSubmit={handleEditFornitore}
+            fornitore={currentFornitore}
+            handleInputChange={handleInputChangeFornitore}
+            validated={fornitoreValidated}
+          />
+
+          <DeleteFornitoreModal
+            show={showDeleteFornitoreModal}
+            handleClose={() => setShowDeleteFornitoreModal(false)}
+            handleDelete={handleDeleteFornitore}
+            fornitore={currentFornitore}
+          />
         </Tab>
       </Tabs>
 

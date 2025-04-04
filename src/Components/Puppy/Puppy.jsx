@@ -1,4 +1,8 @@
 import { useState, useEffect } from 'react';
+import { Container, Row, Col, Form, Button, Card } from 'react-bootstrap';
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchPuppies } from '../../Redux/Actions/puppiesActions';
+import { useState, useEffect } from 'react';
 import {
   Container,
   Row,
